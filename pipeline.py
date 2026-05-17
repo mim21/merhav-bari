@@ -678,7 +678,8 @@ def step_html():
     }}
     .card:hover {{ transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }}
     .status-banner {{ background: #e74c3c; color: white; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; text-align: center; }}
-    .card-img img {{ width: 100%; height: 220px; object-fit: cover; display: block; }}
+    .card-img {{ background: #f0f0f0; }}
+    .card-img img {{ width: 100%; max-height: 380px; object-fit: contain; display: block; }}
     .card-body {{ padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }}
     .card-header-row {{ display: flex; justify-content: space-between; align-items: center; }}
     .badge {{ font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; background: #eef2ff; color: #4361ee; font-weight: 600; }}
