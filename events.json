@@ -16,7 +16,10 @@
     "registration_link": "http://www.falling2balance.com",
     "contact_info": {
       "phone": [
-        "054-973-2823"
+        {
+          "number": "054-973-2823",
+          "name": null
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -51,8 +54,14 @@
     "registration_link": "https://hagitmishali.wixsite.com/spring-nights",
     "contact_info": {
       "phone": [
-        "052-3501450",
-        "054-4799145"
+        {
+          "number": "052-3501450",
+          "name": null
+        },
+        {
+          "number": "054-4799145",
+          "name": null
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -85,7 +94,10 @@
     "registration_link": "https://www.avigayil-lev.com/wildgreece",
     "contact_info": {
       "phone": [
-        "0544900935"
+        {
+          "number": "054-4900935",
+          "name": "אביגיל"
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -141,12 +153,19 @@
     "city": "פרדס חנה",
     "price_text": "380₪–690₪",
     "price_unit": null,
+    "price_note": "יחיד / זוג",
     "description": "ערב חקירה משחקית ושובבה עם ראדיקה ויצחק. מגע אנרגטי, חושני ואיטי, בניית אנרגיה פנימית וחיבור עם אש ומים.",
     "registration_link": "https://forms.gle/4XzZnPZ69gWe3bCH9",
     "contact_info": {
       "phone": [
-        "054-8072424",
-        "055-7046844"
+        {
+          "number": "054-8072424",
+          "name": "תמיר"
+        },
+        {
+          "number": "055-7046844",
+          "name": "ראדיקה"
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -159,8 +178,7 @@
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.85,
-    "price_note": "יחיד / זוג"
+    "confidence": 0.85
   },
   {
     "title": "טנטריק דאנס – מפגש 15",
@@ -174,11 +192,15 @@
     "city": "פרדס חנה",
     "price_text": "180₪–220₪",
     "price_unit": null,
+    "price_note": "יחיד / זוג",
     "description": "הטנטריק דאנס מגיעה לפעם ה-15 בחגיגה לרגל בואו של הקיץ. שילוב של תנועה משחררת עם מגע קשוב ומחבר.",
     "registration_link": "https://www.anandalev.co.il/tantric-dance",
     "contact_info": {
       "phone": [
-        "054-6177878"
+        {
+          "number": "054-6177878",
+          "name": "עמית"
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -191,8 +213,7 @@
         "source_message_timestamp": "2026-05-09"
       }
     ],
-    "confidence": 0.9,
-    "price_note": "יחיד / זוג"
+    "confidence": 0.9
   },
   {
     "title": "מגע אוהב במים – סדנה זוגית",
@@ -239,8 +260,10 @@
     "registration_link": "https://forms.gle/jMtEr6KLAuuKFfZo9",
     "contact_info": {
       "phone": [
-        "97253225366",
-        "+97253225366"
+        {
+          "number": "+972-53-225-3660",
+          "name": "מריה"
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -271,7 +294,10 @@
     "registration_link": null,
     "contact_info": {
       "phone": [
-        "052-5159812"
+        {
+          "number": "052-5159812",
+          "name": "הילה"
+        }
       ],
       "telegram": [],
       "instagram": [],
@@ -303,7 +329,10 @@
     "registration_link": null,
     "contact_info": {
       "phone": [
-        "054-4893970"
+        {
+          "number": "054-4893970",
+          "name": "טארה"
+        }
       ],
       "telegram": [],
       "instagram": [],
