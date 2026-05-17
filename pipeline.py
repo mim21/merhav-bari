@@ -643,8 +643,7 @@ def _make_card(event, chat_folder, line_to_image):
     <h2 class="card-title">{title}</h2>
     {"<div class='card-date'>📅 " + date_str + "</div>" if date_str else ""}
     {"<div class='card-time'>🕐 " + time_str + "</div>" if time_str else ""}
-    {"<div class='card-location'>📍 " + location + "</div>" if location else ""}
-    {"<div class='card-location-note'>🔒 מיקום מדויק יישלח לנרשמים</div>" if loc_private else ""}
+    {"<div class='card-location'>📍 " + location + (" <span class='location-private'>(מיקום מדויק יימסר לנרשמים)</span>" if loc_private else "") + "</div>" if location else ""}
     {"<div class='card-price'>💰 " + "".join(_render_price_tier(t) for t in price_details) + "</div>" if price_details else ("<div class='card-price'>💰 " + price + ("  <span class='price-note'>(" + price_note + ")</span>" if price_note else "") + "</div>" if price else "")}
     {"<div class='card-desc'>" + desc + "</div>" if desc else ""}
     <div class="card-footer">{link_html}{contact_html}</div>
@@ -726,7 +725,7 @@ def step_html():
     .contact {{ font-size: 0.78rem; color: #6b7280; }}
     .contact-wa {{ font-size: 0.78rem; color: #25d366; text-decoration: none; font-weight: 500; }}
     .contact-wa:hover {{ text-decoration: underline; }}
-    .card-location-note {{ font-size: 0.78rem; color: #9061d4; font-style: italic; }}
+    .location-private {{ font-size: 0.78rem; color: #9061d4; font-style: italic; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
 </head>
