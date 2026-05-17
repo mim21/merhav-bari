@@ -598,9 +598,15 @@ def _make_card(event, chat_folder, line_to_image):
             num  = p.get("number", p) if isinstance(p, dict) else p
             name = p.get("name") if isinstance(p, dict) else None
             digits = re.sub(r'\D', '', num)
-            if digits.startswith("0"): digits = "972" + digits[1:]
-            wa_url = f"https://wa.me/{digits}"
-            label = f"{name} {num}" if name else num
+            if digits.startswith("972"): digits = "0" + digits[3:]
+            if digits.startswith("0"): wa_digits = "972" + digits[1:]
+            else: wa_digits = digits
+            # format display: 05X-XXX-XXXX
+            d = digits
+            if len(d) == 10: display_num = f"{d[:3]}-{d[3:6]}-{d[6:]}"
+            else: display_num = digits
+            wa_url = f"https://wa.me/{wa_digits}"
+            label = f"{name} {display_num}" if name else display_num
             contacts.append(f'<a href="{wa_url}" target="_blank" class="contact-wa">&#x202A;{wa_svg} {label}&#x202C;</a>')
         for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {t}</span>')
         for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {i}</span>')
