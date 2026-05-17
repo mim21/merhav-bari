@@ -593,10 +593,14 @@ def _make_card(event, chat_folder, line_to_image):
     contacts = []
     ci = event.get("contact_info") or {}
     if isinstance(ci, dict):
-        for p in ci.get("phone", []):    contacts.append(f"📞 {p}")
-        for t in ci.get("telegram", []): contacts.append(f"✈️ {t}")
-        for i in ci.get("instagram", []): contacts.append(f"📷 {i}")
-    contact_html = "".join(f'<span class="contact">{c}</span>' for c in contacts)
+        for p in ci.get("phone", []):
+            digits = re.sub(r'\D', '', p)
+            if digits.startswith("0"): digits = "972" + digits[1:]
+            wa_url = f"https://wa.me/{digits}"
+            contacts.append(f'<a href="{wa_url}" target="_blank" class="contact-wa">💬 {p}</a>')
+        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {t}</span>')
+        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {i}</span>')
+    contact_html = "".join(contacts)
 
     conf = event.get("confidence", 0)
     conf_color = "#28a745" if conf >= 0.8 else "#ffc107" if conf >= 0.5 else "#dc3545"
@@ -691,6 +695,8 @@ def step_html():
     .reg-link {{ display: inline-block; padding: 6px 14px; background: #4361ee; color: white; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }}
     .reg-link:hover {{ background: #3451d1; }}
     .contact {{ font-size: 0.78rem; color: #6b7280; }}
+    .contact-wa {{ font-size: 0.78rem; color: #25d366; text-decoration: none; font-weight: 500; }}
+    .contact-wa:hover {{ text-decoration: underline; }}
     .card-location-note {{ font-size: 0.78rem; color: #9061d4; font-style: italic; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
