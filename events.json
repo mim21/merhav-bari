@@ -90,6 +90,10 @@
     "city": "כריתים",
     "price_text": "4400₪",
     "price_unit": null,
+    "price_details": [
+      "4,400₪ – מחיר מוקדם",
+      "5,600₪ – מחיר מלא"
+    ],
     "description": "ריטריט נשים 5 ימים בכריתים, יוון. מרחב פראי עם נחל זורם בין עצי זית עתיקים. עונג, גוף וטבע.",
     "registration_link": "https://www.avigayil-lev.com/wildgreece",
     "contact_info": {
@@ -122,8 +126,14 @@
     "raw_date_text": "29.5 - שישי - תל אביב - 20:00",
     "location_name": null,
     "city": "תל אביב",
-    "price_text": "200₪",
-    "price_unit": "person",
+    "price_text": "170₪–400₪",
+    "price_unit": null,
+    "price_details": [
+      "200₪ ליחיד/ה",
+      "400₪ לצמד (אישה+גבר)",
+      "180₪ ליחיד/ה – הנחה מוקדמת",
+      "170₪ ליחיד/ה – הנחה גדולה יותר"
+    ],
     "description": "מסיבת סופט פליי חוגגת 4 שנים עם אבישג זלוף ואוקאס. מסע מוזיקלי עם קקאו, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית, גברים ברשימת המתנה.",
     "registration_link": "http://www.yannivgold.com/spp",
     "contact_info": {
