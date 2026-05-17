@@ -551,6 +551,22 @@ def _format_date(event):
     except: return str(d)
 
 
+_TIER_DATE_RE = re.compile(r'עד\s+(\d{1,2})[./](\d{1,2})')
+
+def _render_price_tier(tier_text):
+    today = date.today()
+    m = _TIER_DATE_RE.search(tier_text)
+    if m:
+        day, month = int(m.group(1)), int(m.group(2))
+        try:
+            tier_date = date(today.year, month, day)
+            if tier_date < today:
+                return f"<div class='price-tier expired'><s>{tier_text}</s> <span class='expired-label'>פג תוקף</span></div>"
+        except ValueError:
+            pass
+    return f"<div class='price-tier'>{tier_text}</div>"
+
+
 def _make_card(event, chat_folder, line_to_image):
     img_tag = ""
     img_file = event.get("_image_filename") or _find_image(event, line_to_image)
@@ -629,7 +645,7 @@ def _make_card(event, chat_folder, line_to_image):
     {"<div class='card-time'>🕐 " + time_str + "</div>" if time_str else ""}
     {"<div class='card-location'>📍 " + location + "</div>" if location else ""}
     {"<div class='card-location-note'>🔒 מיקום מדויק יישלח לנרשמים</div>" if loc_private else ""}
-    {"<div class='card-price'>💰 " + "".join(f"<div class='price-tier'>{t}</div>" for t in price_details) + "</div>" if price_details else ("<div class='card-price'>💰 " + price + ("  <span class='price-note'>(" + price_note + ")</span>" if price_note else "") + "</div>" if price else "")}
+    {"<div class='card-price'>💰 " + "".join(_render_price_tier(t) for t in price_details) + "</div>" if price_details else ("<div class='card-price'>💰 " + price + ("  <span class='price-note'>(" + price_note + ")</span>" if price_note else "") + "</div>" if price else "")}
     {"<div class='card-desc'>" + desc + "</div>" if desc else ""}
     <div class="card-footer">{link_html}{contact_html}</div>
   </div>
@@ -701,6 +717,8 @@ def step_html():
     .card-price  {{ color: #b45309; font-size: 0.85rem; font-weight: 600; }}
     .price-note  {{ font-size: 0.78rem; font-weight: 400; color: #92400e; }}
     .price-tier  {{ font-size: 0.8rem; color: #92400e; margin-top: 2px; }}
+    .price-tier.expired {{ color: #aaa; }}
+    .expired-label {{ font-size: 0.72rem; color: #aaa; font-weight: 400; margin-right: 4px; }}
     .card-desc   {{ color: #374151; font-size: 0.85rem; line-height: 1.5; margin-top: 4px; flex: 1; }}
     .card-footer {{ margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }}
     .reg-link {{ display: inline-block; padding: 6px 14px; background: #4361ee; color: white; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }}

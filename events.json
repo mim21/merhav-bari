@@ -192,7 +192,11 @@
     "city": "פרדס חנה",
     "price_text": "180₪–220₪",
     "price_unit": null,
-    "price_note": "יחיד / זוג",
+    "price_details": [
+      "180₪ – מכירה סופר מוקדמת (עד 10.5)",
+      "200₪ – מכירה מוקדמת (עד 16.5)",
+      "220₪ – כרטיסים אחרונים"
+    ],
     "description": "הטנטריק דאנס מגיעה לפעם ה-15 בחגיגה לרגל בואו של הקיץ. שילוב של תנועה משחררת עם מגע קשוב ומחבר.",
     "registration_link": "https://www.anandalev.co.il/tantric-dance",
     "contact_info": {
