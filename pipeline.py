@@ -339,7 +339,7 @@ def _enrich_from_text(event, text):
             print(f"    city   → {m.group(1)}")
             changed = True
     ci = event.setdefault("contact_info", {"phone": [], "email": [], "telegram": [], "instagram": [], "other": []})
-    if isinstance(ci, dict) and not ci.get("phone"):
+    if isinstance(ci, dict) and ci.get("phone") is None:
         phones = list(set(PHONE_RE.findall(text)))
         if phones:
             ci["phone"] = [{"number": p, "name": None} for p in phones]

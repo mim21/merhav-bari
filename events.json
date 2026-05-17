@@ -259,12 +259,7 @@
     "description": "מסיבת כרבולים בהנחיית מריה. מרחב רך, לא-מיני ובטוח למגע אנושי, נוכחות ותקשורת קשובה. האירוע מתקיים באנגלית.",
     "registration_link": "https://forms.gle/jMtEr6KLAuuKFfZo9",
     "contact_info": {
-      "phone": [
-        {
-          "number": "+972-53-225-3660",
-          "name": "מריה"
-        }
-      ],
+      "phone": [],
       "telegram": [],
       "instagram": [],
       "other": []
