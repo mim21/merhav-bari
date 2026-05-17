@@ -157,7 +157,7 @@
     "status": "scheduled",
     "date_only": "2026-05-28",
     "start_time_only": "20:00",
-    "end_time_only": "19:45",
+    "end_time_only": null,
     "raw_date_text": "28/5 בפרדס חנה",
     "location_name": null,
     "city": "פרדס חנה",

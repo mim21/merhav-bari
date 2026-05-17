@@ -328,7 +328,7 @@ def _enrich_from_text(event, text):
         s, e = _best_times(text)
         if s:
             event["start_time_only"] = s
-            if e and not event.get("end_time_only"):
+            if e and not event.get("end_time_only") and e > s:
                 event["end_time_only"] = e
             print(f"    time   → {s}" + (f"–{e}" if e else ""))
             changed = True
