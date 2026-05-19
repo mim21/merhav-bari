@@ -74,8 +74,7 @@
         "source_message_timestamp": "2026-04-23"
       }
     ],
-    "confidence": 0.9,
-    "price_note": "הרשמה מוקדמת / רגילה"
+    "confidence": 0.9
   },
   {
     "title": "WILD – ריטריט נשים בכריתים",
@@ -254,35 +253,6 @@
         "line_reference": 223,
         "source_excerpt": "מגע אוהב במים | 28.5 בריכה פרטית ליד בנימינה",
         "source_message_timestamp": "2026-05-11"
-      }
-    ],
-    "confidence": 0.9
-  },
-  {
-    "title": "מסיבת כרבולים – Cuddle Party",
-    "event_type": "cuddle_party",
-    "status": "scheduled",
-    "date_only": "2026-05-17",
-    "start_time_only": null,
-    "end_time_only": null,
-    "raw_date_text": "יום ראשון — 17.5",
-    "location_name": null,
-    "city": "תל אביב",
-    "price_text": null,
-    "price_unit": null,
-    "description": "מסיבת כרבולים בהנחיית מריה. מרחב רך, לא-מיני ובטוח למגע אנושי, נוכחות ותקשורת קשובה. האירוע מתקיים באנגלית.",
-    "registration_link": "https://forms.gle/jMtEr6KLAuuKFfZo9",
-    "contact_info": {
-      "phone": [],
-      "telegram": [],
-      "instagram": [],
-      "other": []
-    },
-    "source_messages": [
-      {
-        "line_reference": 238,
-        "source_excerpt": "מסיבת כרבולים | 17.5",
-        "source_message_timestamp": "2026-05-14"
       }
     ],
     "confidence": 0.9

@@ -315,7 +315,7 @@ def _enrich_from_text(event, text):
                 event["price_unit"] = unit
             print(f"    price  → {p}")
             changed = True
-    if "–" in (event.get("price_text") or "") and not event.get("price_note"):
+    if "–" in (event.get("price_text") or "") and not event.get("price_note") and not event.get("price_details"):
         if INDIV_RE.search(text) and COUPLE_PRICE_RE.search(text):
             event["price_note"] = "יחיד / זוג"
             print(f"    price_note → יחיד / זוג")
