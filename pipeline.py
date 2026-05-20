@@ -19,6 +19,7 @@ NOTE: Event extraction is done by Claude Code (no API key needed):
 import asyncio
 import base64
 import json
+import math
 import os
 import re
 import sys
@@ -470,6 +471,7 @@ async def step_enrich():
 # STEP 4 – GENERATE HTML
 # ─────────────────────────────────────────────────────────────────────────────
 ATTACH_RE = re.compile(r"<attached:\s*([\w\-\.]+\.(?:jpg|jpeg|png|mp4))\s*>", re.IGNORECASE)
+ALLOWED_MEDIA_EXTS = {".jpg", ".jpeg", ".png", ".mp4"}
 
 HE_MONTHS = ["", "ינואר", "פברואר", "מרץ", "אפריל", "מאי", "יוני",
              "יולי", "אוגוסט", "ספטמבר", "אוקטובר", "נובמבר", "דצמבר"]
@@ -520,16 +522,23 @@ def _safe_url(url):
 
 
 def _img_uri(chat_folder, filename):
+    if not isinstance(filename, str):
+        return None
+    # Reject any path that contains separators or relative components
+    if Path(filename).name != filename:
+        return None
     try:
         path = (chat_folder / filename).resolve()
         chat_root = chat_folder.resolve()
         if os.path.commonpath([str(path), str(chat_root)]) != str(chat_root):
             return None
-        if not path.exists(): return None
+        if path.suffix.lower() not in ALLOWED_MEDIA_EXTS:
+            return None
+        if not path.is_file(): return None
         if path.stat().st_size > 10_000_000: return None  # 10 MB cap
-        ext = path.suffix.lower().lstrip(".")
-        if ext == "mp4": return _mp4_thumbnail(path)
+        if path.suffix.lower() == ".mp4": return _mp4_thumbnail(path)
         data = base64.b64encode(path.read_bytes()).decode("ascii")
+        ext = path.suffix.lower().lstrip(".")
         mime = "jpeg" if ext in ("jpg", "jpeg") else ext
         return f"data:image/{mime};base64,{data}"
     except: return None
@@ -586,6 +595,11 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
+def _str(v):
+    if v is None: return ""
+    return v if isinstance(v, str) else str(v)
+
+
 def _make_card(event, chat_folder, line_to_image):
     img_tag = ""
     img_file = event.get("_image_filename") or _find_image(event, line_to_image)
@@ -600,28 +614,28 @@ def _make_card(event, chat_folder, line_to_image):
     status_label, card_bg = STATUS_STYLES.get(status, ("", "white"))
     status_html = f'<div class="status-banner">{status_label}</div>' if status_label else ""
 
-    title    = h(event.get("title") or event.get("normalized_title") or "אירוע")
+    title    = h(_str(event.get("title")) or _str(event.get("normalized_title")) or "אירוע")
     date_str = h(_format_date(event))
-    s, e     = event.get("start_time_only"), event.get("end_time_only")
-    time_str = h(f"{s} – {e}" if s and e else s or "")
+    s, e     = _str(event.get("start_time_only")), _str(event.get("end_time_only"))
+    time_str = h(f"{s} – {e}" if s and e else s)
 
-    loc_name    = event.get("location_name") or ""
+    loc_name    = _str(event.get("location_name"))
     loc_private = "יימסר לנרשמים" in loc_name or "לנרשמים" in loc_name
     if loc_private:
         loc_clean = loc_name.split("(")[0].strip() if "(" in loc_name else ""
-        loc_parts = [p for p in [loc_clean, event.get("city")] if p]
+        loc_parts = [p for p in [loc_clean, _str(event.get("city"))] if p]
     else:
-        loc_parts = [p for p in [loc_name, event.get("city")] if p]
+        loc_parts = [p for p in [loc_name, _str(event.get("city"))] if p]
     location = h(" · ".join(loc_parts))
 
-    price_raw     = event.get("price_text") or ""
+    price_raw     = _str(event.get("price_text"))
     price_unit    = event.get("price_unit") or ""
     unit_label    = " לזוג" if price_unit == "couple" else " לאדם" if price_unit == "person" else ""
     price         = h(f"{price_raw}{unit_label}") if price_raw else ""
-    price_note    = h(event.get("price_note") or "")
+    price_note    = h(_str(event.get("price_note")))
     price_details = event.get("price_details") or []
 
-    desc = h(event.get("description") or "")
+    desc = h(_str(event.get("description")))
     safe_link = h(_safe_url(event.get("registration_link") or ""))
     link_html = f'<a class="reg-link" href="{safe_link}" target="_blank" rel="noopener noreferrer">להרשמה ←</a>' if safe_link else ""
 
@@ -645,9 +659,16 @@ def _make_card(event, chat_folder, line_to_image):
         for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {h(i)}</span>')
     contact_html = "".join(contacts)
 
-    conf = event.get("confidence", 0)
+    try:
+        conf = float(event.get("confidence", 0))
+        if not math.isfinite(conf):
+            conf = 0.0
+        conf = max(0.0, min(1.0, conf))
+    except (TypeError, ValueError):
+        conf = 0.0
     conf_color = "#28a745" if conf >= 0.8 else "#ffc107" if conf >= 0.5 else "#dc3545"
-    dots = "●" * round(conf * 5) + "○" * (5 - round(conf * 5))
+    dot_count = round(conf * 5)
+    dots = "●" * dot_count + "○" * (5 - dot_count)
 
     return f"""<div class="card" style="background:{card_bg}">
   {status_html}
@@ -655,7 +676,7 @@ def _make_card(event, chat_folder, line_to_image):
   <div class="card-body">
     <div class="card-header-row">
       <span class="badge">{icon} {label}</span>
-      <span class="confidence" style="color:{conf_color}" title="{int(conf*100)}%">{dots}</span>
+      <span class="confidence" style="color:{conf_color}" title="{dot_count * 20}%">{dots}</span>
     </div>
     <h2 class="card-title">{title}</h2>
     {"<div class='card-date'>📅 " + date_str + "</div>" if date_str else ""}
