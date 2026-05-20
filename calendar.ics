@@ -5,92 +5,102 @@ X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
 UID:bdd4a8af20b3187962906411756bf846@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260521T140000
 DTEND:20260521T160000
 SUMMARY:ליפול לאיזון – ריטריט קונטקט ותנועה בטבע
 DESCRIPTION:ריטריט קונטקט אימפרוביזציה ותנועה בטבע של 3 ימים. ריקוד קונטקט\, תנועה עם מים\, חול ואש\, יצירת מרחב חי של חיבור ופשטות.
 LOCATION:סטודיו היער המכושף
+URL:https://mim21.github.io/merhav-bari/#event-0
 END:VEVENT
 BEGIN:VEVENT
 UID:572e8fa87665118ffe590e0320ffa59e@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260521T160000
 DTEND:20260521T180000
 SUMMARY:ריטריט שבועות – ביכורים של הלב
 DESCRIPTION:ריטריט טנטרי של 24 שעות לרגל שבועות – קקאו\, מקדש אהבה\, טקס ביכורים בבריכה מחוממת\, לינה וארוחות משותפות. לזוגות ויחידים.
 LOCATION:אהבה בדרך הטבע · רחובות
+URL:https://mim21.github.io/merhav-bari/#event-1
 END:VEVENT
 BEGIN:VEVENT
 UID:d95cae9f3fbec71a8373c38796338cd8@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260523T183000
 DTEND:20260523T220000
 SUMMARY:הטנטריק דאנס – מוצאי שבת
 DESCRIPTION:הטנטריק דאנס חוזרת בפעם ה-15 – חגיגה מיוחדת לרגל בואו של הקיץ. שילוב של תנועה משחררת עם מגע קשוב ומחבר.
 LOCATION:פרדס חנה
+URL:https://mim21.github.io/merhav-bari/#event-2
 END:VEVENT
 BEGIN:VEVENT
 UID:0b9e7938084aa722744e229db3e95f61@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260528T193000
 DTEND:20260529T000000
 SUMMARY:Spring Nights – מקדש טנטרי
 DESCRIPTION:מקדש טנטרי מונחה באיזון מגדרי בתל אביב. מרחב של מיניות מודעת\, נוכחות\, הקשבה והסכמה. גברים מוזמנים עם מאזנת בלבד.
 LOCATION:תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-3
 END:VEVENT
 BEGIN:VEVENT
 UID:2100efda5efc6f872eb6548bf47970e8@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
 DESCRIPTION:ערב חקירה משחקית ושובבה בשיתוף ראדיקה ויצחק – מגע אנרגטי\, חושני ואיטי. נרגיש איך האנרגיה נבנית מבפנים וזורמת בין הגופים.
 LOCATION:זן גארדן · פרדס חנה
+URL:https://mim21.github.io/merhav-bari/#event-4
 END:VEVENT
 BEGIN:VEVENT
 UID:c57c453ded6131bc2217bea94ac8bbaa@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
 SUMMARY:מגע אוהב במים – סדנה זוגית
 DESCRIPTION:סדנה זוגית חוויתית במים חמים – רגש\, משחקיות\, אירוטיקה\, הרפיה ואינטימיות. מועד 14.5 סולד אאוט\, נפתח מועד חדש ב-28.5. נותרו 2 מקומות בהרשמה מוקדמת.
 LOCATION:בריכה פרטית ליד בנימינה · בנימינה
+URL:https://mim21.github.io/merhav-bari/#event-5
 END:VEVENT
 BEGIN:VEVENT
 UID:888132f6f0ac5cf2ee4d79cc0cc2853b@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
 SUMMARY:Soft Play Party – אבישג ואוקאס
 DESCRIPTION:סדנת מסיבה לרגל ארבע שנות סופט פליי – אבישג ואוקאס יחד שוב! מסע מוזיקלי עם קקאו\, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית\; גברים – טופס המתנה.
 LOCATION:תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-6
 END:VEVENT
 BEGIN:VEVENT
 UID:3ca75c006d68cf093190445eb203e820@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
 DESCRIPTION:ערב לזוגות לחקירת המפגש האינטימי הרגשי והגופני. נשחק עם סוגי מגע ונצא מהמובן מאליו לכיוון התחדשות\, התרחבות והעמקה.
 LOCATION:LUST · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-7
 END:VEVENT
 BEGIN:VEVENT
 UID:9d8610632fda6fffa34e9fd1eab7aa48@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
 SUMMARY:סדנה לנשים – חיבור לאנרגיה הניקבית
 DESCRIPTION:סדנה לנשים בלבד – 4 שעות של שחרור וחיבור לאנרגיה הניקבית. כוללת הפעלה מוזיקלית\, תנועה בביודאנסה\, מגע אוהב בציפה ומגע דינאמי בכיסוי עיניים.
 LOCATION:מרחב סדנאות עם בריכה מקורה · רחובות
+URL:https://mim21.github.io/merhav-bari/#event-8
 END:VEVENT
 BEGIN:VEVENT
 UID:d8f5d7f6119a75edc83628ed2b57e5b2@merhav-bari
-DTSTAMP:20260520T221305Z
+DTSTAMP:20260520T222155Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:latihan – מסע קשוב בכיסוי עיניים
 DESCRIPTION:סדנת תנועה עם כיסוי עיניים עם אבישג מאיה זלוף. נעים לאט מתוך נשימה והקשבה\, מלווה במסע מוזיקלי. ללא עירום/מגע באיברי מין\; מגע קשוב אפשרי.
 LOCATION:פרדס חנה
+URL:https://mim21.github.io/merhav-bari/#event-9
 END:VEVENT
 END:VCALENDAR
