@@ -1,6 +1,6 @@
-# Security Review — pipeline.py (Rounds 7–12)
+# Security Review — pipeline.py (Rounds 7–13)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/90d5de2/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/b7b20b9/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
@@ -145,17 +145,70 @@ fragment scroll fires before the page fully settles.
   XSS — at worst it finds no element and silently does nothing.
 - No user-supplied data from `events.json` flows into this script.
 
-**Status: NOT fully working — still broken on iPhone (Mobile Safari).**
-The card still does not scroll to the top of the viewport after the fix.
-Suspected causes (not yet investigated):
-- Mobile Safari may ignore `scrollIntoView` on initial page load if the call happens
-  while the browser is still processing the native fragment scroll.
-- 50 ms may be too short — Safari renders and lays out large base64-embedded images
-  lazily; the card's final position may not be known yet at 50 ms.
-- `behavior: 'instant'` may be silently ignored in some Safari versions.
-- The `webcal://` / calendar app → browser handoff may restore scroll position from
-  a previous visit before the JS fires, overriding the `scrollIntoView` call.
-- `scroll-margin-top` browser support on Mobile Safari (check if a polyfill is needed).
+---
+
+### Round 13 — ICS hardening, slug/UID collision fix, scroll overhaul (commit b7b20b9)
+
+#### Fixed — real bugs:
+
+**`_ics_escape` missing CR handling:**
+Added `.replace('\r\n', '\n').replace('\r', '\n')` before the existing escapes.
+Raw carriage returns in `description` or `title` could produce spurious ICS content lines.
+
+**`URL:` property not ICS-escaped:**
+Changed `vevent.append('URL:' + event_url)` → `vevent.append(_ics_fold('URL:' + _ics_escape(event_url)))`.
+All other VEVENT text properties were already escaped; this was an inconsistency.
+
+**Slug/UID collision (same title + same date):**
+- `UID` now uses full `gs` (date + time) instead of `gs[:8]` (date only). Two events
+  with the same title on the same date but different start times now get distinct UIDs —
+  calendar apps no longer merge/overwrite them.
+- `_event_slug` now appends start time: `event-{slug}-{YYYYMMDD}-{HHMM}` for timed
+  events, `event-{slug}-{YYYYMMDD}` for all-day events.
+
+**Empty slug from whitespace/special-char title:**
+`re.sub(...).strip('-') or 'untitled'` — prevents `event--YYYYMMDD` from two whitespace-titled events on the same date colliding.
+
+**`step_enrich()` crash on non-dict/non-list JSON:**
+`data["events"] = events` raised `TypeError` if `data` was `null`, a number, or a string.
+Fixed: `if not isinstance(data, dict): data = {}` before the assignment.
+
+#### Fixed — good improvements:
+
+**ICS line folding (`_ics_fold`):**
+New helper folds lines longer than 75 UTF-8 octets per RFC 5545 (splitting on character
+boundaries, not byte boundaries). Applied to every VEVENT property line and at the join
+points in both `_make_cal_links` and `_make_full_cal`. Without this, strict ICS parsers
+(and some Outlook versions) reject the entire VCALENDAR when one Hebrew description
+exceeds 38 characters.
+
+**ICS download button replaced with file link:**
+`data:text/calendar;base64,{full_ics}` in the header replaced with
+`<a href="calendar.ics" download="מרחב-בריא.ics">`. Always fresh, no page bloat.
+Per-event Apple buttons keep their `data:` URIs (no file to link to for individual events).
+
+**`webcal://` URL wrapped in `h()`:**
+`href="{webcal_url}"` → `href="{h(webcal_url)}"` for parity with the other two header buttons.
+
+**iPhone anchor scroll overhauled:**
+Root cause: `scrollIntoView` fired at 50 ms while base64 images were still laying out,
+giving a wrong scroll target; browser scroll restoration then overrode the fix on
+back-forward navigation.
+New script before `</body>`:
+- `history.scrollRestoration = 'manual'` — prevents browser from restoring old position
+- `decodeURIComponent(location.hash.slice(1))` — handles percent-encoded hashes
+- `getBoundingClientRect().top + pageYOffset - 12` + `window.scrollTo` — more reliable
+  than `scrollIntoView` in Mobile Safari
+- Retries at `rAF×2`, 250 ms, 750 ms — catches post-image-load layout shifts
+- Listens to `DOMContentLoaded`, `load`, `pageshow` (back-forward cache), `hashchange`
+- `.card-img { min-height: 180px }` reserves layout space before images decode,
+  reducing layout shift magnitude
+
+#### Not fixed (skipped):
+- SHA-256 digest suffix on slugs — adding start time already eliminates collisions
+- `quote()` on slug in URL fragment — slug contains only `\w` + hyphens, no encoding needed
+- LRM/RLM bidi marks in slug — theoretical edge case, not seen in practice
+- Enricher sublink cross-contamination — documented; not a security risk
 
 ---
 
@@ -164,7 +217,7 @@ Suspected causes (not yet investigated):
 | Issue | Reason not fixed |
 |---|---|
 | `_needs_enrich` gap (misses `end_time_only` when `price_text + city` are already set) | Would force website visit for most events; performance trade-off |
-| Enricher sublink cross-contamination | Complex to fix; no security risk (enricher only overwrites null fields) |
+| Enricher sublink cross-contamination | Complex to fix; not a security risk (enricher only overwrites null fields) |
 | `[:200_000]` post-hoc text slice in `_fetch_text` | Sufficient; added complexity not worth it |
 | `_needs_enrich` dead local variable | Micro-optimization, no behavior impact |
 | `_parse_event_dates` year inference near year boundary | Pre-existing; not a security concern |
@@ -174,43 +227,18 @@ Suspected causes (not yet investigated):
 
 ## What to focus on in this review
 
-**Calendar / ICS security:**
-- Is `_ics_escape()` complete per RFC 5545? Are there special characters that should
-  be escaped but aren't (e.g. COLON, line folding for long values)?
-- Could crafted `title` or `description` in `events.json` break out of the
-  `data:text/calendar;base64,...` URI or corrupt the `download` attribute?
-- `_event_cal_data` is shared by `_make_cal_links` and `_make_full_cal`. If it
-  produces corrupt output for one malformed event, does it affect other events in
-  the full calendar?
-- `_make_full_cal` embeds ALL events into one data URI. Could a large event list
-  produce a data URI that exceeds browser `href` length limits?
+**ICS / calendar:**
+- `_ics_fold` splits on UTF-8 character boundaries. Could a malformed multi-byte sequence in a field value cause the fold to split incorrectly and corrupt the ICS line?
+- Are there remaining ICS injection paths not covered by `_ics_escape` + `_ics_fold`?
+- Could a crafted `title` or `description` corrupt the `download` attribute on the per-event Apple button?
 
-**Slug / back-link security:**
-- `_event_slug` uses `re.sub(r'[^\w]+', '-', title, flags=re.UNICODE)`. Could two
-  different events produce the same slug (collision)?
-- What happens if `title` is empty, all-whitespace, or consists entirely of
-  special characters?
-- Are there Unicode `\w` characters (retained by the slug regex) that are unsafe in
-  a URL fragment without percent-encoding?
-- The back-link URL is appended to `&details=` via `quote()`. Is this applied
-  correctly so no URL injection is possible?
+**Slug / URL:**
+- Are there Unicode `\w` characters retained by `_event_slug` that are unsafe in an HTML `id` attribute or URL fragment?
+- Slug collision is now `title + date + start_time`. Can two events still collide (e.g. all-day events with same title and date)?
 
 **Enricher:**
-- Is the sublink cross-contamination (Round 8) a real security risk, or only a data
-  accuracy issue? Could scraped content from the wrong page cause XSS or injection?
-- Are there remaining `events.json`-driven crash paths or HTML injection paths not
-  covered by the existing `_str()` / `h()` / `_safe_url()` guards?
-
-**Anchor scroll (Round 12 — still broken on iPhone / Mobile Safari):**
-- The current fix (`scroll-margin-top: 12px` + 50 ms `setTimeout` + `scrollIntoView({block:'start', behavior:'instant'})`)
-  does NOT reliably scroll to the card top on iPhone. Why not, and what is the correct fix?
-- Specifically: does Mobile Safari suppress `scrollIntoView` on initial load? Is 50 ms
-  too short given large base64 images in the page? Does `behavior: 'instant'` work in
-  all Safari versions? Could the calendar-app → browser handoff restore a prior scroll
-  position after the JS fires?
-- What is the most reliable cross-browser approach for this pattern (deep-link from
-  external app → specific card at top of viewport on mobile)?
-- `location.hash.slice(1)` → `getElementById()`: safe against DOM-clobbering?
+- Is the sublink cross-contamination a real security risk, or data accuracy only? Could scraped content from the wrong page cause XSS or injection in the rendered HTML?
+- Any remaining `events.json`-driven crash paths not covered by `_str()` / `h()` / `_safe_url()`?
 
 **General:**
-- Any other issues introduced by the Round 9–12 changes?
+- Any issues introduced by the Round 13 changes?
