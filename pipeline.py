@@ -23,6 +23,7 @@ import json
 import math
 import os
 import re
+import subprocess
 import sys
 from datetime import date, datetime, timedelta, timezone
 from html import escape as h
@@ -448,7 +449,9 @@ async def step_enrich():
     is_list = isinstance(data, list)
     events  = [e for e in _events_from_json(data) if isinstance(e, dict)]
     if not is_list:
-        data["events"] = events
+        if not isinstance(data, dict):
+            data = {}
+        data['events'] = events
 
     def _needs_enrich(e):
         price_text = _str(e.get("price_text"))
@@ -629,7 +632,18 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
+def _git_short_hash():
+    try:
+        return subprocess.check_output(
+            ['git', 'rev-parse', '--short', 'HEAD'],
+            cwd=Path(__file__).parent, stderr=subprocess.DEVNULL, text=True
+        ).strip()
+    except Exception:
+        return ''
+
+
 def _ics_escape(s):
+    s = _str(s).replace('\r\n', '\n').replace('\r', '\n')
     return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
 
 
@@ -703,7 +717,7 @@ def _event_cal_data(event, event_url=''):
     if location:
         vevent.append('LOCATION:' + _ics_escape(location))
     if event_url:
-        vevent.append('URL:' + event_url)
+        vevent.append('URL:' + quote(event_url, safe=':/?=&#-._~@'))
     vevent.append('END:VEVENT')
 
     return gs, ge, timed, gcal_url, vevent
@@ -743,7 +757,7 @@ def _make_full_cal(events):
 
     ics_b64    = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
     webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
-    gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(SITE_URL + '/calendar.ics')
+    gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(SITE_URL.replace('https://', 'webcal://') + '/calendar.ics')
 
     apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
     google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
@@ -870,6 +884,9 @@ def step_html():
     full_cal_html, ics_content = _make_full_cal(events)
     OUTPUT_CAL.write_text(ics_content, encoding='utf-8')
 
+    _ver = _git_short_hash()
+    _ver_str = f' · {_ver}' if _ver else ''
+
     html = f"""<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -946,7 +963,7 @@ def step_html():
   <div class="grid">
     {cards_html}
   </div>
-  <footer>נוצר מייצוא WhatsApp · {datetime.now().strftime("%d/%m/%Y %H:%M")}</footer>
+  <footer>נוצר מייצוא WhatsApp · {datetime.now().strftime("%d/%m/%Y %H:%M")}{_ver_str}</footer>
 </body>
 </html>"""
 

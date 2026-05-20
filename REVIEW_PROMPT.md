@@ -1,6 +1,6 @@
-# Security Review — pipeline.py (Round 15)
+# Engineering Review — pipeline.py (Round 16)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/6d85a09/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/HEAD/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
@@ -12,9 +12,7 @@ Treat `events.json` as fully untrusted input.
 
 ---
 
-## Already reviewed and approved (Rounds 1–11)
-
-The following are confirmed safe — do not re-raise them:
+## Confirmed safe — do not re-raise (Rounds 1–15)
 
 - `_events_from_json`, `_str`, `_list` — safe extraction at every JSON boundary
 - `_safe_url()` — http/https scheme + netloc validation
@@ -29,34 +27,20 @@ The following are confirmed safe — do not re-raise them:
 - `download` filename: `re.sub(r'[\\/:"*?<>|]', '', title[:50])` then `h()`
 - `webcal://` and Google subscribe URLs built from hardcoded `SITE_URL` only
 - `_event_slug` — retains only `\w` + hyphens; `or 'untitled'` guards empty title
-- `step_enrich()` — non-dict/non-list JSON handled before `data["events"]` assignment
+- `step_enrich()` — non-dict/non-list JSON handled before `data["events"]` assignment (Round 16)
+- `_ics_escape` — CR normalization before TEXT escaping (Round 16)
+- `URL:` VEVENT — `quote()` applied so non-ASCII fragment chars are percent-encoded (Round 16)
+- Google Calendar subscribe URL — uses `webcal://` in `cid=` parameter (Rounds 15–16)
 
 ---
 
-## Round 12–14 note — changes were reverted
+## History of notable changes
 
-Rounds 12–14 introduced anchor scroll JS, ICS line folding (`_ics_fold`), C0 control
-char stripping, and `_ics_uri`. All of these changes were **reverted** after debugging
-a double-fold bug that caused Apple Calendar to show only 1 event. Current code is back
-to the pre-Round-12 state (stable slugs and `URL:` VEVENT property are still present).
-
----
-
-## Round 15 — Google Calendar subscribe URL fix (commit 6d85a09)
-
-**Problem:** The "📅 Google – הרשם" subscription button used:
-```
-https://calendar.google.com/calendar/r/settings/addbyurl?url=<ics_url>
-```
-This is a desktop web settings page. On iPhone, the Google Calendar app opens but
-shows no subscription prompt — events never appear.
-
-**Fix:** Changed to the `cid=` format:
-```
-https://calendar.google.com/calendar/r?cid=<ics_url>
-```
-The `cid=` parameter is the canonical deep-link format recognized by both the Google
-Calendar web interface and the iOS/Android apps as a "subscribe to this calendar" action.
+| Round | Change |
+|---|---|
+| 12–14 | Anchor scroll JS, ICS line folding, C0 stripping, `_ics_uri` — **reverted** (double-fold bug broke Apple Calendar) |
+| 15 | Google Calendar subscribe URL: `addbyurl?url=` → `cid=` |
+| 16 | `_ics_escape` CR normalization; `URL:` VEVENT percent-encoding; `step_enrich` non-dict guard; `cid=` `webcal://` fix |
 
 ---
 
@@ -64,38 +48,36 @@ Calendar web interface and the iOS/Android apps as a "subscribe to this calendar
 
 | Issue | Reason not fixed |
 |---|---|
-| `_needs_enrich` gap — misses `end_time_only` when `price_text + city` already set | Would force website visit for most events; performance trade-off |
-| Enricher sublink cross-contamination | Not a security risk; enricher only overwrites null fields |
+| `_needs_enrich` gap — misses `end_time_only` when `price_text + city` already set | Performance trade-off |
+| Enricher sublink cross-contamination | Data accuracy only; no XSS path |
 | `[:200_000]` post-hoc slice in `_fetch_text` | Sufficient mitigation |
-| `_parse_event_dates` year boundary inference | Pre-existing; not security-relevant |
+| `_parse_event_dates` year boundary inference | Not security-relevant |
 | `style="background:{card_bg}"` without `h()` | `card_bg` is from `STATUS_STYLES` hardcoded dict only |
-| Slug/UID digest (sha256 of all identity fields) | Start time already distinguishes same-title/date events |
-| `quote()` on URL fragment slug | Slug is `\w` + hyphens only — no encoding needed |
-| Adversarial test suite | Valid long-term; out of scope |
+| Slug/UID uses date only, not time | Same-title same-date events are rare; start time added to slug in Round 13 and reverted |
 | ICS line folding (RFC 5545, 75 byte limit) | Reverted — double-fold bug corrupted Apple Calendar |
+| Google Calendar subscribe on iPhone | Google Calendar iOS app does not support URL-based subscriptions at all — product limitation, not fixable in code |
+| Adversarial test suite | Valid long-term; out of scope |
 
 ---
 
 ## What to focus on in this review
 
-**Google Calendar subscribe URL (Round 15):**
-- Is `https://calendar.google.com/calendar/r?cid=<url>` the correct canonical format
-  for triggering a Google Calendar subscription on iOS? Any known issues with this format?
-- The `<url>` value is `quote(SITE_URL + '/calendar.ics')` where `SITE_URL` is a
-  hardcoded `https://` string — is there any injection surface here?
+**ICS correctness:**
+- `_ics_escape` now normalizes CR, but still has no C0 control char stripping
+  (`\x00–\x08`, `\x0b`, `\x0c`, `\x0e–\x1f`, `\x7f`). Is this a real risk?
+- ICS line folding is still absent. Long Hebrew SUMMARY/DESCRIPTION lines can exceed
+  75 UTF-8 octets. Are any known calendar clients actually rejecting these?
+- `UID` still uses `md5(title + gs[:8])` — date only, not datetime. Could this cause
+  calendar client merge/overwrite issues in practice?
 
-**ICS / calendar (pre-Round-12 state):**
-- `_ics_escape` does TEXT escaping (`\`, `\n`, `,`, `;`) but no C0 control char stripping
-  and no line folding. Is this a correctness or security risk for the current usage?
-- `URL:` VEVENT property uses `_ics_escape(event_url)` — TEXT escaping is incorrect for
-  URI values per RFC 5545 (URIs should not have backslash-escaping). Is this a real
-  problem in practice, or do calendar clients tolerate it?
-
-**Slug / HTML:**
-- Are there Unicode `\w` characters retained by `_event_slug` that are unsafe in an
-  HTML `id` attribute or URL fragment?
-- Any remaining `events.json`-driven crash paths or HTML injection paths?
+**HTML / security:**
+- Any new injection paths introduced in Round 16?
+- Are there Unicode `\w` characters in `_event_slug` that are unsafe in HTML `id`
+  attributes or URL fragments even after percent-encoding in `URL:` VEVENT?
 
 **Enricher:**
-- Is sublink cross-contamination data accuracy only, or could scraped content from
-  the wrong page cause XSS/injection in rendered HTML?
+- Is sublink cross-contamination data accuracy only, or could scraped content
+  from the wrong page cause injection in rendered HTML?
+
+**General:**
+- Anything introduced by Round 16 (CR normalization, percent-encoding, non-dict guard)?
