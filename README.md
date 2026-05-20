@@ -95,7 +95,7 @@ Each event in the array:
 
 ### Images / videos
 - `line_reference` must point to the exact line containing `<attached: FILENAME.jpg>` in `_chat.txt`
-- The pipeline searches ±40 lines around `line_reference` to find the image file
+- The pipeline searches the attachment line and the next 3 lines after `line_reference`
 - Videos (.mp4): set `line_reference` to the mp4 line — the pipeline extracts the first frame as thumbnail
 - No media → `line_reference: null`
 - Two events in one message → only the first gets `line_reference`, the second gets `null`

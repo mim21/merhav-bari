@@ -28,6 +28,32 @@ always fetch the website first and cross-check.
 Website also had `400₪ לצמד` and end time `00:00`. Both were missed because the website
 was never checked during extraction.
 
+## Conflict rules — when post and website disagree
+
+Prefer the **website** for: price, price tiers, couple/person pricing, start/end time, venue name, status (canceled/postponed).
+
+Prefer the **WhatsApp post** when: the website is generic/outdated/unreachable, or the post contains explicit update language (עודכן, שינוי, נדחה, בוטל).
+
+If both sources are valid but conflict: use the more specific value, note the conflict in `source_excerpt`, lower `confidence` to ≤0.6.
+
+## Mandatory second pass before saving events.json
+
+After drafting all events, re-open every `registration_link` and verify:
+- `date_only` / `end_date_only`
+- `start_time_only` / `end_time_only`
+- `price_text` / `price_details` / `price_unit`
+- `location_name` / `city`
+- `contact_info.phone`
+
+Ask before saving: Did I check every link? Did I capture end time? Did I capture couple price? Did I capture early-bird cutoff dates?
+
+## Time rules
+
+- Use 24-hour `HH:MM`.
+- Do not confuse arrival time / התכנסות / doors-open with event start time.
+- If the website shows a range like `20:00–00:00`: `start_time_only: "20:00"`, `end_time_only: "00:00"`.
+- If no end time is explicitly stated: `end_time_only: null` — never invent a duration.
+
 ## price_details vs price_note
 - `price_details` (array): multiple tiers → replaces price display entirely. Include cutoff dates so pipeline can mark expired ones.
 - `price_note` (single string): auto-detected by pipeline from website — never set manually.
