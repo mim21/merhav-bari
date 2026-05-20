@@ -210,6 +210,31 @@ New script before `</body>`:
 - LRM/RLM bidi marks in slug — theoretical edge case, not seen in practice
 - Enricher sublink cross-contamination — documented; not a security risk
 
+#### Bug introduced by Round 13 — double ICS fold (fixed in commit 1349b22):
+`_event_cal_data` was already calling `_ics_fold()` on each property line before
+returning the `vevent` list. Then both `_make_cal_links` and `_make_full_cal` called
+`_ics_fold()` again on every line at join time. A folded line containing embedded
+`\r\n ` sequences was passed through `_ics_fold` a second time, corrupting the byte
+boundary calculations. Result: Apple Calendar parsed only the first VEVENT and silently
+discarded the rest of the VCALENDAR.
+**Fix:** Removed `_ics_fold` calls from inside `_event_cal_data`. Folding now happens
+exactly once — at the join points in `_make_cal_links` and `_make_full_cal`.
+
+**Status: Apple Calendar subscription still shows only 1 event after the fix.**
+The `calendar.ics` file on disk is confirmed correct (10 `BEGIN:VEVENT` blocks).
+Apple Calendar's live subscription may be showing a cached version — it re-fetches
+only ~every 1h. Manual refresh: Calendar → right-click subscription → Refresh.
+If the problem persists after a forced refresh, the remaining suspected causes are:
+- `_ics_fold` still produces lines that confuse Apple's ICS parser (e.g. folding
+  inside a multi-byte Hebrew character boundary despite the guard).
+- A `DTSTAMP` line or `UID` line that is too long and gets folded unexpectedly.
+- Apple Calendar rejecting the `URL:` property on VEVENT (non-standard extension
+  in some older iOS versions — try removing it and testing).
+- The `X-WR-CALNAME` or `X-WR-TIMEZONE` header lines containing characters that
+  confuse the parser before the first VEVENT.
+- Encoding issue: `calendar.ics` is written as UTF-8 but lacks a BOM or
+  `CHARSET` declaration; some Apple Calendar versions expect a BOM for UTF-8 ICS.
+
 ---
 
 ## What was NOT fixed and why
@@ -227,8 +252,16 @@ New script before `</body>`:
 
 ## What to focus on in this review
 
-**ICS / calendar:**
-- `_ics_fold` splits on UTF-8 character boundaries. Could a malformed multi-byte sequence in a field value cause the fold to split incorrectly and corrupt the ICS line?
+**ICS / calendar — Apple Calendar subscription shows only 1 event (unresolved):**
+- `calendar.ics` on disk has all 10 events confirmed. Apple Calendar subscription
+  still shows only 1 after forced refresh. Why?
+- Could `_ics_fold` still be producing malformed lines (e.g. a guard condition miss
+  on multi-byte UTF-8 sequences, leaving a continuation byte at the split point)?
+- Could Apple Calendar be rejecting the non-standard `URL:` VEVENT property and
+  stopping parse at the first event that has one?
+- Could `X-WR-CALNAME:מרחב בריא – אירועים` (Hebrew + em-dash in a header line)
+  confuse the parser before the first VEVENT is reached?
+- Is a UTF-8 BOM needed in `calendar.ics` for Apple Calendar to correctly parse Hebrew?
 - Are there remaining ICS injection paths not covered by `_ics_escape` + `_ics_fold`?
 - Could a crafted `title` or `description` corrupt the `download` attribute on the per-event Apple button?
 
