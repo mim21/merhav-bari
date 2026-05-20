@@ -1,6 +1,6 @@
 # Engineering Review — pipeline.py (Round 17)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/HEAD/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/f4d2e5c/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
