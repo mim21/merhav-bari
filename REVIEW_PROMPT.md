@@ -1,4 +1,4 @@
-# Engineering Review — pipeline.py (Round 16)
+# Engineering Review — pipeline.py (Round 17)
 
 Review this file: https://github.com/mim21/merhav-bari/blob/HEAD/pipeline.py
 
@@ -12,7 +12,7 @@ Treat `events.json` as fully untrusted input.
 
 ---
 
-## Confirmed safe — do not re-raise (Rounds 1–15)
+## Confirmed safe — do not re-raise (Rounds 1–17)
 
 - `_events_from_json`, `_str`, `_list` — safe extraction at every JSON boundary
 - `_safe_url()` — http/https scheme + netloc validation
@@ -26,11 +26,15 @@ Treat `events.json` as fully untrusted input.
 - Per-event ICS: base64-encoded data URI, no untrusted bytes reach HTML unencoded
 - `download` filename: `re.sub(r'[\\/:"*?<>|]', '', title[:50])` then `h()`
 - `webcal://` and Google subscribe URLs built from hardcoded `SITE_URL` only
-- `_event_slug` — retains only `\w` + hyphens; `or 'untitled'` guards empty title
-- `step_enrich()` — non-dict/non-list JSON handled before `data["events"]` assignment (Round 16)
-- `_ics_escape` — CR normalization before TEXT escaping (Round 16)
+- `_event_slug` — retains only `\w` + hyphens; `or 'untitled'` guards empty result (Round 17)
+- `step_enrich()` — non-dict/non-list JSON handled before `data["events"]` assignment
+- `_ics_escape` — CR normalization + C0 control char stripping before TEXT escaping (Rounds 16–17)
 - `URL:` VEVENT — `quote()` applied so non-ASCII fragment chars are percent-encoded (Round 16)
 - Google Calendar subscribe URL — uses `webcal://` in `cid=` parameter (Rounds 15–16)
+- `_collect_urls` — `_str()` applied to `source_excerpt` before regex (Round 17)
+- Full-calendar download button — `href="calendar.ics"` file link, not data URI (Round 17)
+- Copy-URL button — hardcoded `SITE_URL + '/calendar.ics'`, clipboard JS only (Round 17)
+- `UID` in VEVENT — uses full `gs` (datetime), not `gs[:8]` (date only) (Round 17)
 
 ---
 
@@ -40,7 +44,8 @@ Treat `events.json` as fully untrusted input.
 |---|---|
 | 12–14 | Anchor scroll JS, ICS line folding, C0 stripping, `_ics_uri` — **reverted** (double-fold bug broke Apple Calendar) |
 | 15 | Google Calendar subscribe URL: `addbyurl?url=` → `cid=` |
-| 16 | `_ics_escape` CR normalization; `URL:` VEVENT percent-encoding; `step_enrich` non-dict guard; `cid=` `webcal://` fix |
+| 16 | `_ics_escape` CR normalization; `URL:` percent-encoding; `step_enrich` non-dict guard; `cid=webcal://`; page version footer |
+| 17 | C0 stripping in `_ics_escape`; UID full datetime; `or 'untitled'` in slug; `_str()` on `source_excerpt`; download button → `calendar.ics`; copy-URL button added |
 
 ---
 
@@ -49,13 +54,10 @@ Treat `events.json` as fully untrusted input.
 | Issue | Reason not fixed |
 |---|---|
 | `_needs_enrich` gap — misses `end_time_only` when `price_text + city` already set | Performance trade-off |
-| Enricher sublink cross-contamination | Data accuracy only; no XSS path |
-| `[:200_000]` post-hoc slice in `_fetch_text` | Sufficient mitigation |
-| `_parse_event_dates` year boundary inference | Not security-relevant |
-| `style="background:{card_bg}"` without `h()` | `card_bg` is from `STATUS_STYLES` hardcoded dict only |
-| Slug/UID uses date only, not time | Same-title same-date events are rare; start time added to slug in Round 13 and reverted |
-| ICS line folding (RFC 5545, 75 byte limit) | Reverted — double-fold bug corrupted Apple Calendar |
-| Google Calendar subscribe on iPhone | Google Calendar iOS app does not support URL-based subscriptions at all — product limitation, not fixable in code |
+| Enricher sublink cross-contamination | Data accuracy only; no XSS path. Could restrict to canonical URL only in future |
+| ICS line folding (RFC 5545, 75 byte limit) | Reverted twice — double-fold bug corrupted Apple Calendar; audience (iOS/Android) tolerates unfolded lines |
+| Slug/UID SHA digest + start time | Complexity > benefit for current data (events rarely share title + date) |
+| Google Calendar subscribe on iPhone | Google Calendar iOS app does not support URL-based subscriptions at all — product limitation. Workaround: "📋 העתק URL" copy button added |
 | Adversarial test suite | Valid long-term; out of scope |
 
 ---
@@ -63,28 +65,18 @@ Treat `events.json` as fully untrusted input.
 ## What to focus on in this review
 
 **ICS correctness:**
-- `_ics_escape` now normalizes CR, but still has no C0 control char stripping
-  (`\x00–\x08`, `\x0b`, `\x0c`, `\x0e–\x1f`, `\x7f`). Is this a real risk?
-- ICS line folding is still absent. Long Hebrew SUMMARY/DESCRIPTION lines can exceed
-  75 UTF-8 octets. Are any known calendar clients actually rejecting these?
-- `UID` still uses `md5(title + gs[:8])` — date only, not datetime. Could this cause
-  calendar client merge/overwrite issues in practice?
+- `_ics_escape` now strips C0 controls. Any remaining ICS injection paths?
+- `UID` now uses full datetime `gs`. Could two events still collide (same title + same
+  datetime but different location)?
 
 **HTML / security:**
-- Any new injection paths introduced in Round 16?
-- Are there Unicode `\w` characters in `_event_slug` that are unsafe in HTML `id`
-  attributes or URL fragments even after percent-encoding in `URL:` VEVENT?
+- Copy-URL button: `onclick` embeds hardcoded `SITE_URL + '/calendar.ics'` via Python
+  f-string. Is there any injection surface in this pattern?
+- Any new injection paths introduced in Round 17?
 
 **Enricher:**
 - Is sublink cross-contamination data accuracy only, or could scraped content
   from the wrong page cause injection in rendered HTML?
 
-**Google Calendar on iPhone:**
-- The "📅 Google – הרשם" button now uses `https://calendar.google.com/calendar/r?cid=webcal://...`
-  On iPhone, this opens Safari (the Google Calendar web app) instead of the native Google Calendar app.
-  Is there a URL scheme or deep-link format that triggers the Google Calendar iOS app directly?
-  Is there a `googlegcal://` or `x-apple-calevent://` equivalent for Google Calendar?
-  Should the button be removed or replaced with guidance for iPhone users?
-
 **General:**
-- Anything introduced by Round 16 (CR normalization, percent-encoding, non-dict guard)?
+- Anything introduced by Rounds 16–17 worth flagging?

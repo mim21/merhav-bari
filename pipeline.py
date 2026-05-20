@@ -287,7 +287,7 @@ def _collect_urls(event):
     msgs = event.get('source_messages')
     for msg in (msgs if isinstance(msgs, list) else []):
         if isinstance(msg, dict):
-            for u in URL_RE.findall(msg.get('source_excerpt') or ''):
+            for u in URL_RE.findall(_str(msg.get('source_excerpt'))):
                 u = u.rstrip('.,)')
                 if u not in seen and not _should_skip(u):
                     urls.append(u); seen.add(u)
@@ -642,15 +642,17 @@ def _git_short_hash():
         return ''
 
 
+_ICS_CTRL_RE = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
+
 def _ics_escape(s):
-    s = _str(s).replace('\r\n', '\n').replace('\r', '\n')
+    s = _ICS_CTRL_RE.sub('', _str(s).replace('\r\n', '\n').replace('\r', '\n'))
     return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
 
 
 def _event_slug(event):
     title = _str(event.get('title')) or 'event'
     d = _str(event.get('date_only') or event.get('event_start') or '')[:10].replace('-', '')
-    slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-')
+    slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-') or 'untitled'
     return f'event-{slug}-{d}' if d else f'event-{slug}'
 
 
@@ -704,7 +706,7 @@ def _event_cal_data(event, event_url=''):
         + ('&location=' + quote(location) if location else '')
     )
 
-    uid   = hashlib.md5((title + gs[:8]).encode('utf-8')).hexdigest() + '@merhav-bari'
+    uid   = hashlib.md5((title + gs).encode('utf-8')).hexdigest() + '@merhav-bari'
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     vevent = [
         'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
@@ -755,14 +757,15 @@ def _make_full_cal(events):
     lines.append('END:VCALENDAR')
     ics_content = '\r\n'.join(lines) + '\r\n'
 
-    ics_b64    = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
     webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
-    gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(SITE_URL.replace('https://', 'webcal://') + '/calendar.ics')
+    gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(webcal_url)
+    ics_url    = SITE_URL + '/calendar.ics'
 
     apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
     google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
-    download   = f'<a class="cal-link full-cal-dl" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
-    return apple_sub + google_sub + download, ics_content
+    download   = f'<a class="cal-link full-cal-dl" href="calendar.ics" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
+    copy_btn   = f'<button class="cal-link full-cal-copy" onclick="navigator.clipboard.writeText(\'{ics_url}\').then(function(){{this.textContent=\'✅ הועתק\'}}.bind(this))">📋 העתק URL</button>'
+    return apple_sub + google_sub + download + copy_btn, ics_content
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -950,6 +953,8 @@ def step_html():
     .cal-link.full-cal-gcal:hover {{ background: #3451d1; }}
     .cal-link.full-cal-dl {{ background: #6b7280; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
     .cal-link.full-cal-dl:hover {{ background: #4b5563; }}
+    .cal-link.full-cal-copy {{ background: #374151; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; border: none; cursor: pointer; }}
+    .cal-link.full-cal-copy:hover {{ background: #1f2937; }}
     .header-actions {{ margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
