@@ -448,6 +448,8 @@ async def step_enrich():
     is_list = isinstance(data, list)
     events  = [e for e in _events_from_json(data) if isinstance(e, dict)]
     if not is_list:
+        if not isinstance(data, dict):
+            data = {}
         data["events"] = events
 
     def _needs_enrich(e):
@@ -630,14 +632,33 @@ def _render_price_tier(tier_text):
 
 
 def _ics_escape(s):
+    s = _str(s).replace('\r\n', '\n').replace('\r', '\n')
     return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
+
+
+def _ics_fold(line):
+    '''Fold ICS lines longer than 75 UTF-8 octets per RFC 5545.'''
+    b = line.encode('utf-8')
+    if len(b) <= 75:
+        return line
+    chunks, i, limit = [], 0, 75
+    while i < len(b):
+        end = min(i + limit, len(b))
+        while end > i and end < len(b) and (b[end] & 0xC0) == 0x80:
+            end -= 1
+        chunks.append(b[i:end].decode('utf-8'))
+        i = end
+        limit = 74
+    return '\r\n '.join(chunks)
 
 
 def _event_slug(event):
     title = _str(event.get('title')) or 'event'
     d = _str(event.get('date_only') or event.get('event_start') or '')[:10].replace('-', '')
-    slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-')
-    return f'event-{slug}-{d}' if d else f'event-{slug}'
+    t = _str(event.get('start_time_only')).replace(':', '')
+    slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-') or 'untitled'
+    suffix = f'-{d}-{t}' if d and t else f'-{d}' if d else ''
+    return f'event-{slug}{suffix}'
 
 
 def _event_cal_data(event, event_url=''):
@@ -690,20 +711,20 @@ def _event_cal_data(event, event_url=''):
         + ('&location=' + quote(location) if location else '')
     )
 
-    uid   = hashlib.md5((title + gs[:8]).encode('utf-8')).hexdigest() + '@merhav-bari'
+    uid   = hashlib.md5((title + gs).encode('utf-8')).hexdigest() + '@merhav-bari'
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     vevent = [
         'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
         ('DTSTART:' + gs) if timed else ('DTSTART;VALUE=DATE:' + gs),
         ('DTEND:'   + ge) if timed else ('DTEND;VALUE=DATE:'   + ge),
-        'SUMMARY:' + _ics_escape(title),
+        _ics_fold('SUMMARY:' + _ics_escape(title)),
     ]
     if desc:
-        vevent.append('DESCRIPTION:' + _ics_escape(desc[:500]))
+        vevent.append(_ics_fold('DESCRIPTION:' + _ics_escape(desc[:500])))
     if location:
-        vevent.append('LOCATION:' + _ics_escape(location))
+        vevent.append(_ics_fold('LOCATION:' + _ics_escape(location)))
     if event_url:
-        vevent.append('URL:' + event_url)
+        vevent.append(_ics_fold('URL:' + _ics_escape(event_url)))
     vevent.append('END:VEVENT')
 
     return gs, ge, timed, gcal_url, vevent
@@ -717,7 +738,7 @@ def _make_cal_links(event, event_url=''):
     title = _str(event.get('title')) or 'אירוע'
 
     cal_lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//merhav-bari//pipeline//HE'] + vevent + ['END:VCALENDAR']
-    ics_b64 = base64.b64encode(('\r\n'.join(cal_lines) + '\r\n').encode('utf-8')).decode('ascii')
+    ics_b64 = base64.b64encode(('\r\n'.join(_ics_fold(l) for l in cal_lines) + '\r\n').encode('utf-8')).decode('ascii')
     safe_fn = h(re.sub(r'[\\/:"*?<>|]', '', title)[:50])
 
     return (
@@ -739,15 +760,14 @@ def _make_full_cal(events):
         if result:
             lines.extend(result[4])
     lines.append('END:VCALENDAR')
-    ics_content = '\r\n'.join(lines) + '\r\n'
+    ics_content = '\r\n'.join(_ics_fold(l) for l in lines) + '\r\n'
 
-    ics_b64    = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
     webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
     gcal_url   = 'https://calendar.google.com/calendar/r/settings/addbyurl?url=' + quote(SITE_URL + '/calendar.ics')
 
-    apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
+    apple_sub  = f'<a class="cal-link full-cal-apple" href="{h(webcal_url)}">📅 Apple – הרשם</a>'
     google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
-    download   = f'<a class="cal-link full-cal-dl" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
+    download   = f'<a class="cal-link full-cal-dl" href="calendar.ics" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
     return apple_sub + google_sub + download, ics_content
 
 
@@ -899,7 +919,7 @@ def step_html():
     }}
     .card:hover {{ transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }}
     .status-banner {{ background: #e74c3c; color: white; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; text-align: center; }}
-    .card-img {{ background: #f0f0f0; }}
+    .card-img {{ background: #f0f0f0; min-height: 180px; }}
     .card-img img {{ width: 100%; max-height: 380px; object-fit: contain; display: block; }}
     .card-body {{ padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }}
     .card-header-row {{ display: flex; justify-content: space-between; align-items: center; }}
@@ -949,10 +969,27 @@ def step_html():
   </div>
   <footer>נוצר מייצוא WhatsApp · {datetime.now().strftime("%d/%m/%Y %H:%M")}</footer>
   <script>
-    if (location.hash) {{
-      var el = document.getElementById(location.hash.slice(1));
-      if (el) setTimeout(function() {{ el.scrollIntoView({{block: 'start', behavior: 'instant'}}); }}, 50);
-    }}
+    (function() {{
+      try {{ if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; }} catch(_) {{}}
+      function scrollToHash() {{
+        if (!location.hash || location.hash.length < 2) return;
+        var id;
+        try {{ id = decodeURIComponent(location.hash.slice(1)); }} catch(_) {{ id = location.hash.slice(1); }}
+        var el = document.getElementById(id);
+        if (!el) return;
+        var y = el.getBoundingClientRect().top + window.pageYOffset - 12;
+        window.scrollTo({{top: Math.max(0, y), left: 0, behavior: 'auto'}});
+      }}
+      function schedule() {{
+        requestAnimationFrame(function() {{ requestAnimationFrame(scrollToHash); }});
+        setTimeout(scrollToHash, 250);
+        setTimeout(scrollToHash, 750);
+      }}
+      window.addEventListener('DOMContentLoaded', schedule);
+      window.addEventListener('load', schedule);
+      window.addEventListener('pageshow', schedule);
+      window.addEventListener('hashchange', scrollToHash);
+    }})();
   </script>
 </body>
 </html>"""
