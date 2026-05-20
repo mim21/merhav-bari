@@ -1,6 +1,6 @@
-# Security Review — pipeline.py (Rounds 7–13)
+# Security Review — pipeline.py (Rounds 7–14)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/b7b20b9/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/cdfa3a4/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
@@ -223,21 +223,36 @@ exactly once — at the join points in `_make_cal_links` and `_make_full_cal`.
 **Status: Apple Calendar subscription still shows only 1 event after the fix.**
 **The problem first appeared in Round 13** — before Round 13 (before the ICS folding
 and scroll changes), the full-calendar subscription was showing all events correctly.
-The double-fold bug was introduced in Round 13 and partially fixed (commit 1349b22),
-but the subscription still shows only 1 event even after the fix.
-The `calendar.ics` file on disk is confirmed correct (10 `BEGIN:VEVENT` blocks).
-Apple Calendar's live subscription may be showing a cached version — it re-fetches
-only ~every 1h. Manual refresh: Calendar → right-click subscription → Refresh.
-If the problem persists after a forced refresh, the remaining suspected causes are:
-- `_ics_fold` still produces lines that confuse Apple's ICS parser (e.g. folding
-  inside a multi-byte Hebrew character boundary despite the guard).
-- A `DTSTAMP` line or `UID` line that is too long and gets folded unexpectedly.
-- Apple Calendar rejecting the `URL:` property on VEVENT (non-standard extension
-  in some older iOS versions — try removing it and testing).
-- The `X-WR-CALNAME` or `X-WR-TIMEZONE` header lines containing characters that
-  confuse the parser before the first VEVENT.
-- Encoding issue: `calendar.ics` is written as UTF-8 but lacks a BOM or
-  `CHARSET` declaration; some Apple Calendar versions expect a BOM for UTF-8 ICS.
+The double-fold bug was introduced in Round 13 and fixed (commit 1349b22).
+**Resolution:** Both reviewers agreed the most likely cause was Apple Calendar's
+subscription cache being stuck on the broken double-fold version. Recommended fix:
+**unsubscribe entirely and re-subscribe** (not just refresh) — Apple caches aggressively
+and a refresh may not clear a broken parse baseline.
+If unsubscribe+resubscribe still shows 1 event, validate `calendar.ics` at
+https://icalendar.org/validator.html and check macOS Console.app for parse errors.
+
+---
+
+### Round 14 — ICS control-char stripping + URI vs TEXT fix (commit cdfa3a4)
+
+**C0 control characters stripped in `_ics_escape`:**
+Added `_ICS_CTRL_RE = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')` and
+`_ICS_CTRL_RE.sub(' ', s)` before the TEXT escaping. NUL, BEL, ESC and other
+control bytes in a crafted `events.json` field could corrupt ICS line structure
+or confuse strict parsers.
+
+**`URL:` VEVENT property uses URI sanitizer, not TEXT escaping:**
+RFC 5545 defines `URL` as a `uri` value type, not `TEXT`. TEXT escaping adds
+backslash-escapes before `,` and `;`, which are invalid in a URI context and can
+produce a broken URL in calendar apps. New `_ics_uri(url)` strips CR/LF only
+(the only unsafe chars for a URI in an ICS line). `_ics_escape` continues to be
+used for `SUMMARY`, `DESCRIPTION`, and `LOCATION` (all TEXT type).
+
+**Skipped from reviewer suggestions:**
+- Slug/UID digest (sha256 of all identity fields) — start-time already distinguishes
+  same-title-same-date events; added complexity not worth it
+- `quote()` percent-encoding of URL fragment — slug is `\w` + hyphens only
+- Adversarial test suite — valid long-term suggestion, out of scope for now
 
 ---
 
@@ -256,13 +271,11 @@ If the problem persists after a forced refresh, the remaining suspected causes a
 
 ## What to focus on in this review
 
-**ICS / calendar — Apple Calendar subscription shows only 1 event (unresolved):**
-- `calendar.ics` on disk has all 10 events confirmed. Apple Calendar subscription
-  still shows only 1 after forced refresh. Why?
-- Could `_ics_fold` still be producing malformed lines (e.g. a guard condition miss
-  on multi-byte UTF-8 sequences, leaving a continuation byte at the split point)?
-- Could Apple Calendar be rejecting the non-standard `URL:` VEVENT property and
-  stopping parse at the first event that has one?
+**ICS / calendar:**
+- Is `_ics_fold`'s byte-boundary guard correct? Specifically: when `end < len(b)` and
+  `b[end] & 0xC0 == 0x80`, the loop backs off. Could the guard miss the case where
+  `end == i` (zero-length chunk), causing an infinite loop on a pathological input?
+- Are there any remaining ICS injection paths after `_ics_escape` + `_ics_uri` + C0 stripping?
 - Could `X-WR-CALNAME:מרחב בריא – אירועים` (Hebrew + em-dash in a header line)
   confuse the parser before the first VEVENT is reached?
 - Is a UTF-8 BOM needed in `calendar.ics` for Apple Calendar to correctly parse Hebrew?
