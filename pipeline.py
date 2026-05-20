@@ -717,14 +717,14 @@ def _event_cal_data(event, event_url=''):
         'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
         ('DTSTART:' + gs) if timed else ('DTSTART;VALUE=DATE:' + gs),
         ('DTEND:'   + ge) if timed else ('DTEND;VALUE=DATE:'   + ge),
-        _ics_fold('SUMMARY:' + _ics_escape(title)),
+        'SUMMARY:' + _ics_escape(title),
     ]
     if desc:
-        vevent.append(_ics_fold('DESCRIPTION:' + _ics_escape(desc[:500])))
+        vevent.append('DESCRIPTION:' + _ics_escape(desc[:500]))
     if location:
-        vevent.append(_ics_fold('LOCATION:' + _ics_escape(location)))
+        vevent.append('LOCATION:' + _ics_escape(location))
     if event_url:
-        vevent.append(_ics_fold('URL:' + _ics_escape(event_url)))
+        vevent.append('URL:' + _ics_escape(event_url))
     vevent.append('END:VEVENT')
 
     return gs, ge, timed, gcal_url, vevent
