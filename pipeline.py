@@ -170,6 +170,16 @@ def step_trim():
     print(f"  Final: {len(after_b)} lines from {first}")
 
 
+def _events_from_json(data):
+    """Safely extract the events list from any JSON shape."""
+    if isinstance(data, list):
+        return data
+    if isinstance(data, dict):
+        events = data.get("events", [])
+        return events if isinstance(events, list) else []
+    return []
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 2 – CLEAN OLD EVENTS
 # ─────────────────────────────────────────────────────────────────────────────
@@ -182,8 +192,7 @@ def step_clean():
     with open(EVENTS_JSON, encoding="utf-8") as f:
         data = json.load(f)
     is_list = isinstance(data, list)
-    events  = data if is_list else data.get("events", [])
-    events  = [e for e in events if isinstance(e, dict)]
+    events  = [e for e in _events_from_json(data) if isinstance(e, dict)]
     print(f"  Loaded {len(events)} events")
 
     def get_event_date(e):
@@ -271,7 +280,8 @@ def _collect_urls(event):
     link = _safe_url(event.get("registration_link") or "")
     if link and not _should_skip(link):
         urls.append(link); seen.add(link)
-    for msg in (event.get("source_messages") or []):
+    msgs = event.get("source_messages")
+    for msg in (msgs if isinstance(msgs, list) else []):
         if isinstance(msg, dict):
             for u in URL_RE.findall(msg.get("source_excerpt") or ""):
                 u = u.rstrip(".,)")
@@ -325,7 +335,7 @@ def _enrich_from_text(event, text):
                 event["price_unit"] = unit
             print(f"    price  → {p}")
             changed = True
-    if "–" in (event.get("price_text") or "") and not event.get("price_note") and not event.get("price_details"):
+    if "–" in _str(event.get("price_text")) and not event.get("price_note") and not event.get("price_details"):
         if INDIV_RE.search(text) and COUPLE_PRICE_RE.search(text):
             event["price_note"] = "יחיד / זוג"
             print(f"    price_note → יחיד / זוג")
@@ -433,8 +443,7 @@ async def step_enrich():
     with open(EVENTS_JSON, encoding="utf-8") as f:
         data = json.load(f)
     is_list = isinstance(data, list)
-    events  = data if is_list else data.get("events", [])
-    events  = [e for e in events if isinstance(e, dict)]
+    events  = [e for e in _events_from_json(data) if isinstance(e, dict)]
     if not is_list:
         data["events"] = events
 
@@ -459,7 +468,7 @@ async def step_enrich():
             async with sem:
                 page = await ctx.new_page()
                 try:
-                    label = f"[{idx:02d}/{len(events)}] {(event.get('title') or '')[:40]}"
+                    label = f"[{idx:02d}/{len(events)}] {(_str(event.get('title')) or '')[:40]}"
                     changed = await _enrich_event(page, event, label)
                     if changed:
                         async with lock: total[0] += 1
@@ -556,23 +565,24 @@ def _img_uri(chat_folder, filename):
 
 
 def _find_image(event, line_to_image):
-    for msg in (event.get("source_messages") or []):
+    msgs = event.get("source_messages")
+    for msg in (msgs if isinstance(msgs, list) else []):
         if not isinstance(msg, dict): continue
         ref = msg.get("line_reference")
         if ref is None: continue
         try: base = int(str(ref).strip())
         except: continue
-        for offset in sorted(range(-40, 31), key=abs):
+        for offset in range(0, 4):  # attachment is on or just after the reference line
             img = line_to_image.get(base + offset)
             if img: return img
     return None
 
 
 def _format_date(event):
-    d = event.get("date_only")
+    d = event.get("date_only") or event.get("event_start")
     if not d: return _str(event.get("raw_date_text"))
     try:
-        dt = date.fromisoformat(str(d))
+        dt = date.fromisoformat(str(d)[:10])
         end = event.get("end_date_only")
         if end:
             try:
@@ -662,7 +672,7 @@ def _make_card(event, chat_folder, line_to_image):
         for p in _list(ci.get("phone")):
             num  = p.get("number", p) if isinstance(p, dict) else p
             if not isinstance(num, str): continue
-            name = p.get("name") if isinstance(p, dict) else None
+            name = _str(p.get("name")) if isinstance(p, dict) else ""
             digits = re.sub(r'\D', '', num)
             if digits.startswith("972"): digits = "0" + digits[3:]
             if len(digits) != 10 or not digits.startswith("05"): continue
@@ -720,8 +730,7 @@ def step_html():
 
     with open(EVENTS_JSON, encoding="utf-8") as f:
         all_events = json.load(f)
-    if isinstance(all_events, dict): all_events = all_events.get("events", [])
-    all_events = [e for e in all_events if isinstance(e, dict)]
+    all_events = [e for e in _events_from_json(all_events) if isinstance(e, dict)]
 
     show_from = (date.today() - timedelta(days=SHOW_DAYS_AGO)).isoformat()
     events = [e for e in all_events if str(e.get("date_only") or e.get("event_start") or "") >= show_from]
@@ -799,7 +808,7 @@ def step_html():
     OUTPUT_HTML.write_text(html, encoding="utf-8")
     print(f"  Written: {OUTPUT_HTML}")
     for e in events:
-        print(f"    {e.get('date_only','?')}  {(e.get('title') or '')[:55]}")
+        print(f"    {_str(e.get('date_only')) or '?'}  {(_str(e.get('title')) or '')[:55]}")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
