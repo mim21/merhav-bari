@@ -195,7 +195,8 @@ def step_clean():
         return None
 
     def get_post_date(e):
-        for msg in (e.get("source_messages") or []):
+        msgs = e.get("source_messages")
+        for msg in (msgs if isinstance(msgs, list) else []):
             ts = msg.get("source_message_timestamp", "") if isinstance(msg, dict) else ""
             try: return date.fromisoformat(ts[:10])
             except: pass
@@ -213,7 +214,7 @@ def step_clean():
             kept.append(e)
 
     for e, reason in removed:
-        title = (e.get("title") or "?")[:55]
+        title = (_str(e.get("title")) or "?")[:55]
         print(f"  Removed [{reason}]: {title}")
     print(f"  Keeping {len(kept)} events")
 
@@ -391,7 +392,8 @@ async def _get_sublinks(page, base_url):
             if href.startswith("/"):
                 p = urlparse(base_url)
                 href = f"{p.scheme}://{p.netloc}{href}"
-            if not href.startswith("http") or _should_skip(href) or href == base_url: continue
+            href = _safe_url(href)
+            if not href or _should_skip(href) or href == base_url: continue
             if REGISTER_LINK_RE.search(text) or REGISTER_LINK_RE.search(href) or FOLLOW_DOMAINS.search(href):
                 if href not in seen:
                     seen.add(href); found.append(href)
@@ -437,9 +439,10 @@ async def step_enrich():
         data["events"] = events
 
     def _needs_enrich(e):
-        if any(not e.get(k) for k in ["price_text", "start_time_only", "city"]):
+        price_text = _str(e.get("price_text"))
+        if any(not _str(e.get(k)) for k in ["price_text", "start_time_only", "city"]):
             return True
-        if "–" in (e.get("price_text") or "") and not e.get("price_note"):
+        if "–" in price_text and not _str(e.get("price_note")):
             return True
         return False
     to_enrich = [(i, e) for i, e in enumerate(events, 1) if _needs_enrich(e)]
@@ -567,7 +570,7 @@ def _find_image(event, line_to_image):
 
 def _format_date(event):
     d = event.get("date_only")
-    if not d: return event.get("raw_date_text") or ""
+    if not d: return _str(event.get("raw_date_text"))
     try:
         dt = date.fromisoformat(str(d))
         end = event.get("end_date_only")
@@ -591,6 +594,10 @@ _TIER_DATE_RE = re.compile(r'עד\s+(\d{1,2})[./](\d{1,2})')
 
 def _str(v):
     return v if isinstance(v, str) else ""
+
+
+def _list(v):
+    return v if isinstance(v, list) else []
 
 
 def _render_price_tier(tier_text):
@@ -642,7 +649,7 @@ def _make_card(event, chat_folder, line_to_image):
     unit_label    = " לזוג" if price_unit == "couple" else " לאדם" if price_unit == "person" else ""
     price         = h(f"{price_raw}{unit_label}") if price_raw else ""
     price_note    = h(_str(event.get("price_note")))
-    price_details = event.get("price_details") or []
+    price_details = _list(event.get("price_details"))
 
     desc = h(_str(event.get("description")))
     safe_link = h(_safe_url(event.get("registration_link") or ""))
@@ -652,7 +659,7 @@ def _make_card(event, chat_folder, line_to_image):
     ci = event.get("contact_info") or {}
     if isinstance(ci, dict):
         wa_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="#25d366" style="vertical-align:middle;margin-left:3px"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.488 2.042 7.788L0 32l8.418-2.01A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.784-1.857l-.486-.29-5.001 1.194 1.227-4.865-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.778c-.398-.199-2.354-1.162-2.718-1.294-.364-.133-.629-.199-.894.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.681-.62-3.203-1.976-1.184-1.056-1.983-2.36-2.215-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.894-2.155-1.225-2.95-.322-.775-.649-.67-.894-.682l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.361-1.393 3.317s1.426 3.847 1.625 4.112c.199.265 2.807 4.285 6.802 6.01.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.364-.265-.762-.464z"/></svg>'
-        for p in ci.get("phone", []):
+        for p in _list(ci.get("phone")):
             num  = p.get("number", p) if isinstance(p, dict) else p
             if not isinstance(num, str): continue
             name = p.get("name") if isinstance(p, dict) else None
@@ -664,8 +671,8 @@ def _make_card(event, chat_folder, line_to_image):
             wa_url = f"https://wa.me/{wa_digits}"
             contact_label = h(f"{name} {display_num}" if name else display_num)
             contacts.append(f'<a href="{wa_url}" target="_blank" rel="noopener noreferrer" class="contact-wa">&#x202A;{wa_svg} {contact_label}&#x202C;</a>')
-        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {h(_str(t))}</span>')
-        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {h(_str(i))}</span>')
+        for t in _list(ci.get("telegram")): contacts.append(f'<span class="contact">✈️ {h(_str(t))}</span>')
+        for i in _list(ci.get("instagram")): contacts.append(f'<span class="contact">📷 {h(_str(i))}</span>')
     contact_html = "".join(contacts)
 
     try:
