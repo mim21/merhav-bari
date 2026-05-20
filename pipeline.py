@@ -511,16 +511,19 @@ def _mp4_thumbnail(path):
 
 
 def _safe_url(url):
-    if not url: return ""
+    if not isinstance(url, str) or not url: return ""
     try:
-        return url if urlparse(url).scheme.lower() in ("http", "https") else ""
+        p = urlparse(url.strip())
+        if p.scheme.lower() not in ("http", "https") or not p.netloc: return ""
+        return url.strip()
     except: return ""
 
 
 def _img_uri(chat_folder, filename):
     try:
         path = (chat_folder / filename).resolve()
-        if not str(path).startswith(str(chat_folder.resolve()) + os.sep):
+        chat_root = chat_folder.resolve()
+        if os.path.commonpath([str(path), str(chat_root)]) != str(chat_root):
             return None
         if not path.exists(): return None
         if path.stat().st_size > 10_000_000: return None  # 10 MB cap
@@ -592,7 +595,7 @@ def _make_card(event, chat_folder, line_to_image):
             img_tag = f'<div class="card-img"><img src="{uri}" alt="" loading="lazy"/></div>'
 
     etype = event.get("event_type", "other")
-    icon, label = TYPE_LABELS.get(etype, ("📅", etype))
+    icon, label = TYPE_LABELS.get(etype, ("📅", h(str(etype))))
     status = event.get("status", "scheduled")
     status_label, card_bg = STATUS_STYLES.get(status, ("", "white"))
     status_html = f'<div class="status-banner">{status_label}</div>' if status_label else ""
@@ -619,7 +622,7 @@ def _make_card(event, chat_folder, line_to_image):
     price_details = event.get("price_details") or []
 
     desc = h(event.get("description") or "")
-    safe_link = _safe_url(event.get("registration_link") or "")
+    safe_link = h(_safe_url(event.get("registration_link") or ""))
     link_html = f'<a class="reg-link" href="{safe_link}" target="_blank" rel="noopener noreferrer">להרשמה ←</a>' if safe_link else ""
 
     contacts = []
@@ -628,6 +631,7 @@ def _make_card(event, chat_folder, line_to_image):
         wa_svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="#25d366" style="vertical-align:middle;margin-left:3px"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.488 2.042 7.788L0 32l8.418-2.01A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.784-1.857l-.486-.29-5.001 1.194 1.227-4.865-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.778c-.398-.199-2.354-1.162-2.718-1.294-.364-.133-.629-.199-.894.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.681-.62-3.203-1.976-1.184-1.056-1.983-2.36-2.215-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.894-2.155-1.225-2.95-.322-.775-.649-.67-.894-.682l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.361-1.393 3.317s1.426 3.847 1.625 4.112c.199.265 2.807 4.285 6.802 6.01.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.364-.265-.762-.464z"/></svg>'
         for p in ci.get("phone", []):
             num  = p.get("number", p) if isinstance(p, dict) else p
+            if not isinstance(num, str): continue
             name = p.get("name") if isinstance(p, dict) else None
             digits = re.sub(r'\D', '', num)
             if digits.startswith("972"): digits = "0" + digits[3:]
