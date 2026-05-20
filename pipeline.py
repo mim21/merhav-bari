@@ -633,7 +633,14 @@ def _ics_escape(s):
     return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
 
 
-def _event_cal_data(event):
+def _event_slug(event):
+    title = _str(event.get('title')) or 'event'
+    d = _str(event.get('date_only') or event.get('event_start') or '')[:10].replace('-', '')
+    slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-')
+    return f'event-{slug}-{d}' if d else f'event-{slug}'
+
+
+def _event_cal_data(event, event_url=''):
     '''Return (gs, ge, timed, gcal_url, vevent_lines) or None if event has no date.'''
     title     = _str(event.get('title')) or 'אירוע'
     desc      = _str(event.get('description'))
@@ -674,11 +681,12 @@ def _event_cal_data(event):
         except Exception:
             ge = (start_date + timedelta(days=1)).strftime('%Y%m%d')
 
+    details_str = (desc[:400] + '\n' + event_url if desc else event_url) if event_url else desc
     gcal_url = (
         'https://calendar.google.com/calendar/render?action=TEMPLATE'
         '&text=' + quote(title)
         + '&dates=' + gs + '/' + ge
-        + ('&details=' + quote(desc) if desc else '')
+        + ('&details=' + quote(details_str) if details_str else '')
         + ('&location=' + quote(location) if location else '')
     )
 
@@ -694,13 +702,15 @@ def _event_cal_data(event):
         vevent.append('DESCRIPTION:' + _ics_escape(desc[:500]))
     if location:
         vevent.append('LOCATION:' + _ics_escape(location))
+    if event_url:
+        vevent.append('URL:' + event_url)
     vevent.append('END:VEVENT')
 
     return gs, ge, timed, gcal_url, vevent
 
 
-def _make_cal_links(event):
-    result = _event_cal_data(event)
+def _make_cal_links(event, event_url=''):
+    result = _event_cal_data(event, event_url)
     if not result:
         return ''
     _, _, _, gcal_url, vevent = result
@@ -725,7 +735,7 @@ def _make_full_cal(events):
         'X-WR-TIMEZONE:Asia/Jerusalem',
     ]
     for event in events:
-        result = _event_cal_data(event)
+        result = _event_cal_data(event, f'{SITE_URL}/#{_event_slug(event)}')
         if result:
             lines.extend(result[4])
     lines.append('END:VCALENDAR')
@@ -810,9 +820,11 @@ def _make_card(event, chat_folder, line_to_image):
     conf_color = "#28a745" if conf >= 0.8 else "#ffc107" if conf >= 0.5 else "#dc3545"
     dot_count = round(conf * 5)
     dots = "●" * dot_count + "○" * (5 - dot_count)
-    cal_html = _make_cal_links(event)
+    slug = _event_slug(event)
+    event_url = f'{SITE_URL}/#{slug}'
+    cal_html = _make_cal_links(event, event_url)
 
-    return f"""<div class="card" style="background:{card_bg}">
+    return f"""<div class="card" id="{slug}" style="background:{card_bg}">
   {status_html}
   {img_tag}
   <div class="card-body">
