@@ -731,12 +731,14 @@ def _make_full_cal(events):
     lines.append('END:VCALENDAR')
     ics_content = '\r\n'.join(lines) + '\r\n'
 
-    ics_b64   = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
-    gcal_url  = 'https://calendar.google.com/calendar/r/settings/addbyurl?url=' + quote(SITE_URL + '/calendar.ics')
+    ics_b64    = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
+    webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
+    gcal_url   = 'https://calendar.google.com/calendar/r/settings/addbyurl?url=' + quote(SITE_URL + '/calendar.ics')
 
-    apple_btn  = f'<a class="cal-link full-cal-apple" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">📅 Apple – לוח שנה מלא</a>'
-    google_btn = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – לוח שנה מלא</a>'
-    return apple_btn + google_btn, ics_content
+    apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
+    google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
+    download   = f'<a class="cal-link full-cal-dl" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
+    return apple_sub + google_sub + download, ics_content
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -917,6 +919,8 @@ def step_html():
     .cal-link.full-cal-apple:hover {{ background: #1b4332; }}
     .cal-link.full-cal-gcal {{ background: #4361ee; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
     .cal-link.full-cal-gcal:hover {{ background: #3451d1; }}
+    .cal-link.full-cal-dl {{ background: #6b7280; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
+    .cal-link.full-cal-dl:hover {{ background: #4b5563; }}
     .header-actions {{ margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
