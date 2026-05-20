@@ -19,10 +19,13 @@ NOTE: Event extraction is done by Claude Code (no API key needed):
 import asyncio
 import base64
 import json
+import os
 import re
 import sys
 from datetime import date, datetime, timedelta
+from html import escape as h
 from pathlib import Path
+from urllib.parse import urlparse
 
 sys.stdout.reconfigure(encoding="utf-8")
 
@@ -159,7 +162,9 @@ def step_trim():
             after_b.extend(group)
     print(f"  Pass B (event date): removed {removed_b} lines, kept {len(after_b)}")
 
-    CHAT_FILE.write_text("".join(after_b), encoding="utf-8")
+    tmp = CHAT_FILE.with_suffix(".tmp")
+    tmp.write_text("".join(after_b), encoding="utf-8")
+    os.replace(tmp, CHAT_FILE)
     first = after_b[0][:12] if after_b else "nothing"
     print(f"  Final: {len(after_b)} lines from {first}")
 
@@ -505,10 +510,20 @@ def _mp4_thumbnail(path):
     except Exception: return None
 
 
-def _img_uri(chat_folder, filename):
-    path = chat_folder / filename
-    if not path.exists(): return None
+def _safe_url(url):
+    if not url: return ""
     try:
+        return url if urlparse(url).scheme.lower() in ("http", "https") else ""
+    except: return ""
+
+
+def _img_uri(chat_folder, filename):
+    try:
+        path = (chat_folder / filename).resolve()
+        if not str(path).startswith(str(chat_folder.resolve()) + os.sep):
+            return None
+        if not path.exists(): return None
+        if path.stat().st_size > 10_000_000: return None  # 10 MB cap
         ext = path.suffix.lower().lstrip(".")
         if ext == "mp4": return _mp4_thumbnail(path)
         data = base64.b64encode(path.read_bytes()).decode("ascii")
@@ -556,15 +571,16 @@ _TIER_DATE_RE = re.compile(r'עד\s+(\d{1,2})[./](\d{1,2})')
 def _render_price_tier(tier_text):
     today = date.today()
     m = _TIER_DATE_RE.search(tier_text)
+    escaped = h(tier_text)
     if m:
         day, month = int(m.group(1)), int(m.group(2))
         try:
             tier_date = date(today.year, month, day)
             if tier_date < today:
-                return f"<div class='price-tier expired'><s>{tier_text}</s> <span class='expired-label'>פג תוקף</span></div>"
+                return f"<div class='price-tier expired'><s>{escaped}</s> <span class='expired-label'>פג תוקף</span></div>"
         except ValueError:
             pass
-    return f"<div class='price-tier'>{tier_text}</div>"
+    return f"<div class='price-tier'>{escaped}</div>"
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -581,10 +597,10 @@ def _make_card(event, chat_folder, line_to_image):
     status_label, card_bg = STATUS_STYLES.get(status, ("", "white"))
     status_html = f'<div class="status-banner">{status_label}</div>' if status_label else ""
 
-    title    = event.get("title") or event.get("normalized_title") or "אירוע"
-    date_str = _format_date(event)
+    title    = h(event.get("title") or event.get("normalized_title") or "אירוע")
+    date_str = h(_format_date(event))
     s, e     = event.get("start_time_only"), event.get("end_time_only")
-    time_str = f"{s} – {e}" if s and e else s or ""
+    time_str = h(f"{s} – {e}" if s and e else s or "")
 
     loc_name    = event.get("location_name") or ""
     loc_private = "יימסר לנרשמים" in loc_name or "לנרשמים" in loc_name
@@ -593,18 +609,18 @@ def _make_card(event, chat_folder, line_to_image):
         loc_parts = [p for p in [loc_clean, event.get("city")] if p]
     else:
         loc_parts = [p for p in [loc_name, event.get("city")] if p]
-    location = " · ".join(loc_parts)
+    location = h(" · ".join(loc_parts))
 
     price_raw     = event.get("price_text") or ""
     price_unit    = event.get("price_unit") or ""
     unit_label    = " לזוג" if price_unit == "couple" else " לאדם" if price_unit == "person" else ""
-    price         = f"{price_raw}{unit_label}" if price_raw else ""
-    price_note    = event.get("price_note") or ""
-    price_details = event.get("price_details") or []  # list of strings, one per tier
+    price         = h(f"{price_raw}{unit_label}") if price_raw else ""
+    price_note    = h(event.get("price_note") or "")
+    price_details = event.get("price_details") or []
 
-    desc = event.get("description") or ""
-    link = event.get("registration_link") or ""
-    link_html = f'<a class="reg-link" href="{link}" target="_blank">להרשמה ←</a>' if link else ""
+    desc = h(event.get("description") or "")
+    safe_link = _safe_url(event.get("registration_link") or "")
+    link_html = f'<a class="reg-link" href="{safe_link}" target="_blank" rel="noopener noreferrer">להרשמה ←</a>' if safe_link else ""
 
     contacts = []
     ci = event.get("contact_info") or {}
@@ -615,17 +631,14 @@ def _make_card(event, chat_folder, line_to_image):
             name = p.get("name") if isinstance(p, dict) else None
             digits = re.sub(r'\D', '', num)
             if digits.startswith("972"): digits = "0" + digits[3:]
-            if digits.startswith("0"): wa_digits = "972" + digits[1:]
-            else: wa_digits = digits
-            # format display: 05X-XXX-XXXX
-            d = digits
-            if len(d) == 10: display_num = f"{d[:3]}-{d[3:6]}-{d[6:]}"
-            else: display_num = digits
+            if len(digits) != 10 or not digits.startswith("05"): continue
+            wa_digits = "972" + digits[1:]
+            display_num = f"{digits[:3]}-{digits[3:6]}-{digits[6:]}"
             wa_url = f"https://wa.me/{wa_digits}"
-            label = f"{name} {display_num}" if name else display_num
-            contacts.append(f'<a href="{wa_url}" target="_blank" class="contact-wa">&#x202A;{wa_svg} {label}&#x202C;</a>')
-        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {t}</span>')
-        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {i}</span>')
+            contact_label = h(f"{name} {display_num}" if name else display_num)
+            contacts.append(f'<a href="{wa_url}" target="_blank" rel="noopener noreferrer" class="contact-wa">&#x202A;{wa_svg} {contact_label}&#x202C;</a>')
+        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {h(t)}</span>')
+        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {h(i)}</span>')
     contact_html = "".join(contacts)
 
     conf = event.get("confidence", 0)
