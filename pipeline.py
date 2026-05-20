@@ -886,6 +886,15 @@ def step_html():
     events.sort(key=lambda e: str(e.get("date_only") or e.get("event_start") or ""))
     print(f"  Showing {len(events)} events (from {show_from})")
 
+    try:
+        import subprocess
+        _git_hash = subprocess.check_output(
+            ['git', '-C', str(Path(__file__).parent), 'rev-parse', '--short', 'HEAD'],
+            stderr=subprocess.DEVNULL, text=True).strip()
+    except Exception:
+        _git_hash = ''
+    build_ver = f'{datetime.now().strftime("%d/%m/%Y %H:%M")}' + (f' · {_git_hash}' if _git_hash else '')
+
     cards_html              = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
     full_cal_html, ics_content = _make_full_cal(events)
     OUTPUT_CAL.write_text(ics_content, encoding='utf-8')
@@ -967,7 +976,7 @@ def step_html():
   <div class="grid">
     {cards_html}
   </div>
-  <footer>נוצר מייצוא WhatsApp · {datetime.now().strftime("%d/%m/%Y %H:%M")}</footer>
+  <footer>נוצר מייצוא WhatsApp · {build_ver}</footer>
   <script>
     (function() {{
       try {{ if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; }} catch(_) {{}}
