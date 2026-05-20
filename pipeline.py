@@ -895,6 +895,7 @@ def step_html():
       border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
       overflow: hidden; display: flex; flex-direction: column;
       transition: transform 0.2s, box-shadow 0.2s;
+      scroll-margin-top: 12px;
     }}
     .card:hover {{ transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }}
     .status-banner {{ background: #e74c3c; color: white; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; text-align: center; }}
@@ -947,6 +948,12 @@ def step_html():
     {cards_html}
   </div>
   <footer>נוצר מייצוא WhatsApp · {datetime.now().strftime("%d/%m/%Y %H:%M")}</footer>
+  <script>
+    if (location.hash) {{
+      var el = document.getElementById(location.hash.slice(1));
+      if (el) setTimeout(function() {{ el.scrollIntoView({{block: 'start', behavior: 'instant'}}); }}, 50);
+    }}
+  </script>
 </body>
 </html>"""
 
