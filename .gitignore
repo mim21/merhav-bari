@@ -3,3 +3,5 @@ WhatsApp Chat*.zip
 *.mp4
 __pycache__/
 *.pyc
+events.json
+index.html
