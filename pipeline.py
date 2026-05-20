@@ -627,7 +627,12 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
-def _make_cal_links(event):
+def _ics_escape(s):
+    return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
+
+
+def _event_cal_data(event):
+    '''Return (gs, ge, timed, gcal_url, vevent_lines) or None if event has no date.'''
     title     = _str(event.get('title')) or 'אירוע'
     desc      = _str(event.get('description'))
     loc_parts = [p for p in [_str(event.get('location_name')), _str(event.get('city'))] if p]
@@ -635,11 +640,11 @@ def _make_cal_links(event):
 
     d_raw = event.get('date_only') or event.get('event_start')
     if not d_raw:
-        return ''
+        return None
     try:
         start_date = date.fromisoformat(str(d_raw)[:10])
     except ValueError:
-        return ''
+        return None
 
     start_t = _str(event.get('start_time_only'))
     end_t   = _str(event.get('end_time_only'))
@@ -649,12 +654,15 @@ def _make_cal_links(event):
     if timed:
         gs = start_date.strftime('%Y%m%d') + 'T' + start_t.replace(':', '') + '00'
         if re.match(r'^\d{2}:\d{2}$', end_t):
-            ge = start_date.strftime('%Y%m%d') + 'T' + end_t.replace(':', '') + '00'
+            # end <= start means midnight crossover (e.g. 20:00–00:00 → ends next day)
+            end_date = start_date + timedelta(days=1) if end_t <= start_t else start_date
+            ge = end_date.strftime('%Y%m%d') + 'T' + end_t.replace(':', '') + '00'
         else:
             try:
                 total = int(start_t[:2]) * 60 + int(start_t[3:]) + 120
                 h2, m2 = divmod(total, 60)
-                ge = start_date.strftime('%Y%m%d') + f'T{h2 % 24:02d}{m2:02d}00'
+                end_date = start_date + timedelta(days=1) if h2 >= 24 else start_date
+                ge = end_date.strftime('%Y%m%d') + f'T{h2 % 24:02d}{m2:02d}00'
             except Exception:
                 ge = gs
     else:
@@ -672,30 +680,54 @@ def _make_cal_links(event):
         + ('&location=' + quote(location) if location else '')
     )
 
-    def _esc(s):
-        return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
-
     uid   = hashlib.md5((title + gs[:8]).encode('utf-8')).hexdigest() + '@merhav-bari'
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    lines = [
-        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//merhav-bari//pipeline//HE',
+    vevent = [
         'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
         ('DTSTART:' + gs) if timed else ('DTSTART;VALUE=DATE:' + gs),
         ('DTEND:'   + ge) if timed else ('DTEND;VALUE=DATE:'   + ge),
-        'SUMMARY:' + _esc(title),
+        'SUMMARY:' + _ics_escape(title),
     ]
     if desc:
-        lines.append('DESCRIPTION:' + _esc(desc[:500]))
+        vevent.append('DESCRIPTION:' + _ics_escape(desc[:500]))
     if location:
-        lines.append('LOCATION:' + _esc(location))
-    lines += ['END:VEVENT', 'END:VCALENDAR']
-    ics_b64 = base64.b64encode(('\r\n'.join(lines) + '\r\n').encode('utf-8')).decode('ascii')
+        vevent.append('LOCATION:' + _ics_escape(location))
+    vevent.append('END:VEVENT')
+
+    return gs, ge, timed, gcal_url, vevent
+
+
+def _make_cal_links(event):
+    result = _event_cal_data(event)
+    if not result:
+        return ''
+    _, _, _, gcal_url, vevent = result
+    title = _str(event.get('title')) or 'אירוע'
+
+    cal_lines = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//merhav-bari//pipeline//HE'] + vevent + ['END:VCALENDAR']
+    ics_b64 = base64.b64encode(('\r\n'.join(cal_lines) + '\r\n').encode('utf-8')).decode('ascii')
     safe_fn = h(re.sub(r'[\\/:"*?<>|]', '', title)[:50])
 
     return (
         f'<a class="cal-link gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google</a>'
-        f'<a class="cal-link apple" href="data:text/calendar;base64,{ics_b64}" download="{safe_fn}.ics">🍎 Apple</a>'
+        f'<a class="cal-link apple" href="data:text/calendar;base64,{ics_b64}" download="{safe_fn}.ics">📅 Apple</a>'
     )
+
+
+def _make_full_cal(events):
+    lines = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0',
+        'PRODID:-//merhav-bari//pipeline//HE',
+        'X-WR-CALNAME:מרחב בריא – אירועים',
+        'X-WR-TIMEZONE:Asia/Jerusalem',
+    ]
+    for event in events:
+        result = _event_cal_data(event)
+        if result:
+            lines.extend(result[4])  # vevent lines
+    lines.append('END:VCALENDAR')
+    ics_b64 = base64.b64encode(('\r\n'.join(lines) + '\r\n').encode('utf-8')).decode('ascii')
+    return f'<a class="cal-link full-cal" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">📅 הורד לוח שנה מלא</a>'
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -811,7 +843,8 @@ def step_html():
     events.sort(key=lambda e: str(e.get("date_only") or e.get("event_start") or ""))
     print(f"  Showing {len(events)} events (from {show_from})")
 
-    cards_html = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
+    cards_html   = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
+    full_cal_html = _make_full_cal(events)
 
     html = f"""<!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -870,6 +903,9 @@ def step_html():
     .cal-link.gcal:hover {{ background: #dce4ff; }}
     .cal-link.apple {{ background: #f0f0f0; color: #333; }}
     .cal-link.apple:hover {{ background: #e0e0e0; }}
+    .cal-link.full-cal {{ background: #2d6a4f; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }}
+    .cal-link.full-cal:hover {{ background: #1b4332; }}
+    .header-actions {{ margin-top: 14px; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
 </head>
@@ -877,6 +913,7 @@ def step_html():
   <header>
     <h1>🌿 אירועים קרובים</h1>
     <p>מרחב בריא – פרסום מרחבים ואירועים &nbsp;|&nbsp; {len(events)} אירועים</p>
+    <div class="header-actions">{full_cal_html}</div>
   </header>
   <div class="grid">
     {cards_html}
