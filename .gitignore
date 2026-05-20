@@ -1,2 +1,5 @@
 WhatsApp Chat*/
+WhatsApp Chat*.zip
 *.mp4
+__pycache__/
+*.pyc
