@@ -221,6 +221,10 @@ discarded the rest of the VCALENDAR.
 exactly once — at the join points in `_make_cal_links` and `_make_full_cal`.
 
 **Status: Apple Calendar subscription still shows only 1 event after the fix.**
+**The problem first appeared in Round 13** — before Round 13 (before the ICS folding
+and scroll changes), the full-calendar subscription was showing all events correctly.
+The double-fold bug was introduced in Round 13 and partially fixed (commit 1349b22),
+but the subscription still shows only 1 event even after the fix.
 The `calendar.ics` file on disk is confirmed correct (10 `BEGIN:VEVENT` blocks).
 Apple Calendar's live subscription may be showing a cached version — it re-fetches
 only ~every 1h. Manual refresh: Calendar → right-click subscription → Refresh.
