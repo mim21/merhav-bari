@@ -5,7 +5,7 @@ X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
 UID:bdd4a8af20b3187962906411756bf846@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260521T140000
 DTEND:20260521T160000
 SUMMARY:ליפול לאיזון – ריטריט קונטקט ותנועה בטבע
@@ -15,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-ליפול-לאיזון-ריטר�
 END:VEVENT
 BEGIN:VEVENT
 UID:572e8fa87665118ffe590e0320ffa59e@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260521T160000
 DTEND:20260521T180000
 SUMMARY:ריטריט שבועות – ביכורים של הלב
@@ -25,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-ריטריט-שבועות-ביכ�
 END:VEVENT
 BEGIN:VEVENT
 UID:d95cae9f3fbec71a8373c38796338cd8@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260523T183000
 DTEND:20260523T220000
 SUMMARY:הטנטריק דאנס – מוצאי שבת
@@ -35,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-הטנטריק-דאנס-מוצא�
 END:VEVENT
 BEGIN:VEVENT
 UID:0b9e7938084aa722744e229db3e95f61@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260528T193000
 DTEND:20260529T000000
 SUMMARY:Spring Nights – מקדש טנטרי
@@ -45,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-מקדש-טנטרי
 END:VEVENT
 BEGIN:VEVENT
 UID:2100efda5efc6f872eb6548bf47970e8@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
@@ -55,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-מקדש-מפת-האינטימי�
 END:VEVENT
 BEGIN:VEVENT
 UID:c57c453ded6131bc2217bea94ac8bbaa@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
 SUMMARY:מגע אוהב במים – סדנה זוגית
@@ -65,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-מגע-אוהב-במים-סדנה
 END:VEVENT
 BEGIN:VEVENT
 UID:888132f6f0ac5cf2ee4d79cc0cc2853b@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
 SUMMARY:Soft Play Party – אבישג ואוקאס
@@ -75,7 +75,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-אבישג-ואו
 END:VEVENT
 BEGIN:VEVENT
 UID:3ca75c006d68cf093190445eb203e820@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
@@ -85,7 +85,7 @@ URL:https://mim21.github.io/merhav-bari/#event-עונג-שבת-זוגי-20260530
 END:VEVENT
 BEGIN:VEVENT
 UID:9d8610632fda6fffa34e9fd1eab7aa48@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
 SUMMARY:סדנה לנשים – חיבור לאנרגיה הניקבית
@@ -95,7 +95,7 @@ URL:https://mim21.github.io/merhav-bari/#event-סדנה-לנשים-חיבור-ל
 END:VEVENT
 BEGIN:VEVENT
 UID:d8f5d7f6119a75edc83628ed2b57e5b2@merhav-bari
-DTSTAMP:20260520T230320Z
+DTSTAMP:20260520T230951Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:latihan – מסע קשוב בכיסוי עיניים

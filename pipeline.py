@@ -743,7 +743,7 @@ def _make_full_cal(events):
 
     ics_b64    = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
     webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
-    gcal_url   = 'https://calendar.google.com/calendar/r/settings/addbyurl?url=' + quote(SITE_URL + '/calendar.ics')
+    gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(SITE_URL + '/calendar.ics')
 
     apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
     google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
