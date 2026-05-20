@@ -182,7 +182,8 @@ def step_clean():
     with open(EVENTS_JSON, encoding="utf-8") as f:
         data = json.load(f)
     is_list = isinstance(data, list)
-    events  = data if is_list else data["events"]
+    events  = data if is_list else data.get("events", [])
+    events  = [e for e in events if isinstance(e, dict)]
     print(f"  Loaded {len(events)} events")
 
     def get_event_date(e):
@@ -217,8 +218,10 @@ def step_clean():
     print(f"  Keeping {len(kept)} events")
 
     out = kept if is_list else {"events": kept}
-    with open(EVENTS_JSON, "w", encoding="utf-8") as f:
+    tmp = EVENTS_JSON.with_suffix(".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, EVENTS_JSON)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -257,14 +260,14 @@ FOLLOW_DOMAINS = re.compile(
 def _should_skip(url):
     try:
         from urllib.parse import urlparse
-        host = urlparse(url).netloc.lower().lstrip("www.")
+        host = urlparse(url).netloc.lower().removeprefix("www.")
         return any(d in host for d in SKIP_DOMAINS)
     except: return False
 
 
 def _collect_urls(event):
     urls, seen = [], set()
-    link = event.get("registration_link") or ""
+    link = _safe_url(event.get("registration_link") or "")
     if link and not _should_skip(link):
         urls.append(link); seen.add(link)
     for msg in (event.get("source_messages") or []):
@@ -368,10 +371,10 @@ async def _fetch_text(page, url):
                 else: await page.keyboard.press("Escape")
                 await page.wait_for_timeout(1500)
             except: pass
-        text = await page.inner_text("body") or ""
+        text = (await page.inner_text("body") or "")[:200_000]
         if len(text.strip()) < 50:
             await page.wait_for_timeout(3000)
-            text = await page.inner_text("body") or ""
+            text = (await page.inner_text("body") or "")[:200_000]
         return text
     except Exception as ex:
         print(f"      error: {ex}")
@@ -428,7 +431,10 @@ async def step_enrich():
     with open(EVENTS_JSON, encoding="utf-8") as f:
         data = json.load(f)
     is_list = isinstance(data, list)
-    events  = data if is_list else data["events"]
+    events  = data if is_list else data.get("events", [])
+    events  = [e for e in events if isinstance(e, dict)]
+    if not is_list:
+        data["events"] = events
 
     def _needs_enrich(e):
         if any(not e.get(k) for k in ["price_text", "start_time_only", "city"]):
@@ -463,8 +469,10 @@ async def step_enrich():
         await browser.close()
 
     print(f"  Enriched {total[0]}/{len(events)} events")
-    with open(EVENTS_JSON, "w", encoding="utf-8") as f:
+    tmp = EVENTS_JSON.with_suffix(".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, EVENTS_JSON)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -524,8 +532,8 @@ def _safe_url(url):
 def _img_uri(chat_folder, filename):
     if not isinstance(filename, str):
         return None
-    # Reject any path that contains separators or relative components
-    if Path(filename).name != filename:
+    # Only allow plain filenames matching WhatsApp attachment naming
+    if not re.fullmatch(r'[\w\-.]+\.(?:jpg|jpeg|png|mp4)', filename, re.IGNORECASE):
         return None
     try:
         path = (chat_folder / filename).resolve()
@@ -580,7 +588,13 @@ def _format_date(event):
 
 _TIER_DATE_RE = re.compile(r'עד\s+(\d{1,2})[./](\d{1,2})')
 
+
+def _str(v):
+    return v if isinstance(v, str) else ""
+
+
 def _render_price_tier(tier_text):
+    tier_text = _str(tier_text)
     today = date.today()
     m = _TIER_DATE_RE.search(tier_text)
     escaped = h(tier_text)
@@ -595,11 +609,6 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
-def _str(v):
-    if v is None: return ""
-    return v if isinstance(v, str) else str(v)
-
-
 def _make_card(event, chat_folder, line_to_image):
     img_tag = ""
     img_file = event.get("_image_filename") or _find_image(event, line_to_image)
@@ -608,9 +617,9 @@ def _make_card(event, chat_folder, line_to_image):
         if uri:
             img_tag = f'<div class="card-img"><img src="{uri}" alt="" loading="lazy"/></div>'
 
-    etype = event.get("event_type", "other")
-    icon, label = TYPE_LABELS.get(etype, ("📅", h(str(etype))))
-    status = event.get("status", "scheduled")
+    etype = _str(event.get("event_type")) or "other"
+    icon, label = TYPE_LABELS.get(etype, ("📅", h(etype)))
+    status = _str(event.get("status")) or "scheduled"
     status_label, card_bg = STATUS_STYLES.get(status, ("", "white"))
     status_html = f'<div class="status-banner">{status_label}</div>' if status_label else ""
 
@@ -655,8 +664,8 @@ def _make_card(event, chat_folder, line_to_image):
             wa_url = f"https://wa.me/{wa_digits}"
             contact_label = h(f"{name} {display_num}" if name else display_num)
             contacts.append(f'<a href="{wa_url}" target="_blank" rel="noopener noreferrer" class="contact-wa">&#x202A;{wa_svg} {contact_label}&#x202C;</a>')
-        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {h(t)}</span>')
-        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {h(i)}</span>')
+        for t in ci.get("telegram", []): contacts.append(f'<span class="contact">✈️ {h(_str(t))}</span>')
+        for i in ci.get("instagram", []): contacts.append(f'<span class="contact">📷 {h(_str(i))}</span>')
     contact_html = "".join(contacts)
 
     try:
@@ -704,11 +713,12 @@ def step_html():
 
     with open(EVENTS_JSON, encoding="utf-8") as f:
         all_events = json.load(f)
-    if isinstance(all_events, dict): all_events = all_events["events"]
+    if isinstance(all_events, dict): all_events = all_events.get("events", [])
+    all_events = [e for e in all_events if isinstance(e, dict)]
 
     show_from = (date.today() - timedelta(days=SHOW_DAYS_AGO)).isoformat()
-    events = [e for e in all_events if (e.get("date_only") or e.get("event_start") or "") >= show_from]
-    events.sort(key=lambda e: (e.get("date_only") or e.get("event_start") or ""))
+    events = [e for e in all_events if str(e.get("date_only") or e.get("event_start") or "") >= show_from]
+    events.sort(key=lambda e: str(e.get("date_only") or e.get("event_start") or ""))
     print(f"  Showing {len(events)} events (from {show_from})")
 
     cards_html = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
