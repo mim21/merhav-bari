@@ -1,6 +1,6 @@
-# Security Review — pipeline.py (Rounds 7–11)
+# Security Review — pipeline.py (Rounds 7–12)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/bf67dcb/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/90d5de2/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
@@ -120,6 +120,33 @@ Each card `<div>` gets `id="{slug}"`.
 
 ---
 
+### Round 12 — anchor scroll fix (commit 90d5de2)
+
+**Problem:** On mobile browsers, navigating to a deep link (`#event-slug`) positioned the
+event card in the center of the viewport instead of the top, because the browser's default
+fragment scroll fires before the page fully settles.
+
+**Fix:**
+- CSS `scroll-margin-top: 12px` added to `.card` — standard property that reserves
+  12 px of space above the element when it is the anchor target.
+- Inline JS added before `</body>`:
+  ```javascript
+  if (location.hash) {
+    var el = document.getElementById(location.hash.slice(1));
+    if (el) setTimeout(function() { el.scrollIntoView({block: 'start', behavior: 'instant'}); }, 50);
+  }
+  ```
+  The 50 ms delay lets the page finish rendering before the explicit `scrollIntoView`
+  overrides whatever position the browser defaulted to.
+
+**Security surface:**
+- `location.hash.slice(1)` is passed to `getElementById()`. `getElementById` does not
+  execute code; it only does a DOM lookup. An attacker-controlled hash value cannot cause
+  XSS — at worst it finds no element and silently does nothing.
+- No user-supplied data from `events.json` flows into this script.
+
+---
+
 ## What was NOT fixed and why
 
 | Issue | Reason not fixed |
@@ -162,5 +189,12 @@ Each card `<div>` gets `id="{slug}"`.
 - Are there remaining `events.json`-driven crash paths or HTML injection paths not
   covered by the existing `_str()` / `h()` / `_safe_url()` guards?
 
+**Anchor scroll JS (Round 12):**
+- `location.hash.slice(1)` → `getElementById()`: is this truly safe against any
+  DOM-clobbering or prototype-pollution attack if the page has an element whose `id`
+  matches a built-in property name?
+- Is the 50 ms `setTimeout` reliable across all mobile browsers, or can it race with
+  late-loading content (e.g. large base64 images reflow)?
+
 **General:**
-- Any other issues introduced by the Round 9–10 changes?
+- Any other issues introduced by the Round 9–12 changes?
