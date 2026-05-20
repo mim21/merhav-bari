@@ -35,8 +35,10 @@ sys.stdout.reconfigure(encoding="utf-8")
 # CONFIG  ← edit only this section
 # ─────────────────────────────────────────────────────────────────────────────
 CHAT_FILE   = Path(r"c:/PRIVATE/merhav-bari/WhatsApp_Chat_מרחב_בריא_פרסום_מרחבים_ואירועים/_chat.txt")
-EVENTS_JSON = Path(__file__).parent / "events.json"
-OUTPUT_HTML = Path(__file__).parent / "index.html"
+EVENTS_JSON = Path(__file__).parent / 'events.json'
+OUTPUT_HTML = Path(__file__).parent / 'index.html'
+OUTPUT_CAL  = Path(__file__).parent / 'calendar.ics'
+SITE_URL    = 'https://mim21.github.io/merhav-bari'
 
 TRIM_DAYS        = 60   # strip chat messages older than this
 SHOW_DAYS_AGO    = 1    # show events from N days ago (1 = from yesterday)
@@ -715,6 +717,7 @@ def _make_cal_links(event):
 
 
 def _make_full_cal(events):
+    '''Returns (html_buttons, ics_content). Caller must write ics_content to OUTPUT_CAL.'''
     lines = [
         'BEGIN:VCALENDAR', 'VERSION:2.0',
         'PRODID:-//merhav-bari//pipeline//HE',
@@ -724,10 +727,16 @@ def _make_full_cal(events):
     for event in events:
         result = _event_cal_data(event)
         if result:
-            lines.extend(result[4])  # vevent lines
+            lines.extend(result[4])
     lines.append('END:VCALENDAR')
-    ics_b64 = base64.b64encode(('\r\n'.join(lines) + '\r\n').encode('utf-8')).decode('ascii')
-    return f'<a class="cal-link full-cal" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">📅 הורד לוח שנה מלא</a>'
+    ics_content = '\r\n'.join(lines) + '\r\n'
+
+    ics_b64   = base64.b64encode(ics_content.encode('utf-8')).decode('ascii')
+    gcal_url  = 'https://calendar.google.com/calendar/r/settings/addbyurl?url=' + quote(SITE_URL + '/calendar.ics')
+
+    apple_btn  = f'<a class="cal-link full-cal-apple" href="data:text/calendar;base64,{ics_b64}" download="מרחב-בריא.ics">📅 Apple – לוח שנה מלא</a>'
+    google_btn = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – לוח שנה מלא</a>'
+    return apple_btn + google_btn, ics_content
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -843,8 +852,9 @@ def step_html():
     events.sort(key=lambda e: str(e.get("date_only") or e.get("event_start") or ""))
     print(f"  Showing {len(events)} events (from {show_from})")
 
-    cards_html   = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
-    full_cal_html = _make_full_cal(events)
+    cards_html              = "\n".join(_make_card(e, chat_folder, line_to_image) for e in events)
+    full_cal_html, ics_content = _make_full_cal(events)
+    OUTPUT_CAL.write_text(ics_content, encoding='utf-8')
 
     html = f"""<!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -903,9 +913,11 @@ def step_html():
     .cal-link.gcal:hover {{ background: #dce4ff; }}
     .cal-link.apple {{ background: #f0f0f0; color: #333; }}
     .cal-link.apple:hover {{ background: #e0e0e0; }}
-    .cal-link.full-cal {{ background: #2d6a4f; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; }}
-    .cal-link.full-cal:hover {{ background: #1b4332; }}
-    .header-actions {{ margin-top: 14px; }}
+    .cal-link.full-cal-apple {{ background: #2d6a4f; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
+    .cal-link.full-cal-apple:hover {{ background: #1b4332; }}
+    .cal-link.full-cal-gcal {{ background: #4361ee; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
+    .cal-link.full-cal-gcal:hover {{ background: #3451d1; }}
+    .header-actions {{ margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
 </head>
