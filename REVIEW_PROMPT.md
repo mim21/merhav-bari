@@ -145,6 +145,18 @@ fragment scroll fires before the page fully settles.
   XSS — at worst it finds no element and silently does nothing.
 - No user-supplied data from `events.json` flows into this script.
 
+**Status: NOT fully working — still broken on iPhone (Mobile Safari).**
+The card still does not scroll to the top of the viewport after the fix.
+Suspected causes (not yet investigated):
+- Mobile Safari may ignore `scrollIntoView` on initial page load if the call happens
+  while the browser is still processing the native fragment scroll.
+- 50 ms may be too short — Safari renders and lays out large base64-embedded images
+  lazily; the card's final position may not be known yet at 50 ms.
+- `behavior: 'instant'` may be silently ignored in some Safari versions.
+- The `webcal://` / calendar app → browser handoff may restore scroll position from
+  a previous visit before the JS fires, overriding the `scrollIntoView` call.
+- `scroll-margin-top` browser support on Mobile Safari (check if a polyfill is needed).
+
 ---
 
 ## What was NOT fixed and why
@@ -189,12 +201,16 @@ fragment scroll fires before the page fully settles.
 - Are there remaining `events.json`-driven crash paths or HTML injection paths not
   covered by the existing `_str()` / `h()` / `_safe_url()` guards?
 
-**Anchor scroll JS (Round 12):**
-- `location.hash.slice(1)` → `getElementById()`: is this truly safe against any
-  DOM-clobbering or prototype-pollution attack if the page has an element whose `id`
-  matches a built-in property name?
-- Is the 50 ms `setTimeout` reliable across all mobile browsers, or can it race with
-  late-loading content (e.g. large base64 images reflow)?
+**Anchor scroll (Round 12 — still broken on iPhone / Mobile Safari):**
+- The current fix (`scroll-margin-top: 12px` + 50 ms `setTimeout` + `scrollIntoView({block:'start', behavior:'instant'})`)
+  does NOT reliably scroll to the card top on iPhone. Why not, and what is the correct fix?
+- Specifically: does Mobile Safari suppress `scrollIntoView` on initial load? Is 50 ms
+  too short given large base64 images in the page? Does `behavior: 'instant'` work in
+  all Safari versions? Could the calendar-app → browser handoff restore a prior scroll
+  position after the JS fires?
+- What is the most reliable cross-browser approach for this pattern (deep-link from
+  external app → specific card at top of viewport on mobile)?
+- `location.hash.slice(1)` → `getElementById()`: safe against DOM-clobbering?
 
 **General:**
 - Any other issues introduced by the Round 9–12 changes?
