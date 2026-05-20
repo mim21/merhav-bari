@@ -31,7 +31,7 @@ sys.stdout.reconfigure(encoding="utf-8")
 # ─────────────────────────────────────────────────────────────────────────────
 CHAT_FILE   = Path(r"c:/PRIVATE/merhav-bari/WhatsApp Chat - מרחב בריא - פרסום מרחבים ואירועים 1/_chat.txt")
 EVENTS_JSON = Path(__file__).parent / "events.json"
-OUTPUT_HTML = Path(__file__).parent / "events.html"
+OUTPUT_HTML = Path(__file__).parent / "index.html"
 
 TRIM_DAYS        = 60   # strip chat messages older than this
 SHOW_DAYS_AGO    = 1    # show events from N days ago (1 = from yesterday)
