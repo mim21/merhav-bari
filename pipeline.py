@@ -652,8 +652,10 @@ def _ics_escape(s):
 def _event_slug(event):
     title = _str(event.get('title')) or 'event'
     d = _str(event.get('date_only') or event.get('event_start') or '')[:10].replace('-', '')
+    t = _str(event.get('start_time_only')).replace(':', '')
     slug = re.sub(r'[^\w]+', '-', title, flags=re.UNICODE).strip('-') or 'untitled'
-    return f'event-{slug}-{d}' if d else f'event-{slug}'
+    suffix = f'-{d}-{t}' if d and t else f'-{d}' if d else ''
+    return f'event-{slug}{suffix}'
 
 
 def _event_cal_data(event, event_url=''):
@@ -706,7 +708,7 @@ def _event_cal_data(event, event_url=''):
         + ('&location=' + quote(location) if location else '')
     )
 
-    uid   = hashlib.md5((title + gs).encode('utf-8')).hexdigest() + '@merhav-bari'
+    uid   = hashlib.md5('|'.join([title, gs, location]).encode('utf-8')).hexdigest() + '@merhav-bari'
     stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
     vevent = [
         'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
