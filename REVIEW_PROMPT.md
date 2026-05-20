@@ -1,6 +1,6 @@
 # Engineering Review — pipeline.py (Round 18)
 
-Review this file: https://github.com/mim21/merhav-bari/blob/d20b5a2/pipeline.py
+Review this file: https://github.com/mim21/merhav-bari/blob/7dde07d/pipeline.py
 
 You are reviewing `pipeline.py` in the **merhav-bari** project.
 This is a WhatsApp chat → JSON → HTML event pipeline that publishes to GitHub Pages at
@@ -46,6 +46,7 @@ Treat `events.json` as fully untrusted input.
 | 16 | `_ics_escape` CR normalization; `URL:` percent-encoding; `step_enrich` non-dict guard; `cid=webcal://`; page version footer |
 | 17 | C0 stripping in `_ics_escape`; UID full datetime; `or 'untitled'` in slug; `_str()` on `source_excerpt`; download button → `calendar.ics` |
 | 18 | Slug appends `-HHMM` start time; UID includes location in hash |
+| 18 (docs) | `CLAUDE.md`: conflict rules, mandatory second-pass audit, time rules; `README.md`: fix `±40 lines` → `0..3 lines` for `line_reference` |
 
 ---
 
