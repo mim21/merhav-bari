@@ -18,22 +18,23 @@ NOTE: Event extraction is done by Claude Code (no API key needed):
 
 import asyncio
 import base64
+import hashlib
 import json
 import math
 import os
 import re
 import sys
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from html import escape as h
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote
 
 sys.stdout.reconfigure(encoding="utf-8")
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIG  ← edit only this section
 # ─────────────────────────────────────────────────────────────────────────────
-CHAT_FILE   = Path(r"c:/PRIVATE/merhav-bari/WhatsApp Chat - מרחב בריא - פרסום מרחבים ואירועים 1/_chat.txt")
+CHAT_FILE   = Path(r"c:/PRIVATE/merhav-bari/WhatsApp_Chat_מרחב_בריא_פרסום_מרחבים_ואירועים/_chat.txt")
 EVENTS_JSON = Path(__file__).parent / "events.json"
 OUTPUT_HTML = Path(__file__).parent / "index.html"
 
@@ -626,6 +627,77 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
+def _make_cal_links(event):
+    title     = _str(event.get('title')) or 'אירוע'
+    desc      = _str(event.get('description'))
+    loc_parts = [p for p in [_str(event.get('location_name')), _str(event.get('city'))] if p]
+    location  = ' · '.join(loc_parts)
+
+    d_raw = event.get('date_only') or event.get('event_start')
+    if not d_raw:
+        return ''
+    try:
+        start_date = date.fromisoformat(str(d_raw)[:10])
+    except ValueError:
+        return ''
+
+    start_t = _str(event.get('start_time_only'))
+    end_t   = _str(event.get('end_time_only'))
+    end_d   = _str(event.get('end_date_only'))
+    timed   = bool(re.match(r'^\d{2}:\d{2}$', start_t))
+
+    if timed:
+        gs = start_date.strftime('%Y%m%d') + 'T' + start_t.replace(':', '') + '00'
+        if re.match(r'^\d{2}:\d{2}$', end_t):
+            ge = start_date.strftime('%Y%m%d') + 'T' + end_t.replace(':', '') + '00'
+        else:
+            try:
+                total = int(start_t[:2]) * 60 + int(start_t[3:]) + 120
+                h2, m2 = divmod(total, 60)
+                ge = start_date.strftime('%Y%m%d') + f'T{h2 % 24:02d}{m2:02d}00'
+            except Exception:
+                ge = gs
+    else:
+        gs = start_date.strftime('%Y%m%d')
+        try:
+            ge = (date.fromisoformat(end_d) + timedelta(days=1)).strftime('%Y%m%d') if end_d else (start_date + timedelta(days=1)).strftime('%Y%m%d')
+        except Exception:
+            ge = (start_date + timedelta(days=1)).strftime('%Y%m%d')
+
+    gcal_url = (
+        'https://calendar.google.com/calendar/render?action=TEMPLATE'
+        '&text=' + quote(title)
+        + '&dates=' + gs + '/' + ge
+        + ('&details=' + quote(desc) if desc else '')
+        + ('&location=' + quote(location) if location else '')
+    )
+
+    def _esc(s):
+        return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
+
+    uid   = hashlib.md5((title + gs[:8]).encode('utf-8')).hexdigest() + '@merhav-bari'
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')
+    lines = [
+        'BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//merhav-bari//pipeline//HE',
+        'BEGIN:VEVENT', 'UID:' + uid, 'DTSTAMP:' + stamp,
+        ('DTSTART:' + gs) if timed else ('DTSTART;VALUE=DATE:' + gs),
+        ('DTEND:'   + ge) if timed else ('DTEND;VALUE=DATE:'   + ge),
+        'SUMMARY:' + _esc(title),
+    ]
+    if desc:
+        lines.append('DESCRIPTION:' + _esc(desc[:500]))
+    if location:
+        lines.append('LOCATION:' + _esc(location))
+    lines += ['END:VEVENT', 'END:VCALENDAR']
+    ics_b64 = base64.b64encode(('\r\n'.join(lines) + '\r\n').encode('utf-8')).decode('ascii')
+    safe_fn = h(re.sub(r'[\\/:"*?<>|]', '', title)[:50])
+
+    return (
+        f'<a class="cal-link gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google</a>'
+        f'<a class="cal-link apple" href="data:text/calendar;base64,{ics_b64}" download="{safe_fn}.ics">🍎 Apple</a>'
+    )
+
+
 def _make_card(event, chat_folder, line_to_image):
     img_tag = ""
     img_file = event.get("_image_filename") or _find_image(event, line_to_image)
@@ -695,6 +767,7 @@ def _make_card(event, chat_folder, line_to_image):
     conf_color = "#28a745" if conf >= 0.8 else "#ffc107" if conf >= 0.5 else "#dc3545"
     dot_count = round(conf * 5)
     dots = "●" * dot_count + "○" * (5 - dot_count)
+    cal_html = _make_cal_links(event)
 
     return f"""<div class="card" style="background:{card_bg}">
   {status_html}
@@ -711,6 +784,7 @@ def _make_card(event, chat_folder, line_to_image):
     {"<div class='card-price'>💰 " + "".join(_render_price_tier(t) for t in price_details) + "</div>" if price_details else ("<div class='card-price'>💰 " + price + ("  <span class='price-note'>(" + price_note + ")</span>" if price_note else "") + "</div>" if price else "")}
     {"<div class='card-desc'>" + desc + "</div>" if desc else ""}
     <div class="card-footer">{link_html}{contact_html}</div>
+    {'<div class="cal-links">' + cal_html + '</div>' if cal_html else ''}
   </div>
 </div>"""
 
@@ -790,6 +864,12 @@ def step_html():
     .contact-wa {{ font-size: 0.78rem; color: #25d366; text-decoration: none; font-weight: 500; }}
     .contact-wa:hover {{ text-decoration: underline; }}
     .location-private {{ font-size: 0.78rem; color: #9061d4; font-style: italic; }}
+    .cal-links {{ margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }}
+    .cal-link {{ display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-decoration: none; }}
+    .cal-link.gcal {{ background: #eef2ff; color: #4361ee; }}
+    .cal-link.gcal:hover {{ background: #dce4ff; }}
+    .cal-link.apple {{ background: #f0f0f0; color: #333; }}
+    .cal-link.apple:hover {{ background: #e0e0e0; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
 </head>
