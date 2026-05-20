@@ -33,7 +33,6 @@ Treat `events.json` as fully untrusted input.
 - Google Calendar subscribe URL — uses `webcal://` in `cid=` parameter (Rounds 15–16)
 - `_collect_urls` — `_str()` applied to `source_excerpt` before regex (Round 17)
 - Full-calendar download button — `href="calendar.ics"` file link, not data URI (Round 17)
-- Copy-URL button — hardcoded `SITE_URL + '/calendar.ics'`, clipboard JS only (Round 17)
 - `UID` in VEVENT — uses full `gs` (datetime), not `gs[:8]` (date only) (Round 17)
 
 ---
@@ -45,7 +44,7 @@ Treat `events.json` as fully untrusted input.
 | 12–14 | Anchor scroll JS, ICS line folding, C0 stripping, `_ics_uri` — **reverted** (double-fold bug broke Apple Calendar) |
 | 15 | Google Calendar subscribe URL: `addbyurl?url=` → `cid=` |
 | 16 | `_ics_escape` CR normalization; `URL:` percent-encoding; `step_enrich` non-dict guard; `cid=webcal://`; page version footer |
-| 17 | C0 stripping in `_ics_escape`; UID full datetime; `or 'untitled'` in slug; `_str()` on `source_excerpt`; download button → `calendar.ics`; copy-URL button added |
+| 17 | C0 stripping in `_ics_escape`; UID full datetime; `or 'untitled'` in slug; `_str()` on `source_excerpt`; download button → `calendar.ics` |
 
 ---
 
@@ -57,7 +56,7 @@ Treat `events.json` as fully untrusted input.
 | Enricher sublink cross-contamination | Data accuracy only; no XSS path. Could restrict to canonical URL only in future |
 | ICS line folding (RFC 5545, 75 byte limit) | Reverted twice — double-fold bug corrupted Apple Calendar; audience (iOS/Android) tolerates unfolded lines |
 | Slug/UID SHA digest + start time | Complexity > benefit for current data (events rarely share title + date) |
-| Google Calendar subscribe on iPhone | Google Calendar iOS app does not support URL-based subscriptions at all — product limitation. Workaround: "📋 העתק URL" copy button added |
+| Google Calendar subscribe on iPhone | Works via the "📅 Google – הרשם" button — opens Google Calendar in Safari where user confirms the subscription. No native app deep-link needed. |
 | Adversarial test suite | Valid long-term; out of scope |
 
 ---
@@ -70,8 +69,6 @@ Treat `events.json` as fully untrusted input.
   datetime but different location)?
 
 **HTML / security:**
-- Copy-URL button: `onclick` embeds hardcoded `SITE_URL + '/calendar.ics'` via Python
-  f-string. Is there any injection surface in this pattern?
 - Any new injection paths introduced in Round 17?
 
 **Enricher:**
