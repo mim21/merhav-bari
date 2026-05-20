@@ -631,9 +631,17 @@ def _render_price_tier(tier_text):
     return f"<div class='price-tier'>{escaped}</div>"
 
 
+_ICS_CTRL_RE = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
+
 def _ics_escape(s):
     s = _str(s).replace('\r\n', '\n').replace('\r', '\n')
+    s = _ICS_CTRL_RE.sub(' ', s)
     return s.replace('\\', '\\\\').replace('\n', '\\n').replace(',', '\\,').replace(';', '\\;')
+
+
+def _ics_uri(url):
+    '''Sanitize a URI value for ICS — strip CR/LF only, no TEXT escaping.'''
+    return _str(url).replace('\r', '').replace('\n', '')
 
 
 def _ics_fold(line):
@@ -724,7 +732,7 @@ def _event_cal_data(event, event_url=''):
     if location:
         vevent.append('LOCATION:' + _ics_escape(location))
     if event_url:
-        vevent.append('URL:' + _ics_escape(event_url))
+        vevent.append('URL:' + _ics_uri(event_url))
     vevent.append('END:VEVENT')
 
     return gs, ge, timed, gcal_url, vevent
