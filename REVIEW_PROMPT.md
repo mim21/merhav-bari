@@ -79,5 +79,12 @@ Treat `events.json` as fully untrusted input.
 - Is sublink cross-contamination data accuracy only, or could scraped content
   from the wrong page cause injection in rendered HTML?
 
+**Google Calendar on iPhone:**
+- The "📅 Google – הרשם" button now uses `https://calendar.google.com/calendar/r?cid=webcal://...`
+  On iPhone, this opens Safari (the Google Calendar web app) instead of the native Google Calendar app.
+  Is there a URL scheme or deep-link format that triggers the Google Calendar iOS app directly?
+  Is there a `googlegcal://` or `x-apple-calevent://` equivalent for Google Calendar?
+  Should the button be removed or replaced with guidance for iPhone users?
+
 **General:**
 - Anything introduced by Round 16 (CR normalization, percent-encoding, non-dict guard)?
