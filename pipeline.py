@@ -759,13 +759,11 @@ def _make_full_cal(events):
 
     webcal_url = SITE_URL.replace('https://', 'webcal://') + '/calendar.ics'
     gcal_url   = 'https://calendar.google.com/calendar/r?cid=' + quote(webcal_url)
-    ics_url    = SITE_URL + '/calendar.ics'
 
     apple_sub  = f'<a class="cal-link full-cal-apple" href="{webcal_url}">📅 Apple – הרשם</a>'
     google_sub = f'<a class="cal-link full-cal-gcal" href="{h(gcal_url)}" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a>'
     download   = f'<a class="cal-link full-cal-dl" href="calendar.ics" download="מרחב-בריא.ics">⬇ הורד ICS</a>'
-    copy_btn   = f'<button class="cal-link full-cal-copy" onclick="navigator.clipboard.writeText(\'{ics_url}\').then(function(){{this.textContent=\'✅ הועתק\'}}.bind(this))">📋 העתק URL</button>'
-    return apple_sub + google_sub + download + copy_btn, ics_content
+    return apple_sub + google_sub + download, ics_content
 
 
 def _make_card(event, chat_folder, line_to_image):
@@ -953,9 +951,7 @@ def step_html():
     .cal-link.full-cal-gcal:hover {{ background: #3451d1; }}
     .cal-link.full-cal-dl {{ background: #6b7280; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }}
     .cal-link.full-cal-dl:hover {{ background: #4b5563; }}
-    .cal-link.full-cal-copy {{ background: #374151; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; border: none; cursor: pointer; }}
-    .cal-link.full-cal-copy:hover {{ background: #1f2937; }}
-    .header-actions {{ margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }}
+.header-actions {{ margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }}
     footer {{ text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }}
   </style>
 </head>
