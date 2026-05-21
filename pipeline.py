@@ -229,6 +229,22 @@ def step_clean():
     for e, reason in removed:
         title = (_str(e.get('title')) or '?')[:55]
         print(f"  Removed [{reason}]: {title}")
+
+    # Deduplication by (title, date)
+    seen_keys, unique = set(), []
+    for e in kept:
+        key = (
+            _str(e.get('title')).strip().lower(),
+            _str(e.get('date_only') or e.get('event_start') or '')[:10]
+        )
+        if key in seen_keys:
+            print(f"  Duplicate removed: {(_str(e.get('title')) or '?')[:55]}")
+        else:
+            seen_keys.add(key)
+            unique.append(e)
+    if len(unique) < len(kept):
+        print(f"  Removed {len(kept) - len(unique)} duplicate(s)")
+    kept = unique
     print(f"  Keeping {len(kept)} events")
 
     out = kept if is_list else {'events': kept}
@@ -436,7 +452,7 @@ async def _enrich_event(page, event, label):
     return changed
 
 
-async def step_enrich():
+async def step_enrich(force=False):
     print('\n── Step 3: Enrich with Playwright ──')
     try:
         from playwright.async_api import async_playwright
@@ -454,6 +470,8 @@ async def step_enrich():
         data['events'] = events
 
     def _needs_enrich(e):
+        if force:
+            return True
         price_text = _str(e.get('price_text'))
         if any(not _str(e.get(k)) for k in ['price_text', 'start_time_only', 'city']):
             return True
@@ -977,11 +995,116 @@ def step_html():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# STEP 2b – VALIDATE SCHEMA
+# ─────────────────────────────────────────────────────────────────────────────
+_VALID_STATUSES = {'scheduled', 'updated', 'postponed', 'canceled', 'tentative'}
+
+
+def step_validate():
+    print('\n── Step 2b: Validate schema ──')
+    with open(EVENTS_JSON, encoding='utf-8') as f:
+        data = json.load(f)
+    events = [e for e in _events_from_json(data) if isinstance(e, dict)]
+    errors = 0
+    for i, e in enumerate(events, 1):
+        title = _str(e.get('title')) or f'[event {i}]'
+        d = e.get('date_only') or e.get('event_start')
+        if not d:
+            print(f'  [{i}] "{title}": missing date_only')
+            errors += 1
+        else:
+            try:
+                date.fromisoformat(str(d)[:10])
+            except ValueError:
+                print(f'  [{i}] "{title}": invalid date: {d}')
+                errors += 1
+        etype = e.get('event_type')
+        if etype and etype not in TYPE_LABELS:
+            print(f'  [{i}] "{title}": unknown event_type "{etype}"')
+            errors += 1
+        status = e.get('status')
+        if status and status not in _VALID_STATUSES:
+            print(f'  [{i}] "{title}": unknown status "{status}"')
+            errors += 1
+        conf = e.get('confidence')
+        if conf is not None:
+            try:
+                if not 0.0 <= float(conf) <= 1.0:
+                    print(f'  [{i}] "{title}": confidence out of range: {conf}')
+                    errors += 1
+            except (TypeError, ValueError):
+                print(f'  [{i}] "{title}": invalid confidence: {conf}')
+                errors += 1
+    if errors:
+        print(f'  {errors} error(s) — fix events.json before continuing')
+        sys.exit(1)
+    print(f'  {len(events)} events valid')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# POST-ENRICH REPORT
+# ─────────────────────────────────────────────────────────────────────────────
+def step_report_missing():
+    print('\n── Missing fields after enrichment ──')
+    with open(EVENTS_JSON, encoding='utf-8') as f:
+        data = json.load(f)
+    events = [e for e in _events_from_json(data) if isinstance(e, dict)]
+    fields = ['price_text', 'start_time_only', 'city']
+    any_missing = False
+    for e in events:
+        missing = [f for f in fields if not _str(e.get(f))]
+        if missing:
+            title = (_str(e.get('title')) or '?')[:50]
+            d = _str(e.get('date_only') or '')[:10]
+            print(f'  ⚠  {d}  {title}: missing {", ".join(missing)}')
+            any_missing = True
+    if not any_missing:
+        print('  All events have price, time and city.')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# STEP 5 – GIT PUSH
+# ─────────────────────────────────────────────────────────────────────────────
+def step_push():
+    print('\n── Step 5: Push to GitHub ──')
+    cwd = Path(__file__).parent
+    try:
+        subprocess.run(
+            ['git', '-C', str(cwd), 'add', '-f', 'index.html', 'calendar.ics', 'events.json'],
+            check=True
+        )
+        result = subprocess.run(
+            ['git', '-C', str(cwd), 'commit', '-m', 'Update events'],
+            capture_output=True, text=True
+        )
+        if result.returncode != 0:
+            if 'nothing to commit' in result.stdout + result.stderr:
+                print('  Nothing to commit.')
+                return
+            print(f'  Commit failed: {result.stderr.strip()}')
+            return
+        subprocess.run(['git', '-C', str(cwd), 'push'], check=True)
+        print(f'  Published → {SITE_URL}')
+    except subprocess.CalledProcessError as ex:
+        print(f'  Push failed: {ex}')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # MAIN
 # ─────────────────────────────────────────────────────────────────────────────
 if __name__ == '__main__':
+    import argparse
+    ap = argparse.ArgumentParser(description='מרחב בריא event pipeline')
+    ap.add_argument('--force', action='store_true', help='Re-enrich all events, not just incomplete ones')
+    ap.add_argument('--push',  action='store_true', help='Git-push after generating HTML')
+    args = ap.parse_args()
+
     step_trim()
     step_clean()
-    asyncio.run(step_enrich())
+    step_validate()
+    asyncio.run(step_enrich(force=args.force))
+    step_report_missing()
     step_html()
+    if args.push:
+        step_push()
     print('\nDone.')
