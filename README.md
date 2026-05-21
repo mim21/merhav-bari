@@ -56,7 +56,7 @@ Each event in the array:
   "start_time_only": "HH:MM or null",
   "end_time_only": "HH:MM or null",
   "raw_date_text": "original date text from the post",
-  "location_name": "venue name or null",
+  "location_name": "full address or venue name or null  (e.g. 'רחוב השלום 5, תל אביב' — use whatever detail the website provides)",
   "city": "city name in Hebrew or null",
   "price_text": "e.g. 150₪ or null  (lowest/summary price)",
   "price_unit": "couple|person|null",

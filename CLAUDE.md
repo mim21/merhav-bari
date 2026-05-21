@@ -19,7 +19,7 @@ The post alone is never enough. Known gaps the post often omits:
   The website may also have a couple (לצמד/לזוג) price. Capture BOTH in `price_details`.
 - **Early-bird tiers with cutoff dates** — use `price_details` with the exact dates
   so the pipeline can auto-mark expired tiers.
-- **Location name** — the post may say just a city; the website often has the venue name.
+- **Location name / full address** — the post may say just a city; the website often has the venue name AND full street address. Put the full address (e.g. `רחוב השלום 5, תל אביב`) into `location_name` — the card will display it as-is. Never truncate to just the venue name when you have more detail.
 
 Never write a field based only on the post if the registration_link is available —
 always fetch the website first and cross-check.
