@@ -1,0 +1,394 @@
+[
+  {
+    "title": "ליפול לאיזון – ריטריט קונטקט ותנועה בטבע",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-21",
+    "end_date_only": "2026-05-23",
+    "start_time_only": "14:00",
+    "end_time_only": "16:00",
+    "raw_date_text": "חמשו\"ש ה- 21-23.5",
+    "location_name": "סטודיו היער המכושף, כ-45 דקות מדרום לתל אביב (כתובת מלאה לנרשמים)",
+    "city": null,
+    "price_text": "1,250₪",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "1,250₪ לאדם (תשלום ב-3 תשלומים אפשרי)",
+      "10% הנחה להרשמה קבוצתית"
+    ],
+    "description": "ריטריט של 3 ימים (חמישי-שבת) של קונטקט אימפרוביזציה ותנועה בטבע, כולל ריקוד, מים, חול ואש. מקום מוגבל ל-25 משתתפים.",
+    "registration_link": "https://www.falling2balance.com",
+    "contact_info": {
+      "phone": [],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 10926,
+        "source_excerpt": "[20/04/2026, 11:08:20] ~ רותם רם: 🌿 *ליפול לאיזון*🌿",
+        "source_message_timestamp": "2026-04-20"
+      }
+    ],
+    "confidence": 0.85
+  },
+  {
+    "title": "ריטריט שבועות – ביכורים של הלב",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-21",
+    "end_date_only": "2026-05-22",
+    "start_time_only": "16:00",
+    "end_time_only": null,
+    "raw_date_text": "חמישי הבא, שבועות 21/5 החל מ 16:00",
+    "location_name": "מרחב הסדנאות \"אהבה בדרך הטבע\", רחובות",
+    "city": "רחובות",
+    "price_text": null,
+    "price_unit": null,
+    "price_note": null,
+    "price_details": [],
+    "description": "ריטריט טנטרי של 24 שעות לכבוד חג השבועות, כולל טקס קקאו, מקדש אהבה, סדנת מים בבריכה מחוממת, לינה וארוחות משותפות. מתאים לזוגות ויחידים.",
+    "registration_link": null,
+    "contact_info": {
+      "phone": [
+        {
+          "number": "054-4893970",
+          "name": "טארה (מיכל)"
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11577,
+        "source_excerpt": "[17/05/2026, 12:17:20] יצחק כרבולים: אהובים ❤️🩷",
+        "source_message_timestamp": "2026-05-17"
+      }
+    ],
+    "confidence": 0.8
+  },
+  {
+    "title": "טנטריק דאנס – מחזור 15",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-23",
+    "end_date_only": null,
+    "start_time_only": "19:00",
+    "end_time_only": "22:00",
+    "raw_date_text": "מוצ\"ש 23.5",
+    "location_name": "בית פרטי בפרדס חנה (כתובת מלאה תישלח לנרשמים)",
+    "city": "פרדס חנה",
+    "price_text": "220₪",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "180₪ – הרשמה מוקדמת עד 10.5 (פג תוקף)",
+      "200₪ – הרשמה מוקדמת עד 16.5 (פג תוקף)",
+      "220₪ – מחיר מלא",
+      "10% הנחה לזוגות/צמדים מאוזנים מגדרית",
+      "10% הנחה לחוזרים"
+    ],
+    "description": "המחזור ה-15 של הטנטריק דאנס – שילוב של תנועה משחררת עם מגע קשוב ומחבר. כניסה ב-18:30, התחלה ב-19:00. הרשמה דרך ווטסאפ.",
+    "registration_link": "https://www.anandalev.co.il/tantric-dance",
+    "contact_info": {
+      "phone": [
+        {
+          "number": "054-6177878",
+          "name": "עמית"
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11460,
+        "source_excerpt": "[09/05/2026, 21:09:57] יצחק כרבולים: הטנטריק דאנס חוזרת בפעם ה-15!",
+        "source_message_timestamp": "2026-05-09"
+      }
+    ],
+    "confidence": 0.9
+  },
+  {
+    "title": "Spring Nights – מקדש טנטרי",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-28",
+    "end_date_only": null,
+    "start_time_only": "19:30",
+    "end_time_only": "00:00",
+    "raw_date_text": "יום חמישי | 28.5",
+    "location_name": "תל אביב (כתובת מלאה לנרשמים לאחר רישום ותשלום)",
+    "city": "תל אביב",
+    "price_text": "340₪ לאדם / 620₪ לזוג",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "290₪ לאדם – הרשמה מוקדמת עד 21.5",
+      "550₪ לזוג – הרשמה מוקדמת עד 21.5",
+      "340₪ לאדם – מחיר רגיל מ-22.5",
+      "620₪ לזוג – מחיר רגיל מ-22.5"
+    ],
+    "description": "מקדש טנטרי מונחה באיזון מגדרי בתל אביב. ערב של נוכחות, הקשבה, מגע מוסכם ועונג. עירום חלקי אפשרי מבחירה. ללא אלכוהול וסמים. גברים – הרשמה עם מאזנת בלבד.",
+    "registration_link": "https://hagitmishali.wixsite.com/spring-nights",
+    "contact_info": {
+      "phone": [],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 10944,
+        "source_excerpt": "[23/04/2026, 10:27:53] יצחק כרבולים: 🪷💐*Spring Nights*🪷💐",
+        "source_message_timestamp": "2026-04-23"
+      }
+    ],
+    "confidence": 0.9
+  },
+  {
+    "title": "מקדש מפת האינטימיות",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-28",
+    "end_date_only": null,
+    "start_time_only": "20:00",
+    "end_time_only": "01:00",
+    "raw_date_text": "28/5 בפרדס חנה",
+    "location_name": "גן זן, פרדס חנה",
+    "city": "פרדס חנה",
+    "price_text": "380₪ לאדם / 690₪ לזוג",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "380₪ לאדם",
+      "690₪ לזוג מאוזן מגדרית"
+    ],
+    "description": "ערב חקירה משחקית של מפת האינטימיות דרך מגע אנרגטי, חושני ואיטי. שיתוף פעולה של ראדיקה ותמיר. הרשמה רק לאחר שיחת היכרות עם המנחים.",
+    "registration_link": "https://forms.gle/4XzZnPZ69gWe3bCH9",
+    "contact_info": {
+      "phone": [
+        {
+          "number": "054-8072424",
+          "name": "תמיר"
+        },
+        {
+          "number": "055-7046844",
+          "name": "ראדיקה"
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11369,
+        "source_excerpt": "[05/05/2026, 18:14:54] יצחק כרבולים: *מקדש מפת האינטימיות*",
+        "source_message_timestamp": "2026-05-05"
+      }
+    ],
+    "confidence": 0.85
+  },
+  {
+    "title": "ערב מגע אוהב לזוגות בבריכה מחוממת",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-28",
+    "end_date_only": null,
+    "start_time_only": "19:30",
+    "end_time_only": "22:00",
+    "raw_date_text": "חמישי ה 28.5",
+    "location_name": "בריכה פרטית ומחוממת ליד בנימינה (כתובת מלאה לנרשמים)",
+    "city": "בנימינה",
+    "price_text": "750₪ לזוג",
+    "price_unit": "couple",
+    "price_note": null,
+    "price_details": [
+      "750₪ לזוג (תשלום ב-2 תשלומים אפשרי)",
+      "נותר מקום אחד אחרון"
+    ],
+    "description": "ערב זוגי חוויתי של מגע אוהב במים חמים, כולל תנועה משותפת ואינטימיות. בעירום אופציונלי. מוגבל ל-7 זוגות.",
+    "registration_link": "https://benoam.wixsite.com/couplesrotemnoam/aquaticlove",
+    "contact_info": {
+      "phone": [
+        {
+          "number": "052-8698159",
+          "name": null
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11488,
+        "source_excerpt": "[11/05/2026, 14:39:59] ~ רותם רם: *סדנה לזוגות של מגע אוהב במים (בעירום אופציונלי)*",
+        "source_message_timestamp": "2026-05-11"
+      }
+    ],
+    "confidence": 0.9
+  },
+  {
+    "title": "Soft Play Party Special – אבישג זלוף ואוקאס",
+    "event_type": "cuddle_party",
+    "status": "scheduled",
+    "date_only": "2026-05-29",
+    "end_date_only": null,
+    "start_time_only": "20:00",
+    "end_time_only": "00:00",
+    "raw_date_text": "29.5 - שישי - תל אביב - 20:00",
+    "location_name": "תל אביב (כתובת מלאה לנרשמים)",
+    "city": "תל אביב",
+    "price_text": "200₪ לאדם / 400₪ לזוג",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "200₪ לאדם",
+      "400₪ לזוג (אישה+גבר)",
+      "180₪ עם קוד קופון: הנחהקטנה",
+      "170₪ עם קוד קופון: יותרהנחה"
+    ],
+    "description": "Soft Play Party חוגגת 4 שנים – ספיישל עם אבישג זלוף ואוקאס יחד. מסע של מוזיקה, קקאו, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית; גברים ברשימת המתנה.",
+    "registration_link": "https://www.yannivgold.com/spp",
+    "contact_info": {
+      "phone": [],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11327,
+        "source_excerpt": "[05/05/2026, 11:07:36] יצחק כרבולים: ספיישל מיוחד! *Soft Play Party*",
+        "source_message_timestamp": "2026-05-05"
+      }
+    ],
+    "confidence": 0.9
+  },
+  {
+    "title": "עונג שבת זוגי",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-05-30",
+    "end_date_only": null,
+    "start_time_only": "18:00",
+    "end_time_only": "22:00",
+    "raw_date_text": "שבת 30.5.26",
+    "location_name": "LUST, תל אביב",
+    "city": "תל אביב",
+    "price_text": "500₪ לזוג",
+    "price_unit": "couple",
+    "price_note": null,
+    "price_details": [
+      "500₪ לזוג"
+    ],
+    "description": "סדנה זוגית לחקירת המפגש האינטימי דרך 4 סוגי מגע. ערב מחבר לזוגות שרוצים לגוון ולהרחיב את המיניות הזוגית שלהם.",
+    "registration_link": "https://forms.gle/vKrfdfiWjuydy436A",
+    "contact_info": {
+      "phone": [
+        {
+          "number": "054-4752034",
+          "name": "אליה"
+        },
+        {
+          "number": "054-4730011",
+          "name": "בועז"
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11608,
+        "source_excerpt": "[19/05/2026, 15:26:48] יצחק כרבולים: מזמינים אתכםן ל- *עונג שבת זוגי*",
+        "source_message_timestamp": "2026-05-19"
+      }
+    ],
+    "confidence": 0.85
+  },
+  {
+    "title": "סדנת נשים – חיבור לאנרגיה הנקבית במים",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-06-03",
+    "end_date_only": null,
+    "start_time_only": "20:00",
+    "end_time_only": "00:00",
+    "raw_date_text": "יום רביעי 3.6",
+    "location_name": "מרחב סדנאות עם בריכה מחוממת, רחובות",
+    "city": "רחובות",
+    "price_text": null,
+    "price_unit": null,
+    "price_note": null,
+    "price_details": [],
+    "description": "סדנה לנשים בלבד: חיבור לאנרגיה הנקבית דרך תנועה בבריכה ברוח הביודאנסה, מגע אוהב בציפה ומגע דינאמי עם כיסוי עיניים בחדר חושך. יש מרחב מוגן.",
+    "registration_link": null,
+    "contact_info": {
+      "phone": [
+        {
+          "number": "052-5159812",
+          "name": "הילה"
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11551,
+        "source_excerpt": "[15/05/2026, 6:18:24] יצחק כרבולים: 📢📢📢 *שימו לב שימו לב !!!*",
+        "source_message_timestamp": "2026-05-15"
+      }
+    ],
+    "confidence": 0.8
+  },
+  {
+    "title": "Latihan – מסע קשוב בכיסוי עיניים",
+    "event_type": "workshop",
+    "status": "scheduled",
+    "date_only": "2026-06-11",
+    "end_date_only": null,
+    "start_time_only": "20:30",
+    "end_time_only": "23:30",
+    "raw_date_text": "יום חמישי 11.6",
+    "location_name": "פרדס חנה (מיקום מדויק לנרשמים)",
+    "city": "פרדס חנה",
+    "price_text": "150₪",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "150₪ לכרטיס"
+    ],
+    "description": "סדנת תנועה עם כיסוי עיניים בהנחיית אבישג מאיה זלוף. תנועה מתוך נשימה והקשבה לגוף, מלווה במסע מוזיקלי. ללא מגע גניטלי; מגע קשוב אפשרי.",
+    "registration_link": "https://lovemesoftly.my.canva.site/latihan",
+    "contact_info": {
+      "phone": [
+        {
+          "number": "050-6789911",
+          "name": null
+        }
+      ],
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11634,
+        "source_excerpt": "[20/05/2026, 12:11:08] יצחק כרבולים: latihan - מסע קשוב בכיסוי עיניים",
+        "source_message_timestamp": "2026-05-20"
+      }
+    ],
+    "confidence": 0.85
+  }
+]
