@@ -4,18 +4,18 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:d7d4891eb305fb5f3f1cf9052fa91144@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:4b7ab4a18b53addd96e55a35ee74db43@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260521T140000
 DTEND:20260521T160000
 SUMMARY:ליפול לאיזון – ריטריט קונטקט ותנועה בטבע
 DESCRIPTION:ריטריט קונטקט אימפרוביזציה ותנועה בטבע של 3 ימים. ריקוד קונטקט\, תנועה עם מים\, חול ואש\, יצירת מרחב חי של חיבור ופשטות.
-LOCATION:סטודיו היער המכושף
+LOCATION:סטודיו היער המכושף (מיקום יימסר לנרשמים)
 URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D7%9C%D7%90%D7%99%D7%96%D7%95%D7%9F-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%95%D7%AA%D7%A0%D7%95%D7%A2%D7%94-%D7%91%D7%98%D7%91%D7%A2-20260521-1400
 END:VEVENT
 BEGIN:VEVENT
 UID:80f2ffae480f7e018496ac433d8037a6@merhav-bari
-DTSTAMP:20260521T004425Z
+DTSTAMP:20260521T005207Z
 DTSTART:20260521T160000
 DTEND:20260521T180000
 SUMMARY:ריטריט שבועות – ביכורים של הלב
@@ -24,28 +24,28 @@ LOCATION:אהבה בדרך הטבע · רחובות
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%A9%D7%91%D7%95%D7%A2%D7%95%D7%AA-%D7%91%D7%99%D7%9B%D7%95%D7%A8%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9C%D7%91-20260521-1600
 END:VEVENT
 BEGIN:VEVENT
-UID:7eae8c558d143c2f6ea74c5f17a8b42b@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:094122102b5565ddc6d6ecdd32622469@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260523T183000
 DTEND:20260523T220000
 SUMMARY:הטנטריק דאנס – מוצאי שבת
 DESCRIPTION:הטנטריק דאנס חוזרת בפעם ה-15 – חגיגה מיוחדת לרגל בואו של הקיץ. שילוב של תנועה משחררת עם מגע קשוב ומחבר.
-LOCATION:פרדס חנה
+LOCATION:בית פרטי (מיקום יימסר לנרשמים) · פרדס חנה
 URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%98%D7%A0%D7%98%D7%A8%D7%99%D7%A7-%D7%93%D7%90%D7%A0%D7%A1-%D7%9E%D7%95%D7%A6%D7%90%D7%99-%D7%A9%D7%91%D7%AA-20260523-1830
 END:VEVENT
 BEGIN:VEVENT
-UID:7d5af9e89b101d7256256ff5223c995c@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:c0bdf566b30e90759e2203e42bdf7375@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260528T193000
 DTEND:20260529T000000
 SUMMARY:Spring Nights – מקדש טנטרי
 DESCRIPTION:מקדש טנטרי מונחה באיזון מגדרי בתל אביב. מרחב של מיניות מודעת\, נוכחות\, הקשבה והסכמה. גברים מוזמנים עם מאזנת בלבד.
-LOCATION:תל אביב
+LOCATION:מיקום יימסר לאחר הרשמה · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260528-1930
 END:VEVENT
 BEGIN:VEVENT
 UID:bf8b38047d89ff801583a3b9bf43218d@merhav-bari
-DTSTAMP:20260521T004425Z
+DTSTAMP:20260521T005207Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
@@ -54,28 +54,28 @@ LOCATION:זן גארדן\, נורית 1\, פרדס חנה-כרכור · פרדס
 URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A7%D7%93%D7%A9-%D7%9E%D7%A4%D7%AA-%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%99%D7%9E%D7%99%D7%95%D7%AA-20260528-2000
 END:VEVENT
 BEGIN:VEVENT
-UID:1346be6a699113b4e0cc61bb581d4627@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:0598fb436ba781f8f3122a538df3a52d@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
 SUMMARY:מגע אוהב במים – סדנה זוגית
 DESCRIPTION:סדנה זוגית חוויתית במים חמים – רגש\, משחקיות\, אירוטיקה\, הרפיה ואינטימיות. מועד 14.5 סולד אאוט\, נפתח מועד חדש ב-28.5. נותרו 2 מקומות בהרשמה מוקדמת.
-LOCATION:בריכה פרטית ליד בנימינה · בנימינה
+LOCATION:בריכה פרטית מחוממת (מיקום ליד בנימינה) · בנימינה
 URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%91%D7%9E%D7%99%D7%9D-%D7%A1%D7%93%D7%A0%D7%94-%D7%96%D7%95%D7%92%D7%99%D7%AA-20260528-1930
 END:VEVENT
 BEGIN:VEVENT
-UID:aa15317c468457007449ed87fff774c6@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:5e520a877b8f46187ab0bad51f65218d@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
 SUMMARY:Soft Play Party – אבישג ואוקאס
 DESCRIPTION:סדנת מסיבה לרגל ארבע שנות סופט פליי – אבישג ואוקאס יחד שוב! מסע מוזיקלי עם קקאו\, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית\; גברים – טופס המתנה.
-LOCATION:תל אביב
+LOCATION:מיקום יימסר לנרשמים · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-%D7%90%D7%91%D7%99%D7%A9%D7%92-%D7%95%D7%90%D7%95%D7%A7%D7%90%D7%A1-20260529-2000
 END:VEVENT
 BEGIN:VEVENT
 UID:f4069d14270500e9ebc3ca0eff56b5e2@merhav-bari
-DTSTAMP:20260521T004425Z
+DTSTAMP:20260521T005207Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
@@ -84,23 +84,23 @@ LOCATION:LUST · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%A9%D7%91%D7%AA-%D7%96%D7%95%D7%92%D7%99-20260530-1800
 END:VEVENT
 BEGIN:VEVENT
-UID:6cf356f2962bd02c8536facca9c7b9c4@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:55ce11ce6a3638822f869c44835704a7@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
 SUMMARY:סדנה לנשים – חיבור לאנרגיה הניקבית
 DESCRIPTION:סדנה לנשים בלבד – 4 שעות של שחרור וחיבור לאנרגיה הניקבית. כוללת הפעלה מוזיקלית\, תנועה בביודאנסה\, מגע אוהב בציפה ומגע דינאמי בכיסוי עיניים.
-LOCATION:מרחב סדנאות עם בריכה מקורה · רחובות
+LOCATION:מרחב סדנאות עם בריכה מקורה ומחוממת · רחובות
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%94-%D7%9C%D7%A0%D7%A9%D7%99%D7%9D-%D7%97%D7%99%D7%91%D7%95%D7%A8-%D7%9C%D7%90%D7%A0%D7%A8%D7%92%D7%99%D7%94-%D7%94%D7%A0%D7%99%D7%A7%D7%91%D7%99%D7%AA-20260603-2000
 END:VEVENT
 BEGIN:VEVENT
-UID:399c5eeb2228c0780cd35a1c7566913f@merhav-bari
-DTSTAMP:20260521T004425Z
+UID:9ef0a0f1f1df303f323822cdae64c0c3@merhav-bari
+DTSTAMP:20260521T005207Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:latihan – מסע קשוב בכיסוי עיניים
 DESCRIPTION:סדנת תנועה עם כיסוי עיניים עם אבישג מאיה זלוף. נעים לאט מתוך נשימה והקשבה\, מלווה במסע מוזיקלי. ללא עירום/מגע באיברי מין\; מגע קשוב אפשרי.
-LOCATION:פרדס חנה
+LOCATION:מיקום יימסר לנרשמים · פרדס חנה
 URL:https://mim21.github.io/merhav-bari/#event-latihan-%D7%9E%D7%A1%D7%A2-%D7%A7%D7%A9%D7%95%D7%91-%D7%91%D7%9B%D7%99%D7%A1%D7%95%D7%99-%D7%A2%D7%99%D7%A0%D7%99%D7%99%D7%9D-20260611-2030
 END:VEVENT
 END:VCALENDAR
