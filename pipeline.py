@@ -913,6 +913,7 @@ def step_html():
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>אירועים קרובים – מרחב בריא</title>
   <style>
@@ -998,6 +999,9 @@ def step_html():
 # ─────────────────────────────────────────────────────────────────────────────
 # STEP 2b – VALIDATE SCHEMA
 # ─────────────────────────────────────────────────────────────────────────────
+class ValidationError(Exception):
+    pass
+
 _VALID_STATUSES = {'scheduled', 'updated', 'postponed', 'canceled', 'tentative'}
 
 
@@ -1038,7 +1042,7 @@ def step_validate():
                 errors += 1
     if errors:
         print(f'  {errors} error(s) — fix events.json before continuing')
-        sys.exit(1)
+        raise ValidationError(f'{errors} validation error(s) in events.json')
     print(f'  {len(events)} events valid')
 
 
@@ -1069,25 +1073,21 @@ def step_report_missing():
 def step_push():
     print('\n── Step 5: Push to GitHub ──')
     cwd = Path(__file__).parent
-    try:
-        subprocess.run(
-            ['git', '-C', str(cwd), 'add', '-f', 'index.html', 'calendar.ics', 'events.json'],
-            check=True
-        )
-        result = subprocess.run(
-            ['git', '-C', str(cwd), 'commit', '-m', 'Update events'],
-            capture_output=True, text=True
-        )
-        if result.returncode != 0:
-            if 'nothing to commit' in result.stdout + result.stderr:
-                print('  Nothing to commit.')
-                return
-            print(f'  Commit failed: {result.stderr.strip()}')
+    subprocess.run(
+        ['git', '-C', str(cwd), 'add', '-f', 'index.html', 'calendar.ics', 'events.json'],
+        check=True
+    )
+    result = subprocess.run(
+        ['git', '-C', str(cwd), 'commit', '-m', 'Update events'],
+        capture_output=True, text=True
+    )
+    if result.returncode != 0:
+        if 'nothing to commit' in result.stdout + result.stderr:
+            print('  Nothing to commit.')
             return
-        subprocess.run(['git', '-C', str(cwd), 'push'], check=True)
-        print(f'  Published → {SITE_URL}')
-    except subprocess.CalledProcessError as ex:
-        print(f'  Push failed: {ex}')
+        raise RuntimeError(f'git commit failed: {result.stderr.strip()}')
+    subprocess.run(['git', '-C', str(cwd), 'push'], check=True)
+    print(f'  Published → {SITE_URL}')
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -1100,10 +1100,21 @@ if __name__ == '__main__':
     ap.add_argument('--push',  action='store_true', help='Git-push after generating HTML')
     args = ap.parse_args()
 
-    step_trim()
+    if os.environ.get('MERHAV_SKIP_TRIM', '') == '1':
+        print('\n── Step 1: Trim skipped (MERHAV_SKIP_TRIM=1) ──')
+    else:
+        step_trim()
     step_clean()
-    step_validate()
-    asyncio.run(step_enrich(force=args.force))
+    try:
+        step_validate()
+    except ValidationError as ex:
+        print(f'\nAborted: {ex}')
+        sys.exit(1)
+    skip_enrich = os.environ.get('MERHAV_SKIP_ENRICH', '') == '1'
+    if skip_enrich:
+        print('\n── Step 3: Enrich skipped (MERHAV_SKIP_ENRICH=1) ──')
+    else:
+        asyncio.run(step_enrich(force=args.force))
     step_report_missing()
     step_html()
     if args.push:
