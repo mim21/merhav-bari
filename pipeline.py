@@ -35,10 +35,11 @@ sys.stdout.reconfigure(encoding='utf-8')
 # ─────────────────────────────────────────────────────────────────────────────
 # CONFIG  ← edit only this section
 # ─────────────────────────────────────────────────────────────────────────────
-CHAT_FILE   = Path(r'c:/PRIVATE/merhav-bari/WhatsApp_Chat_מרחב_בריא_פרסום_מרחבים_ואירועים/_chat.txt')
-EVENTS_JSON = Path(__file__).parent / 'events.json'
-OUTPUT_HTML = Path(__file__).parent / 'index.html'
-OUTPUT_CAL  = Path(__file__).parent / 'calendar.ics'
+CHAT_FILE   = Path(os.environ.get('MERHAV_CHAT_FILE',
+                   r'c:/PRIVATE/merhav-bari/WhatsApp_Chat_מרחב_בריא_פרסום_מרחבים_ואירועים/_chat.txt'))
+EVENTS_JSON = Path(os.environ.get('MERHAV_EVENTS_JSON', Path(__file__).parent / 'events.json'))
+OUTPUT_HTML = Path(os.environ.get('MERHAV_OUTPUT_HTML', Path(__file__).parent / 'index.html'))
+OUTPUT_CAL  = Path(os.environ.get('MERHAV_OUTPUT_CAL',  Path(__file__).parent / 'calendar.ics'))
 SITE_URL    = 'https://mim21.github.io/merhav-bari'
 
 TRIM_DAYS        = 120   # strip chat messages older than this
