@@ -236,7 +236,8 @@ def step_clean():
     for e in kept:
         key = (
             _str(e.get('title')).strip().lower(),
-            _str(e.get('date_only') or e.get('event_start') or '')[:10]
+            _str(e.get('date_only') or e.get('event_start') or '')[:10],
+            _str(e.get('start_time_only')),
         )
         if key in seen_keys:
             print(f"  Duplicate removed: {(_str(e.get('title')) or '?')[:55]}")
@@ -653,10 +654,10 @@ def _render_price_tier(tier_text):
 
 def _git_short_hash():
     try:
-        return subprocess.check_output(
-            ['git', 'rev-parse', '--short', 'HEAD'],
-            cwd=Path(__file__).parent, stderr=subprocess.DEVNULL, text=True
-        ).strip()
+        kwargs = {'cwd': Path(__file__).parent, 'stderr': subprocess.DEVNULL, 'text': True}
+        if sys.platform == 'win32':
+            kwargs['creationflags'] = subprocess.CREATE_NO_WINDOW
+        return subprocess.check_output(['git', 'rev-parse', '--short', 'HEAD'], **kwargs).strip()
     except Exception:
         return ''
 
@@ -1007,8 +1008,11 @@ _VALID_STATUSES = {'scheduled', 'updated', 'postponed', 'canceled', 'tentative'}
 
 def step_validate():
     print('\n── Step 2b: Validate schema ──')
-    with open(EVENTS_JSON, encoding='utf-8') as f:
-        data = json.load(f)
+    try:
+        with open(EVENTS_JSON, encoding='utf-8') as f:
+            data = json.load(f)
+    except json.JSONDecodeError as ex:
+        raise ValidationError(f'events.json is not valid JSON: {ex}')
     events = [e for e in _events_from_json(data) if isinstance(e, dict)]
     errors = 0
     for i, e in enumerate(events, 1):
@@ -1073,6 +1077,13 @@ def step_report_missing():
 def step_push():
     print('\n── Step 5: Push to GitHub ──')
     cwd = Path(__file__).parent
+    try:
+        subprocess.run(
+            ['git', '-C', str(cwd), 'pull', '--rebase', '--autostash'],
+            check=True, capture_output=True, text=True, timeout=30
+        )
+    except subprocess.CalledProcessError as ex:
+        print(f'  Warning: pull --rebase skipped ({ex.stderr.strip()[:100]})')
     subprocess.run(
         ['git', '-C', str(cwd), 'add', '-f', 'index.html', 'calendar.ics', 'events.json'],
         check=True
