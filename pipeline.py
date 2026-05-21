@@ -41,7 +41,7 @@ OUTPUT_HTML = Path(__file__).parent / 'index.html'
 OUTPUT_CAL  = Path(__file__).parent / 'calendar.ics'
 SITE_URL    = 'https://mim21.github.io/merhav-bari'
 
-TRIM_DAYS        = 60   # strip chat messages older than this
+TRIM_DAYS        = 120   # strip chat messages older than this
 SHOW_DAYS_AGO    = 1    # show events from N days ago (1 = from yesterday)
 
 WAIT_MS          = 3000
