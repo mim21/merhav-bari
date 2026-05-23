@@ -4,28 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:c22ec2f6c86c3d10364e93d86e1ac516@merhav-bari
-DTSTAMP:20260521T143920Z
-DTSTART:20260521T140000
-DTEND:20260521T160000
-SUMMARY:ליפול לאיזון – ריטריט קונטקט ותנועה בטבע
-DESCRIPTION:ריטריט של 3 ימים (חמישי-שבת) של קונטקט אימפרוביזציה ותנועה בטבע\, כולל ריקוד\, מים\, חול ואש. מקום מוגבל ל-25 משתתפים.
-LOCATION:סטודיו היער המכושף\, כ-45 דקות מדרום לתל אביב (כתובת מלאה לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D7%9C%D7%90%D7%99%D7%96%D7%95%D7%9F-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%95%D7%AA%D7%A0%D7%95%D7%A2%D7%94-%D7%91%D7%98%D7%91%D7%A2-20260521-1400
-END:VEVENT
-BEGIN:VEVENT
-UID:ad3cd9ca038d989475eeff10cb5ae46f@merhav-bari
-DTSTAMP:20260521T143920Z
-DTSTART:20260521T160000
-DTEND:20260521T180000
-SUMMARY:ריטריט שבועות – ביכורים של הלב
-DESCRIPTION:ריטריט טנטרי של 24 שעות לכבוד חג השבועות\, כולל טקס קקאו\, מקדש אהבה\, סדנת מים בבריכה מחוממת\, לינה וארוחות משותפות. מתאים לזוגות ויחידים.
-LOCATION:מרחב הסדנאות "אהבה בדרך הטבע"\, רחובות · רחובות
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%A9%D7%91%D7%95%D7%A2%D7%95%D7%AA-%D7%91%D7%99%D7%9B%D7%95%D7%A8%D7%99%D7%9D-%D7%A9%D7%9C-%D7%94%D7%9C%D7%91-20260521-1600
-END:VEVENT
-BEGIN:VEVENT
 UID:f26f92c5d70f854c6c1650576fe92e1a@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260523T190000
 DTEND:20260523T220000
 SUMMARY:טנטריק דאנס – מחזור 15
@@ -35,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A0%D7%98%D7%A8%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:b40e3331140aaa8b4cee15f339960f61@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260528T193000
 DTEND:20260529T000000
 SUMMARY:Spring Nights – מקדש טנטרי
@@ -45,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:9407e5bc8b8e39de67363d0e576ed0c1@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
@@ -55,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A7%D7%93%D7%A9-%D7%9E%D
 END:VEVENT
 BEGIN:VEVENT
 UID:01c168780fc6fc67b899587e6ed86b99@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
 SUMMARY:ערב מגע אוהב לזוגות בבריכה מחוממת
@@ -65,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%A8%D7%91-%D7%9E%D7%92%D
 END:VEVENT
 BEGIN:VEVENT
 UID:e9ea28aa0d92c0b19a6c5e9bb39ec43c@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
 SUMMARY:Soft Play Party Special – אבישג זלוף ואוקאס
@@ -75,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-Special-%D7%90%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:9983f487084cfa25940c75be3ce0969f@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
@@ -85,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%A9%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6413f8325423bcd74392d7dd9e4d9326@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
 SUMMARY:סדנת נשים – חיבור לאנרגיה הנקבית במים
@@ -95,7 +75,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%A0%D
 END:VEVENT
 BEGIN:VEVENT
 UID:a0fc5b24a3cd52954a346ad231401835@merhav-bari
-DTSTAMP:20260521T143920Z
+DTSTAMP:20260523T011734Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:Latihan – מסע קשוב בכיסוי עיניים

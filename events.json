@@ -1,78 +1,5 @@
 [
   {
-    "title": "ליפול לאיזון – ריטריט קונטקט ותנועה בטבע",
-    "event_type": "workshop",
-    "status": "scheduled",
-    "date_only": "2026-05-21",
-    "end_date_only": "2026-05-23",
-    "start_time_only": "14:00",
-    "end_time_only": "16:00",
-    "raw_date_text": "חמשו\"ש ה- 21-23.5",
-    "location_name": "סטודיו היער המכושף, כ-45 דקות מדרום לתל אביב (כתובת מלאה לנרשמים)",
-    "city": null,
-    "price_text": "1,250₪",
-    "price_unit": "person",
-    "price_note": null,
-    "price_details": [
-      "1,250₪ לאדם (תשלום ב-3 תשלומים אפשרי)",
-      "10% הנחה להרשמה קבוצתית"
-    ],
-    "description": "ריטריט של 3 ימים (חמישי-שבת) של קונטקט אימפרוביזציה ותנועה בטבע, כולל ריקוד, מים, חול ואש. מקום מוגבל ל-25 משתתפים.",
-    "registration_link": "https://www.falling2balance.com",
-    "contact_info": {
-      "phone": [],
-      "telegram": [],
-      "instagram": [],
-      "other": []
-    },
-    "source_messages": [
-      {
-        "line_reference": 10926,
-        "source_excerpt": "[20/04/2026, 11:08:20] ~ רותם רם: 🌿 *ליפול לאיזון*🌿",
-        "source_message_timestamp": "2026-04-20"
-      }
-    ],
-    "confidence": 0.85,
-    "image_url": "https://static.wixstatic.com/media/de6489_140c92b9a6174ba7ad6df0f74588f4eb~mv2.jpg"
-  },
-  {
-    "title": "ריטריט שבועות – ביכורים של הלב",
-    "event_type": "workshop",
-    "status": "scheduled",
-    "date_only": "2026-05-21",
-    "end_date_only": "2026-05-22",
-    "start_time_only": "16:00",
-    "end_time_only": null,
-    "raw_date_text": "חמישי הבא, שבועות 21/5 החל מ 16:00",
-    "location_name": "מרחב הסדנאות \"אהבה בדרך הטבע\", רחובות",
-    "city": "רחובות",
-    "price_text": null,
-    "price_unit": null,
-    "price_note": null,
-    "price_details": [],
-    "description": "ריטריט טנטרי של 24 שעות לכבוד חג השבועות, כולל טקס קקאו, מקדש אהבה, סדנת מים בבריכה מחוממת, לינה וארוחות משותפות. מתאים לזוגות ויחידים.",
-    "registration_link": null,
-    "contact_info": {
-      "phone": [
-        {
-          "number": "054-4893970",
-          "name": "טארה (מיכל)"
-        }
-      ],
-      "telegram": [],
-      "instagram": [],
-      "other": []
-    },
-    "source_messages": [
-      {
-        "line_reference": 11577,
-        "source_excerpt": "[17/05/2026, 12:17:20] יצחק כרבולים: אהובים ❤️🩷",
-        "source_message_timestamp": "2026-05-17"
-      }
-    ],
-    "confidence": 0.8
-  },
-  {
     "title": "טנטריק דאנס – מחזור 15",
     "event_type": "workshop",
     "status": "scheduled",
@@ -114,7 +41,8 @@
       }
     ],
     "confidence": 0.9,
-    "image_url": "https://static.wixstatic.com/media/35dc78_1fb8d1bcea6b43c891647892c99b1b4e~mv2.jpg"
+    "image_url": "https://static.wixstatic.com/media/35dc78_1fb8d1bcea6b43c891647892c99b1b4e~mv2.jpg",
+    "_image_filename": "00001098-PHOTO-2026-05-09-21-08-42.jpg"
   },
   {
     "title": "Spring Nights – מקדש טנטרי",
@@ -152,7 +80,8 @@
       }
     ],
     "confidence": 0.9,
-    "image_url": "https://static.wixstatic.com/media/cb4b2a_e6138971708e4d13b5f8cbe7c4faf10f~mv2.jpeg"
+    "image_url": "https://static.wixstatic.com/media/cb4b2a_e6138971708e4d13b5f8cbe7c4faf10f~mv2.jpeg",
+    "_image_filename": "00001055-PHOTO-2026-04-23-10-26-38.jpg"
   },
   {
     "title": "מקדש מפת האינטימיות",
@@ -196,7 +125,8 @@
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.85
+    "confidence": 0.85,
+    "_image_filename": "00001090-PHOTO-2026-05-05-18-13-39.jpg"
   },
   {
     "title": "ערב מגע אוהב לזוגות בבריכה מחוממת",
@@ -237,7 +167,8 @@
       }
     ],
     "confidence": 0.9,
-    "image_url": "https://cdn.meshulam.co.il/_media/media/100005/106/105484/purchase_media_105553_105484_1.jpg"
+    "image_url": "https://cdn.meshulam.co.il/_media/media/100005/106/105484/purchase_media_105553_105484_1.jpg",
+    "_image_filename": "00001101-PHOTO-2026-05-11-14-38-44.jpg"
   },
   {
     "title": "Soft Play Party Special – אבישג זלוף ואוקאס",
@@ -275,7 +206,8 @@
       }
     ],
     "confidence": 0.9,
-    "image_url": "https://static.wixstatic.com/media/8004f8_9be034d5095746a8862674fd23042bc4~mv2.jpeg"
+    "image_url": "https://static.wixstatic.com/media/8004f8_9be034d5095746a8862674fd23042bc4~mv2.jpeg",
+    "_image_filename": "00001089-PHOTO-2026-05-05-11-06-21.jpg"
   },
   {
     "title": "עונג שבת זוגי",
@@ -318,7 +250,8 @@
         "source_message_timestamp": "2026-05-19"
       }
     ],
-    "confidence": 0.85
+    "confidence": 0.85,
+    "_image_filename": "00001121-PHOTO-2026-05-19-15-25-33.jpg"
   },
   {
     "title": "סדנת נשים – חיבור לאנרגיה הנקבית במים",
@@ -355,7 +288,8 @@
         "source_message_timestamp": "2026-05-15"
       }
     ],
-    "confidence": 0.8
+    "confidence": 0.8,
+    "_image_filename": "00001118-PHOTO-2026-05-15-06-17-09.jpg"
   },
   {
     "title": "Latihan – מסע קשוב בכיסוי עיניים",
@@ -394,6 +328,7 @@
         "source_message_timestamp": "2026-05-20"
       }
     ],
-    "confidence": 0.85
+    "confidence": 0.85,
+    "_image_filename": "00001122-PHOTO-2026-05-20-12-09-53.jpg"
   }
 ]
