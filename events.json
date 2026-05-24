@@ -1,50 +1,5 @@
 [
   {
-    "title": "טנטריק דאנס – מחזור 15",
-    "event_type": "workshop",
-    "status": "scheduled",
-    "date_only": "2026-05-23",
-    "end_date_only": null,
-    "start_time_only": "19:00",
-    "end_time_only": "22:00",
-    "raw_date_text": "מוצ\"ש 23.5",
-    "location_name": "בית פרטי בפרדס חנה (כתובת מלאה תישלח לנרשמים)",
-    "city": "פרדס חנה",
-    "price_text": "220₪",
-    "price_unit": "person",
-    "price_note": null,
-    "price_details": [
-      "180₪ – הרשמה מוקדמת עד 10.5 (פג תוקף)",
-      "200₪ – הרשמה מוקדמת עד 16.5 (פג תוקף)",
-      "220₪ – מחיר מלא",
-      "10% הנחה לזוגות/צמדים מאוזנים מגדרית",
-      "10% הנחה לחוזרים"
-    ],
-    "description": "המחזור ה-15 של הטנטריק דאנס – שילוב של תנועה משחררת עם מגע קשוב ומחבר. כניסה ב-18:30, התחלה ב-19:00. הרשמה דרך ווטסאפ.",
-    "registration_link": "https://www.anandalev.co.il/tantric-dance",
-    "contact_info": {
-      "phone": [
-        {
-          "number": "054-6177878",
-          "name": "עמית"
-        }
-      ],
-      "telegram": [],
-      "instagram": [],
-      "other": []
-    },
-    "source_messages": [
-      {
-        "line_reference": 11460,
-        "source_excerpt": "[09/05/2026, 21:09:57] יצחק כרבולים: הטנטריק דאנס חוזרת בפעם ה-15!",
-        "source_message_timestamp": "2026-05-09"
-      }
-    ],
-    "confidence": 0.9,
-    "image_url": "https://static.wixstatic.com/media/35dc78_1fb8d1bcea6b43c891647892c99b1b4e~mv2.jpg",
-    "_image_filename": "00001098-PHOTO-2026-05-09-21-08-42.jpg"
-  },
-  {
     "title": "Spring Nights – מקדש טנטרי",
     "event_type": "workshop",
     "status": "scheduled",
@@ -59,27 +14,36 @@
     "price_unit": "person",
     "price_note": null,
     "price_details": [
-      "290₪ לאדם – הרשמה מוקדמת עד 21.5",
-      "550₪ לזוג – הרשמה מוקדמת עד 21.5",
+      "290₪ לאדם – הרשמה מוקדמת עד 21.5 (פג תוקף)",
+      "550₪ לזוג – הרשמה מוקדמת עד 21.5 (פג תוקף)",
       "340₪ לאדם – מחיר רגיל מ-22.5",
       "620₪ לזוג – מחיר רגיל מ-22.5"
     ],
     "description": "מקדש טנטרי מונחה באיזון מגדרי בתל אביב. ערב של נוכחות, הקשבה, מגע מוסכם ועונג. עירום חלקי אפשרי מבחירה. ללא אלכוהול וסמים. גברים – הרשמה עם מאזנת בלבד.",
     "registration_link": "https://hagitmishali.wixsite.com/spring-nights",
     "contact_info": {
-      "phone": [],
+      "phone": [
+        {
+          "number": "052-3501450",
+          "name": "חגית (מוהנה)"
+        },
+        {
+          "number": "054-4799145",
+          "name": "גילי (סנאנד)"
+        }
+      ],
       "telegram": [],
       "instagram": [],
       "other": []
     },
     "source_messages": [
       {
-        "line_reference": 10944,
+        "line_reference": 16,
         "source_excerpt": "[23/04/2026, 10:27:53] יצחק כרבולים: 🪷💐*Spring Nights*🪷💐",
         "source_message_timestamp": "2026-04-23"
       }
     ],
-    "confidence": 0.9,
+    "confidence": 0.95,
     "image_url": "https://static.wixstatic.com/media/cb4b2a_e6138971708e4d13b5f8cbe7c4faf10f~mv2.jpeg",
     "_image_filename": "00001055-PHOTO-2026-04-23-10-26-38.jpg"
   },
@@ -120,12 +84,12 @@
     },
     "source_messages": [
       {
-        "line_reference": 11369,
+        "line_reference": 147,
         "source_excerpt": "[05/05/2026, 18:14:54] יצחק כרבולים: *מקדש מפת האינטימיות*",
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.85,
+    "confidence": 0.9,
     "_image_filename": "00001090-PHOTO-2026-05-05-18-13-39.jpg"
   },
   {
@@ -161,13 +125,13 @@
     },
     "source_messages": [
       {
-        "line_reference": 11488,
+        "line_reference": 213,
         "source_excerpt": "[11/05/2026, 14:39:59] ~ רותם רם: *סדנה לזוגות של מגע אוהב במים (בעירום אופציונלי)*",
         "source_message_timestamp": "2026-05-11"
       }
     ],
     "confidence": 0.9,
-    "image_url": "https://cdn.meshulam.co.il/_media/media/100005/106/105484/purchase_media_105553_105484_1.jpg",
+    "image_url": "https://static.wixstatic.com/media/2912b3_c8286f16133a48d68eae4676b0c7b3fb~mv2.jpeg",
     "_image_filename": "00001101-PHOTO-2026-05-11-14-38-44.jpg"
   },
   {
@@ -179,7 +143,7 @@
     "start_time_only": "20:00",
     "end_time_only": "00:00",
     "raw_date_text": "29.5 - שישי - תל אביב - 20:00",
-    "location_name": "תל אביב (כתובת מלאה לנרשמים)",
+    "location_name": "בית להיוולד מחדש – רחוב מרדכי אנילביץ' 62, תל אביב-יפו",
     "city": "תל אביב",
     "price_text": "200₪ לאדם / 400₪ לזוג",
     "price_unit": "person",
@@ -200,13 +164,13 @@
     },
     "source_messages": [
       {
-        "line_reference": 11327,
+        "line_reference": 105,
         "source_excerpt": "[05/05/2026, 11:07:36] יצחק כרבולים: ספיישל מיוחד! *Soft Play Party*",
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.9,
-    "image_url": "https://static.wixstatic.com/media/8004f8_9be034d5095746a8862674fd23042bc4~mv2.jpeg",
+    "confidence": 0.95,
+    "image_url": "https://static.wixstatic.com/media/8004f8_3f69d67b10264d71b4663897aeaa7878~mv2.png",
     "_image_filename": "00001089-PHOTO-2026-05-05-11-06-21.jpg"
   },
   {
@@ -245,12 +209,12 @@
     },
     "source_messages": [
       {
-        "line_reference": 11608,
+        "line_reference": 282,
         "source_excerpt": "[19/05/2026, 15:26:48] יצחק כרבולים: מזמינים אתכםן ל- *עונג שבת זוגי*",
         "source_message_timestamp": "2026-05-19"
       }
     ],
-    "confidence": 0.85,
+    "confidence": 0.9,
     "_image_filename": "00001121-PHOTO-2026-05-19-15-25-33.jpg"
   },
   {
@@ -283,7 +247,7 @@
     },
     "source_messages": [
       {
-        "line_reference": 11551,
+        "line_reference": 225,
         "source_excerpt": "[15/05/2026, 6:18:24] יצחק כרבולים: 📢📢📢 *שימו לב שימו לב !!!*",
         "source_message_timestamp": "2026-05-15"
       }
@@ -323,7 +287,7 @@
     },
     "source_messages": [
       {
-        "line_reference": 11634,
+        "line_reference": 308,
         "source_excerpt": "[20/05/2026, 12:11:08] יצחק כרבולים: latihan - מסע קשוב בכיסוי עיניים",
         "source_message_timestamp": "2026-05-20"
       }

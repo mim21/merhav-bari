@@ -4,18 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:f26f92c5d70f854c6c1650576fe92e1a@merhav-bari
-DTSTAMP:20260523T011734Z
-DTSTART:20260523T190000
-DTEND:20260523T220000
-SUMMARY:טנטריק דאנס – מחזור 15
-DESCRIPTION:המחזור ה-15 של הטנטריק דאנס – שילוב של תנועה משחררת עם מגע קשוב ומחבר. כניסה ב-18:30\, התחלה ב-19:00. הרשמה דרך ווטסאפ.
-LOCATION:בית פרטי בפרדס חנה (כתובת מלאה תישלח לנרשמים) · פרדס חנה
-URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A0%D7%98%D7%A8%D7%99%D7%A7-%D7%93%D7%90%D7%A0%D7%A1-%D7%9E%D7%97%D7%96%D7%95%D7%A8-15-20260523-1900
-END:VEVENT
-BEGIN:VEVENT
 UID:b40e3331140aaa8b4cee15f339960f61@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260528T193000
 DTEND:20260529T000000
 SUMMARY:Spring Nights – מקדש טנטרי
@@ -25,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:9407e5bc8b8e39de67363d0e576ed0c1@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
@@ -35,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A7%D7%93%D7%A9-%D7%9E%D
 END:VEVENT
 BEGIN:VEVENT
 UID:01c168780fc6fc67b899587e6ed86b99@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
 SUMMARY:ערב מגע אוהב לזוגות בבריכה מחוממת
@@ -44,18 +34,18 @@ LOCATION:בריכה פרטית ומחוממת ליד בנימינה (כתובת 
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%A8%D7%91-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-%D7%91%D7%91%D7%A8%D7%99%D7%9B%D7%94-%D7%9E%D7%97%D7%95%D7%9E%D7%9E%D7%AA-20260528-1930
 END:VEVENT
 BEGIN:VEVENT
-UID:e9ea28aa0d92c0b19a6c5e9bb39ec43c@merhav-bari
-DTSTAMP:20260523T011734Z
+UID:bb7cbf25bd2cf5a6cc6e53c9dcb54fc2@merhav-bari
+DTSTAMP:20260524T080302Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
 SUMMARY:Soft Play Party Special – אבישג זלוף ואוקאס
 DESCRIPTION:Soft Play Party חוגגת 4 שנים – ספיישל עם אבישג זלוף ואוקאס יחד. מסע של מוזיקה\, קקאו\, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית\; גברים ברשימת המתנה.
-LOCATION:תל אביב (כתובת מלאה לנרשמים) · תל אביב
+LOCATION:בית להיוולד מחדש – רחוב מרדכי אנילביץ' 62\, תל אביב-יפו · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-Special-%D7%90%D7%91%D7%99%D7%A9%D7%92-%D7%96%D7%9C%D7%95%D7%A3-%D7%95%D7%90%D7%95%D7%A7%D7%90%D7%A1-20260529-2000
 END:VEVENT
 BEGIN:VEVENT
 UID:9983f487084cfa25940c75be3ce0969f@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
@@ -65,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%A9%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6413f8325423bcd74392d7dd9e4d9326@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
 SUMMARY:סדנת נשים – חיבור לאנרגיה הנקבית במים
@@ -75,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%A0%D
 END:VEVENT
 BEGIN:VEVENT
 UID:a0fc5b24a3cd52954a346ad231401835@merhav-bari
-DTSTAMP:20260523T011734Z
+DTSTAMP:20260524T080302Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:Latihan – מסע קשוב בכיסוי עיניים
