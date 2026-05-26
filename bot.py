@@ -412,6 +412,7 @@ if __name__ == '__main__':
             print('Detecting latest chat source...')
             chat_file = _find_latest_chat()
             print(f'Running extraction from {MERHAV_BARI_DIR} ...')
+            print('(claude is running silently — this takes ~5 min, please wait)')
             summary = _run_extraction_with_backup(chat_file, stream=True)
             print(summary)
         except Exception as ex:
