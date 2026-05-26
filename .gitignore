@@ -1,8 +1,14 @@
-WhatsApp Chat*/
-WhatsApp Chat*.zip
+WhatsApp*/
+*.zip
 *.mp4
+*.jpg
+*.jpeg
+*.png
 __pycache__/
 *.pyc
 events.json
 index.html
-REVIEW_PROMPT.md
+.env
+*.bak
+_EXTRACT_DONE.json
+_BOT_REQUEST.json
