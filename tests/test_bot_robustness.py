@@ -375,7 +375,7 @@ class TestExtractionBackupRestore(unittest.TestCase):
         new  = '[{"title": "new"}]'
         (self._tmpdir / 'events.json').write_text(good, encoding='utf-8')
 
-        def ok(_):
+        def ok(*_, **__):  # noqa: E306
             (self._tmpdir / 'events.json').write_text(new, encoding='utf-8')
             return '1 events published'
 
@@ -386,7 +386,7 @@ class TestExtractionBackupRestore(unittest.TestCase):
         self.assertEqual(result, '1 events published')
 
     def test_first_run_no_prior_events_json(self):
-        def ok(_):
+        def ok(*_, **__):  # noqa: E306
             (self._tmpdir / 'events.json').write_text('[]', encoding='utf-8')
             return '0 events published'
         with patch.object(bot, '_run_extraction', side_effect=ok):

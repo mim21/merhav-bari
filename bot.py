@@ -75,11 +75,12 @@ def _save_chat(chat_bytes: bytes) -> Path:
 
 # ── Claude CLI extraction ─────────────────────────────────────────────────────
 
-def _run_extraction(chat_file: Path) -> str:
+def _run_extraction(chat_file: Path, stream: bool = False) -> str:
     '''
     Run claude CLI in non-interactive mode to extract events and publish.
     Returns summary string like "7 events published".
     Raises RuntimeError on any detectable failure.
+    stream=True prints claude output live (CLI mode); skips keyword scan.
     '''
     claude_bin = shutil.which('claude') or 'claude'
     done_file  = MERHAV_BARI_DIR / '_EXTRACT_DONE.json'
@@ -109,24 +110,26 @@ def _run_extraction(chat_file: Path) -> str:
         f'Follow CLAUDE.md strictly: check every registration_link for end_time, '
         f'couple pricing, early-bird tiers, _image_filename, image_url.'
     )
-    result = subprocess.run(
-        [claude_bin, '-p', prompt, '--permission-mode', 'acceptEdits'],
-        cwd=str(MERHAV_BARI_DIR),
-        capture_output=True,
-        text=True,
-        encoding='utf-8',
-    )
+    cmd = [claude_bin, '-p', prompt, '--permission-mode', 'acceptEdits']
+    if stream:
+        result = subprocess.run(cmd, cwd=str(MERHAV_BARI_DIR))
+    else:
+        result = subprocess.run(
+            cmd, cwd=str(MERHAV_BARI_DIR),
+            capture_output=True, text=True, encoding='utf-8',
+        )
     if result.returncode != 0:
         raise RuntimeError(f'claude exited {result.returncode}')
 
-    # Detect auth/rate-limit failures that claude reports but exits 0 on
-    combined = (result.stdout or '') + (result.stderr or '')
-    for kw in ('invalid api key', 'unauthorized', 'rate limit', 'please run /login',
-                'not authenticated', 'authentication required', 'auth failed',
-                'credit balance', 'insufficient credits', 'overloaded',
-                'context length', 'prompt is too long', 'session expired'):
-        if kw in combined.lower():
-            raise RuntimeError(f'claude auth/rate-limit failure (keyword: "{kw}")')
+    # Detect auth/rate-limit failures (only possible when output is captured)
+    if not stream:
+        combined = (result.stdout or '') + (result.stderr or '')
+        for kw in ('invalid api key', 'unauthorized', 'rate limit', 'please run /login',
+                    'not authenticated', 'authentication required', 'auth failed',
+                    'credit balance', 'insufficient credits', 'overloaded',
+                    'context length', 'prompt is too long', 'session expired'):
+            if kw in combined.lower():
+                raise RuntimeError(f'claude auth/rate-limit failure (keyword: "{kw}")')
 
     # Verify claude actually completed — done file must be fresh from this run
     if not done_file.exists() or done_file.stat().st_mtime < start_ts:
@@ -161,7 +164,7 @@ def _run_extraction(chat_file: Path) -> str:
     return f'{actual_count} events published'
 
 
-def _run_extraction_with_backup(chat_file: Path) -> str:
+def _run_extraction_with_backup(chat_file: Path, stream: bool = False) -> str:
     '''Wrap _run_extraction with atomic events.json backup/restore on failure.'''
     events_json = MERHAV_BARI_DIR / 'events.json'
     backup      = MERHAV_BARI_DIR / 'events.json.bak'
@@ -170,7 +173,7 @@ def _run_extraction_with_backup(chat_file: Path) -> str:
         shutil.copy2(events_json, backup)
         backed_up = True
     try:
-        result = _run_extraction(chat_file)
+        result = _run_extraction(chat_file, stream=stream)
         if backed_up:
             backup.unlink(missing_ok=True)
         return result
@@ -409,7 +412,7 @@ if __name__ == '__main__':
             print('Detecting latest chat source...')
             chat_file = _find_latest_chat()
             print(f'Running extraction from {MERHAV_BARI_DIR} ...')
-            summary = _run_extraction_with_backup(chat_file)
+            summary = _run_extraction_with_backup(chat_file, stream=True)
             print(summary)
         except Exception as ex:
             print(f'Error: {ex}', file=sys.stderr)

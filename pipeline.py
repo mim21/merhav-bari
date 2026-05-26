@@ -703,7 +703,10 @@ def _event_cal_data(event, event_url=''):
     '''Return (gs, ge, timed, gcal_url, vevent_lines) or None if event has no date.'''
     title     = _str(event.get('title')) or 'אירוע'
     desc      = _str(event.get('description'))
-    loc_parts = [p for p in [_str(event.get('location_name')), _str(event.get('city'))] if p]
+    loc_name_cal = _str(event.get('location_name'))
+    loc_city_cal = _str(event.get('city'))
+    loc_parts = [p for p in [loc_name_cal,
+                              loc_city_cal if loc_city_cal not in loc_name_cal else ''] if p]
     location  = ' · '.join(loc_parts)
 
     d_raw = event.get('date_only') or event.get('event_start')
@@ -835,12 +838,15 @@ def _make_card(event, chat_folder, line_to_image):
     time_str = h(f"{s} – {e}" if s and e else s)
 
     loc_name    = _str(event.get('location_name'))
+    loc_city    = _str(event.get('city'))
     loc_private = 'יימסר לנרשמים' in loc_name or 'לנרשמים' in loc_name
     if loc_private:
         loc_clean = loc_name.split('(')[0].strip() if '(' in loc_name else ''
-        loc_parts = [p for p in [loc_clean, _str(event.get('city'))] if p]
+        loc_parts = [p for p in [loc_clean,
+                                  loc_city if loc_city not in loc_clean else ''] if p]
     else:
-        loc_parts = [p for p in [loc_name, _str(event.get('city'))] if p]
+        loc_parts = [p for p in [loc_name,
+                                  loc_city if loc_city not in loc_name else ''] if p]
     location = h(' · '.join(loc_parts))
 
     price_raw     = _str(event.get('price_text'))
