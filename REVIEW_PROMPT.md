@@ -1,4 +1,4 @@
-# AI Review Prompt — tg-merhav-bot
+# AI Review Prompt — merhav-bari
 
 Use this prompt with Claude Opus / GPT thinking. The repo is public — fetch each URL before answering.
 
@@ -6,14 +6,16 @@ Use this prompt with Claude Opus / GPT thinking. The repo is public — fetch ea
 
 Please do a security and engineering review of the following Telegram bot project.
 
-**First, fetch and read both files below before answering. Do not answer based on memory or previous versions — verify every claim against the actual fetched code, with line numbers.**
+**First, fetch and read the files below before answering. Do not answer based on memory or previous versions — verify every claim against the actual fetched code, with line numbers.**
 
-**Commit:** https://github.com/mim21/tg-merhav-bot/tree/100b250
+**Commit:** https://github.com/mim21/merhav-bari/tree/a8dbb05
 
 | File | URL |
 |------|-----|
-| `bot.py` | https://raw.githubusercontent.com/mim21/tg-merhav-bot/100b250/bot.py |
-| `pipeline.py` (separate repo) | https://raw.githubusercontent.com/mim21/merhav-bari/main/pipeline.py |
+| `bot.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/bot.py |
+| `pipeline.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/pipeline.py |
+| `tests/test_bot_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/tests/test_bot_robustness.py |
+| `tests/test_pipeline_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/tests/test_pipeline_robustness.py |
 
 **Project description:**
 
@@ -124,6 +126,20 @@ Fetch both files. Focus on what an adversary could do with a malicious WhatsApp 
 4. **`_safe_error` leakage**: does any exception path send file paths, tokens, or Windows paths to the Telegram user? Check `_run_extraction` `RuntimeError` messages specifically — they include `MERHAV_BARI_DIR` in the done-file path shown to the user.
 5. **HTML XSS**: verify all event fields written into `index.html` pass through `h()` (`html.escape`). Pay attention to `registration_link`, `image_url`, `_image_filename`, and any field used inside an `href` or `src` attribute. Does `_safe_url` enforce `http`/`https` scheme?
 6. **CSP effectiveness**: the CSP is in a `<meta>` tag. Is it placed before any inline `<style>` block or any resource load? Does `script-src 'none'` fully prevent XSS given that no JS is intentionally used?
+
+---
+
+### Track D — Test suite review
+
+Fetch `tests/test_bot_robustness.py` and `tests/test_pipeline_robustness.py`. Evaluate coverage, correctness, and what's missing.
+
+1. **Coverage gaps in `test_bot_robustness.py`**: the file tests `_extract_chat_from_zip`, `_is_allowed`, `_safe_error`, and config constants. What important functions in `bot.py` are NOT tested? (e.g. `_last_msg_date`, `_find_latest_chat`, `_run_extraction`, `_run_extraction_with_backup`) — for each, explain whether it's testable without a real `claude -p` and what a useful unit test would look like.
+2. **ZIP slip test correctness**: `test_zip_slip_traversal_blocked` checks that `../evil_chat.txt` entries don't extract — but the attack entries don't end with `_chat.txt`, so they'd be skipped by the `if not info.filename.endswith('_chat.txt')` check before the `commonpath` check even runs. Does the test actually exercise the zip-slip protection, or does it pass vacuously?
+3. **`test_first_matching_chat_returned`**: the assertion is `assertIn(result.read_text(), ['first match', 'second match'])` — this passes even if the function returns the second match. Is the test asserting correct behavior, or is it too permissive?
+4. **Missing negative tests**: are there tests for `_extract_chat_from_zip` with a ZIP that contains a `_chat.txt` entry using Windows-style backslash paths (`..\_chat.txt`) or null bytes in the filename?
+5. **`test_pipeline_robustness.py` coverage**: what does it test? Are there tests for `step_validate`, `step_clean` dedup behavior, `step_push` error propagation, or the `_LINE_TO_IMAGE` photo indexing? What's the most valuable missing test for `pipeline.py`?
+6. **Test isolation**: the bot tests stub `telegram` and `telegram.ext` modules at import time. Is the stub complete enough that `bot.py` imports cleanly? Could a future `bot.py` change (e.g. using a new `telegram` submodule) silently break the stub without the test failing at import?
+7. **Improvement suggestions**: propose up to 3 specific new test cases (with sketch implementations) that would catch the bugs found in previous review rounds — e.g. a test that verifies `_EXTRACT_DONE.json` staleness is detected, or that `events.json` is restored after a failed extraction.
 
 ---
 
