@@ -8,14 +8,14 @@ Please do a security and engineering review of the following Telegram bot projec
 
 **First, fetch and read the files below before answering. Do not answer based on memory or previous versions — verify every claim against the actual fetched code, with line numbers.**
 
-**Commit:** https://github.com/mim21/merhav-bari/tree/d8692b9
+**Commit:** https://github.com/mim21/merhav-bari/tree/23e72d7
 
 | File | URL |
 |------|-----|
-| `bot.py` | https://raw.githubusercontent.com/mim21/merhav-bari/d8692b9/bot.py |
-| `pipeline.py` | https://raw.githubusercontent.com/mim21/merhav-bari/d8692b9/pipeline.py |
-| `tests/test_bot_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/d8692b9/tests/test_bot_robustness.py |
-| `tests/test_pipeline_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/d8692b9/tests/test_pipeline_robustness.py |
+| `bot.py` | https://raw.githubusercontent.com/mim21/merhav-bari/23e72d7/bot.py |
+| `pipeline.py` | https://raw.githubusercontent.com/mim21/merhav-bari/23e72d7/pipeline.py |
+| `tests/test_bot_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/23e72d7/tests/test_bot_robustness.py |
+| `tests/test_pipeline_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/23e72d7/tests/test_pipeline_robustness.py |
 
 **Project description:**
 
@@ -74,12 +74,19 @@ Findings marked **[deleted]** applied only to files that have since been removed
 | 34 | **`TestFindImage` range test stale** | Updated to match actual +50 line search window. |
 | 35 | **No tests for `_run_extraction` guards** | `TestRunExtractionGuards`: stale done-file, empty-events guard, auth keyword scan. |
 | 36 | **No regression test for dedup fix #21** | `TestStepCleanDedup`: same-title/same-date/different-time kept; true duplicate removed; all-past raises. |
+| 37 | **`image_url` caused browser-side requests to attacker-controlled hosts** | `_img_uri_remote()` fetches at build time, validates content-type, caps size at 10 MB, inlines as base64 data URI. No client-side external image requests. |
+| 38 | **CSP `img-src` widened to `https:` for `image_url`** | Reverted to `img-src 'self' data:` — no longer needed after fix #37. |
+| 39 | **`_run_extraction_with_backup` had no tests** | `TestExtractionBackupRestore`: restore-on-failure, backup-deleted-on-success, first-run no events.json, first-run failure (outstanding 2 rounds). |
+| 40 | **Auth keyword scan tested only one keyword** | `test_all_auth_keywords_raise` uses `subTest` over all 13 keywords. |
+| 41 | **Fix #27 dict-shape branch untested** | `test_dict_shape_prev_count_triggers_guard` exercises `{"events": [...]}` shape. |
+| 42 | **`step_validate` (fix #22) had no tests** | `TestStepValidate`: malformed JSON, valid events, unknown event_type, out-of-range confidence, missing date. |
+| 43 | **`_img_uri_remote` had no tests** | `TestImgUriRemote`: valid JPEG, non-image content-type, oversize, network error, URL not embedded in output. |
 
 ## What was NOT fixed and why
 
 | Finding | Decision |
 |---------|----------|
-| **Prompt injection / real-repo execution** (finding #1, reverted) — `claude -p` runs in `MERHAV_BARI_DIR` with `--permission-mode acceptEdits`. | Accepted for local personal use. `acceptEdits` auto-approves Edit/Write/MultiEdit; Bash and network tools still prompt. Single trusted user. |
+| **Prompt injection / real-repo execution** (finding #1, reverted) — `claude -p` runs in `MERHAV_BARI_DIR` with `--permission-mode acceptEdits`. | Accepted for local personal use. `acceptEdits` auto-approves Edit/Write/MultiEdit AND common filesystem Bash commands (rm, mv, cp, sed, mkdir) on in-scope paths per current Claude Code docs. Arbitrary Bash/network still prompts. Single trusted user. |
 | **`_chat.txt` saved before extraction succeeds** — if extraction fails, new chat is in repo but events.json is restored from backup. | Accepted. The events.json backup (finding #16) covers the data-loss case. Chat being "ahead" is harmless — next run re-processes it. |
 | **`ALLOWED_USER_IDS` fail-open** (empty = allow all) | Intentional dev-mode default. Startup warning added (finding #6). |
 | **`style-src 'unsafe-inline'` in CSP** | Required for inline `<style>`. Hashed CSP is over-engineering for personal use. |
@@ -130,12 +137,12 @@ Fetch both files. Look for logic bugs, silent failures, and edge cases — espec
 
 Fetch both files. Focus on what an adversary could do with a malicious WhatsApp message that ends up in `_chat.txt`.
 
-1. **`acceptEdits` scope on Windows**: Claude Code docs say `--permission-mode acceptEdits` auto-approves Edit/Write/MultiEdit tool calls. On Windows, does it also auto-approve PowerShell or Bash commands run via the tool? What is the actual blast radius in a `-p` non-interactive subprocess?
+1. **`acceptEdits` scope on Windows**: `--permission-mode acceptEdits` auto-approves Edit/Write/MultiEdit AND common filesystem Bash commands (rm, mv, cp, sed, mkdir, rmdir) on in-scope paths. What is the actual blast radius in a `-p` non-interactive subprocess? Would adding deny rules in `.claude/settings.json` (e.g. `Edit(CLAUDE.md)`, `Write(pipeline.py)`, `Bash(rm *)`) meaningfully reduce it?
 2. **Prompt injection via chat content**: the prompt passed to `claude -p` includes the full path to `_chat.txt` and tells Claude to "follow all rules in CLAUDE.md". Can a WhatsApp message containing `[SYSTEM]` or `---END OF INSTRUCTIONS---` style text cause Claude to ignore CLAUDE.md and follow attacker instructions instead?
-3. **CLAUDE.md as persistence point**: if a prior injection modified `CLAUDE.md`, every future `claude -p` run inherits attacker-controlled instructions. What mitigations exist? (Hash check? Read-only file attribute?) Is there any defense in depth?
-4. **`_safe_error` leakage**: does any exception path send file paths, tokens, or Windows paths to the Telegram user? Check `_run_extraction` `RuntimeError` messages specifically — some include `MERHAV_BARI_DIR` in the done-file path shown to the user.
-5. **HTML XSS**: verify all event fields written into `index.html` pass through `h()` (`html.escape`). Pay attention to `registration_link`, `image_url`, `_image_filename`, and any field used inside an `href` or `src` attribute. Does `_safe_url` enforce `http`/`https` scheme?
-6. **CSP effectiveness**: the CSP is in a `<meta>` tag. Is it placed before any inline `<style>` block or any resource load? Does `script-src 'none'` fully prevent XSS given that no JS is intentionally used?
+3. **CLAUDE.md as persistence point**: if a prior injection modified `CLAUDE.md`, every future `claude -p` run inherits attacker-controlled instructions. A hash-check before invoking claude would detect tampering in 10 lines. Is there any other defense in depth?
+4. **`_safe_error` leakage**: does any exception path send file paths, tokens, or Windows paths to the Telegram user? Check all `RuntimeError` messages in `_run_extraction` specifically.
+5. **HTML XSS — `image_url` now inlined**: `image_url` is now fetched at build time by `_img_uri_remote()` and inlined as a base64 data URI. Verify the function validates content-type (`image/*`) and caps size at 10 MB. Does `_safe_url` run before the fetch? Can the inlined base64 itself contain script content that a browser would execute?
+6. **CSP effectiveness**: CSP `img-src` is back to `'self' data:` (no `https:`). Confirm this and confirm the CSP meta tag is placed before any inline `<style>`. Does `script-src 'none'` fully prevent XSS?
 
 ---
 
@@ -143,13 +150,13 @@ Fetch both files. Focus on what an adversary could do with a malicious WhatsApp 
 
 Fetch `tests/test_bot_robustness.py` and `tests/test_pipeline_robustness.py`. Evaluate coverage, correctness, and what's missing.
 
-1. **`_run_extraction` guard tests**: `TestRunExtractionGuards` now tests stale done-file detection, empty-events guard, and auth keyword scan using `subprocess.run` mocks. Do these tests correctly simulate the failure modes? Are there gaps (e.g. `events.json` restore after exception)?
-2. **ZIP slip test**: `test_zip_slip_traversal_blocked` now uses attack entries ending with `_chat.txt` (so they reach the `commonpath` check) and asserts the escaped file doesn't exist. Is the test hermetic — could a previously-escaped `_chat.txt` in `tempfile.gettempdir()` cause a false negative?
-3. **`step_clean` dedup tests**: `TestStepCleanDedup` covers same-title/same-date/different-time kept, exact duplicate removed, and all-past raises. Is the test patching of `EVENTS_JSON` robust? Could `step_clean` print output affect test isolation?
-4. **Missing negative tests**: are there tests for `_extract_chat_from_zip` with a ZIP that contains a `_chat.txt` entry using Windows-style backslash paths (`..\_chat.txt`) or null bytes in the filename?
-5. **`test_pipeline_robustness.py` coverage**: are there tests for `step_validate`, `step_push` error propagation, or the `step_enrich` enrichment logic? What's the most valuable missing test for `pipeline.py`?
-6. **Test isolation**: the bot tests stub `telegram` and `telegram.ext` modules at import time. Is the stub complete enough that `bot.py` imports cleanly? Could a future `bot.py` change (e.g. using a new `telegram` submodule) silently break the stub without the test failing at import?
-7. **Improvement suggestions**: propose up to 3 specific new test cases (with sketch implementations) that would catch bugs not yet covered — e.g. `events.json` restore after a failed extraction, `_find_latest_chat` with all-None dates, or a two-run sequence verifying the backup is deleted on success.
+1. **`TestExtractionBackupRestore`**: 4 tests cover restore-on-failure, backup-deleted-on-success, first-run with no events.json, and first-run failure. Are these tests correct? Does `test_restore_on_failure` verify the backup file is also cleaned up after restore?
+2. **ZIP slip hermeticity**: `test_zip_slip_traversal_blocked` asserts `Path(tempfile.gettempdir()) / '_chat.txt'` doesn't exist. If a pre-existing `_chat.txt` was left in `%TEMP%` by another process or previous test run, would the assertion give a false positive (report zip-slip when there was none)?
+3. **`TestImgUriRemote`**: 5 tests mock `urllib.request.urlopen`. Is the mock correct — does `_img_uri_remote` call `urlopen` in a way the mock captures? What happens when `urlopen` returns a redirect to a non-image URL?
+4. **`TestStepValidate`**: 5 tests. Does `step_validate` raise `ValidationError` when confidence is a string like `"high"` (not a float) rather than an out-of-range float?
+5. **Missing tests**: are there tests for `_find_latest_chat` with all-None dates? For `step_push` error propagation? For the `_img_uri_remote` timeout path specifically?
+6. **Test isolation**: the bot tests stub `telegram` and `telegram.ext` at import time. Is the stub complete enough? Could a future `bot.py` change (e.g. using a new `telegram` submodule) silently break the stub without the test failing at import?
+7. **Improvement suggestions**: propose up to 3 new test cases with sketch implementations that cover remaining gaps.
 
 ---
 
