@@ -32,7 +32,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(mess
 log = logging.getLogger(__name__)
 
 # ── Config (from env vars) ────────────────────────────────────────────────────
-BOT_TOKEN       = os.environ['TELEGRAM_BOT_TOKEN']
+BOT_TOKEN       = os.environ.get('TELEGRAM_BOT_TOKEN', '')
 SITE_URL        = os.environ.get('SITE_URL', 'https://mim21.github.io/merhav-bari')
 MERHAV_BARI_DIR = Path(os.environ.get('MERHAV_BARI_DIR', str(Path(__file__).parent)))
 
@@ -382,6 +382,8 @@ async def handle_document(update: Update, ctx: ContextTypes.DEFAULT_TYPE):
 # ── Entry point ───────────────────────────────────────────────────────────────
 
 def main():
+    if not BOT_TOKEN:
+        raise RuntimeError('TELEGRAM_BOT_TOKEN env var is required to run the bot')
     global _job_lock
     asyncio.set_event_loop(asyncio.new_event_loop())
     _job_lock = asyncio.Lock()
