@@ -45,7 +45,22 @@ After drafting all events, re-open every `registration_link` and verify:
 - `location_name` / `city`
 - `contact_info.phone`
 
-Ask before saving: Did I check every link? Did I capture end time? Did I capture couple price? Did I capture early-bird cutoff dates?
+Ask before saving: Did I check every link? Did I capture end time? Did I capture couple price? Did I capture early-bird cutoff dates? Did I capture _image_filename from the WhatsApp post? Did I capture image_url?
+
+## _image_filename (WhatsApp photo — preferred over image_url)
+
+For every event, look for a `<attached: FILENAME.jpg>` line in the WhatsApp post.
+It appears at the end of the message, after the text. Capture just the filename (e.g. `00001098-PHOTO-2026-05-09-21-08-42.jpg`) and store it in `_image_filename`.
+The pipeline embeds it as a data URI — it takes priority over `image_url`.
+
+## image_url (website fallback)
+
+For every event that has a `registration_link`, fetch the page and extract the event poster image URL:
+- Prefer `og:image` or `twitter:image` meta tag content
+- **Google Forms** (`docs.google.com/forms/...`) never have og:image — look for the `<img>` tag inside the form header/banner section. The URL is typically `https://lh3.googleusercontent.com/...` or similar. Use that.
+- If not found via meta tags, look for the largest/most prominent `<img>` on the page (wixstatic, squarespace, lh3.googleusercontent, etc.)
+- Store as `image_url` field in the event object (must start with `https://`)
+- If no suitable image found, omit the field (do not set to null)
 
 ## Time rules
 
