@@ -75,6 +75,29 @@ def _save_chat(chat_bytes: bytes) -> Path:
 
 # ── Claude CLI extraction ─────────────────────────────────────────────────────
 
+def _run_with_progress(cmd: list, cwd: str):
+    '''Run cmd showing a live elapsed-time counter. Returns CompletedProcess.'''
+    proc = subprocess.Popen(cmd, cwd=cwd)
+    start = time.time()
+    try:
+        while proc.poll() is None:
+            elapsed = int(time.time() - start)
+            m, s = divmod(elapsed, 60)
+            sys.stdout.write(f'\r  claude: {m:02d}:{s:02d} elapsed...')
+            sys.stdout.flush()
+            time.sleep(1)
+    except KeyboardInterrupt:
+        proc.terminate()
+        proc.wait()
+        sys.stdout.write('\n')
+        raise
+    elapsed = int(time.time() - start)
+    m, s = divmod(elapsed, 60)
+    sys.stdout.write(f'\r  claude: done in {m:02d}:{s:02d}          \n')
+    sys.stdout.flush()
+    return subprocess.CompletedProcess(cmd, proc.returncode)
+
+
 def _run_extraction(chat_file: Path, stream: bool = False) -> str:
     '''
     Run claude CLI in non-interactive mode to extract events and publish.
@@ -112,7 +135,7 @@ def _run_extraction(chat_file: Path, stream: bool = False) -> str:
     )
     cmd = [claude_bin, '-p', prompt, '--permission-mode', 'acceptEdits']
     if stream:
-        result = subprocess.run(cmd, cwd=str(MERHAV_BARI_DIR))
+        result = _run_with_progress(cmd, cwd=str(MERHAV_BARI_DIR))
     else:
         result = subprocess.run(
             cmd, cwd=str(MERHAV_BARI_DIR),
@@ -412,7 +435,6 @@ if __name__ == '__main__':
             print('Detecting latest chat source...')
             chat_file = _find_latest_chat()
             print(f'Running extraction from {MERHAV_BARI_DIR} ...')
-            print('(claude is running silently — this takes ~5 min, please wait)')
             summary = _run_extraction_with_backup(chat_file, stream=True)
             print(summary)
         except Exception as ex:
