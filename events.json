@@ -172,7 +172,7 @@
     "end_time_only": "22:30",
     "raw_date_text": "28.5 19:00-22:30",
     "location_name": null,
-    "city": null,
+    "city": "תל אביב",
     "price_text": "150₪",
     "price_unit": "person",
     "price_note": null,
@@ -313,7 +313,7 @@
     },
     "source_messages": [
       {
-        "line_reference": null,
+        "line_reference": 330,
         "source_excerpt": "השבוע נחמוד.",
         "source_message_timestamp": "2026-05-25"
       }
@@ -394,6 +394,6 @@
       }
     ],
     "_image_filename": "00001122-PHOTO-2026-05-20-12-09-53.jpg",
-    "confidence": 0.85
+    "confidence": 0.7
   }
 ]
