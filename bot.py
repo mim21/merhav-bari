@@ -89,7 +89,10 @@ def _run_extraction(chat_file: Path) -> str:
     prev_count = 0
     try:
         prev = json.loads(events_json.read_text(encoding='utf-8'))
-        prev_count = len(prev) if isinstance(prev, list) else 0
+        if isinstance(prev, list):
+            prev_count = len(prev)
+        elif isinstance(prev, dict) and isinstance(prev.get('events'), list):
+            prev_count = len(prev['events'])
     except Exception:
         pass
 
@@ -119,7 +122,9 @@ def _run_extraction(chat_file: Path) -> str:
     # Detect auth/rate-limit failures that claude reports but exits 0 on
     combined = (result.stdout or '') + (result.stderr or '')
     for kw in ('invalid api key', 'unauthorized', 'rate limit', 'please run /login',
-                'not authenticated', 'authentication required', 'auth failed'):
+                'not authenticated', 'authentication required', 'auth failed',
+                'credit balance', 'insufficient credits', 'overloaded',
+                'context length', 'prompt is too long', 'session expired'):
         if kw in combined.lower():
             raise RuntimeError(f'claude auth/rate-limit failure (keyword: "{kw}")')
 
@@ -133,13 +138,27 @@ def _run_extraction(chat_file: Path) -> str:
     except Exception as ex:
         raise RuntimeError(f'_EXTRACT_DONE.json malformed: {ex}')
 
-    # Guard: refuse to publish if a previously-populated events.json became empty
-    if prev_count > 0 and count == 0:
+    # Verify actual events.json count — pipeline's step_clean may drop events
+    # regardless of what claude wrote in the done file
+    actual_count = count
+    try:
+        post = json.loads(events_json.read_text(encoding='utf-8'))
+        if isinstance(post, list):
+            actual_count = len(post)
+        elif isinstance(post, dict) and isinstance(post.get('events'), list):
+            actual_count = len(post['events'])
+    except Exception:
+        pass
+    if actual_count != count:
+        log.warning('Done-file reported %s events but events.json has %s', count, actual_count)
+
+    # Guard: refuse if pipeline left 0 events when we had data before
+    if prev_count > 0 and actual_count == 0:
         raise RuntimeError(
-            f'extraction returned 0 events but previous run had {prev_count} — aborting publish'
+            f'pipeline left 0 events but previous run had {prev_count} — aborting publish'
         )
 
-    return f'{count} events published'
+    return f'{actual_count} events published'
 
 
 def _run_extraction_with_backup(chat_file: Path) -> str:
@@ -211,6 +230,8 @@ def _find_latest_chat() -> Path:
     best_date, best_chat, best_zip = max(
         candidates, key=lambda c: c[0] or datetime.min
     )
+    if best_date is None:
+        log.warning('No parseable WhatsApp timestamp in any candidate — using first available')
     log.info('Latest chat: %s (last msg %s)', best_zip.name if best_zip else 'unzipped folder', best_date)
 
     try:

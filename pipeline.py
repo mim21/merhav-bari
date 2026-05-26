@@ -247,6 +247,8 @@ def step_clean():
     if len(unique) < len(kept):
         print(f"  Removed {len(kept) - len(unique)} duplicate(s)")
     kept = unique
+    if events and not kept:
+        raise RuntimeError('step_clean would drop all events — refusing to publish empty site')
     print(f"  Keeping {len(kept)} events")
 
     out = kept if is_list else {'events': kept}
@@ -517,6 +519,7 @@ async def step_enrich(force=False):
 # STEP 4 – GENERATE HTML
 # ─────────────────────────────────────────────────────────────────────────────
 ATTACH_RE = re.compile(r'<attached:\s*([\w\-\.]+\.(?:jpg|jpeg|png|mp4))\s*>', re.IGNORECASE)
+_LINE_TO_IMAGE: dict[int, str] = {}  # pre-built before trim; keyed by original line number
 ALLOWED_MEDIA_EXTS = {'.jpg', '.jpeg', '.png', '.mp4'}
 
 HE_MONTHS = ['', 'ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני',
@@ -598,7 +601,7 @@ def _find_image(event, line_to_image):
         if ref is None: continue
         try: base = int(str(ref).strip())
         except: continue
-        for offset in range(0, 4):  # attachment is on or just after the reference line
+        for offset in range(0, 50):  # attachment can be many lines after a long event post
             img = line_to_image.get(base + offset)
             if img: return img
     return None
@@ -795,6 +798,10 @@ def _make_card(event, chat_folder, line_to_image):
         uri = _img_uri(chat_folder, img_file)
         if uri:
             img_tag = f'<div class="card-img"><img src="{uri}" alt="" loading="lazy"/></div>'
+    if not img_tag:
+        image_url = _str(event.get('image_url') or '')
+        if image_url.startswith('https://'):
+            img_tag = f'<div class="card-img"><img src="{h(image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer"/></div>'
 
     etype = _str(event.get('event_type')) or 'other'
     icon, label = TYPE_LABELS.get(etype, ('📅', h(etype)))
@@ -885,14 +892,7 @@ def step_html():
     print('\n── Step 4: Generate HTML ──')
     chat_folder = CHAT_FILE.parent
 
-    # Build line → image filename map
-    line_to_image = {}
-    try:
-        for i, line in enumerate(CHAT_FILE.read_text(encoding='utf-8').splitlines(), start=1):
-            m = ATTACH_RE.search(line)
-            if m: line_to_image[i] = m.group(1)
-    except Exception as ex:
-        print(f"  Warning: could not read chat for image map: {ex}")
+    line_to_image = _LINE_TO_IMAGE  # pre-built from full chat before Step 1 trimmed it
 
     with open(EVENTS_JSON, encoding='utf-8') as f:
         all_events = json.load(f)
@@ -914,7 +914,7 @@ def step_html():
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: https:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>אירועים קרובים – מרחב בריא</title>
   <style>
@@ -1110,6 +1110,14 @@ if __name__ == '__main__':
     ap.add_argument('--force', action='store_true', help='Re-enrich all events, not just incomplete ones')
     ap.add_argument('--push',  action='store_true', help='Git-push after generating HTML')
     args = ap.parse_args()
+
+    # Index photos before Step 1 overwrites _chat.txt with the trimmed version
+    try:
+        for i, line in enumerate(CHAT_FILE.read_text(encoding='utf-8').splitlines(), start=1):
+            m = ATTACH_RE.search(line)
+            if m: _LINE_TO_IMAGE[i] = m.group(1)
+    except Exception as ex:
+        print(f'Warning: could not index chat photos: {ex}')
 
     if os.environ.get('MERHAV_SKIP_TRIM', '') == '1':
         print('\n── Step 1: Trim skipped (MERHAV_SKIP_TRIM=1) ──')

@@ -12,14 +12,16 @@ Run with:
 No pytest or telegram dependency required — telegram imports are stubbed.
 '''
 
+import json
 import os
 import sys
 import tempfile
+import time
 import unittest
 import zipfile
 from pathlib import Path
 from types import SimpleNamespace
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 _telegram_stub = MagicMock()
 _telegram_ext_stub = MagicMock()
@@ -114,24 +116,21 @@ class TestZipExtraction(unittest.TestCase):
             bot.MAX_CHAT_SIZE = original_max
 
     def test_zip_slip_traversal_blocked(self):
+        # Entries MUST end with '_chat.txt' to reach the commonpath check
+        # (entries that don't end with '_chat.txt' are skipped before zip-slip protection runs)
         attacks = [
-            '../evil_chat.txt',
-            '../../evil_chat.txt',
-            '../../../etc/passwd_chat.txt',
-            'subdir/../../escaped_chat.txt',
+            '../_chat.txt',
+            '../../_chat.txt',
+            'subdir/../../_chat.txt',
         ]
         for attack in attacks:
             z = self._make_zip([(attack, 'should not extract here')])
-            try:
-                result = bot._extract_chat_from_zip(z)
-                self.assertIsNone(result, msg=f'ZIP slip attack {attack!r} was not blocked')
-            finally:
-                for parent in [Path(tempfile.gettempdir()), Path.cwd()]:
-                    for evil in ['evil_chat.txt', 'escaped_chat.txt']:
-                        try:
-                            (parent / evil).unlink()
-                        except (FileNotFoundError, IsADirectoryError):
-                            pass
+            result = bot._extract_chat_from_zip(z)
+            self.assertIsNone(result, msg=f'ZIP slip attack {attack!r} was not blocked')
+            # Prove the file was not written outside the temp dir
+            escaped = Path(tempfile.gettempdir()) / '_chat.txt'
+            self.assertFalse(escaped.exists(),
+                             msg=f'ZIP slip: _chat.txt escaped to {escaped}')
 
     def test_absolute_path_zip_entry(self):
         z = self._make_zip([
@@ -152,7 +151,8 @@ class TestZipExtraction(unittest.TestCase):
         ])
         result = bot._extract_chat_from_zip(z)
         self.assertIsNotNone(result)
-        self.assertIn(result.read_text(encoding='utf-8'), ['first match', 'second match'])
+        # Must return the FIRST matching entry, not any match
+        self.assertEqual(result.read_text(encoding='utf-8'), 'first match')
 
 
 class TestIsAllowed(unittest.TestCase):
@@ -229,6 +229,84 @@ class TestConfig(unittest.TestCase):
         self.assertNotIn('\\', bot.CHAT_FOLDER_NAME)
         self.assertNotIn('..', bot.CHAT_FOLDER_NAME)
         self.assertNotIn('\x00', bot.CHAT_FOLDER_NAME)
+
+
+class TestRunExtractionGuards(unittest.TestCase):
+    '''Unit tests for _run_extraction guards — no real claude binary needed.'''
+
+    def setUp(self):
+        self._tmpdir = Path(tempfile.mkdtemp())
+        self._orig_dir = bot.MERHAV_BARI_DIR
+        bot.MERHAV_BARI_DIR = self._tmpdir
+
+    def tearDown(self):
+        bot.MERHAV_BARI_DIR = self._orig_dir
+        import shutil
+        shutil.rmtree(self._tmpdir, ignore_errors=True)
+
+    def _fake_claude(self, done_payload=None, stdout='', returncode=0, write_done=True,
+                     mtime_offset=1.0):
+        '''Return a mock subprocess.run that optionally writes _EXTRACT_DONE.json.'''
+        def _run(cmd, **kwargs):
+            if write_done and done_payload is not None:
+                done_file = self._tmpdir / '_EXTRACT_DONE.json'
+                done_file.write_text(json.dumps(done_payload), encoding='utf-8')
+                # Advance mtime so freshness check passes
+                t = time.time() + mtime_offset
+                os.utime(done_file, (t, t))
+            result = MagicMock()
+            result.returncode = returncode
+            result.stdout = stdout
+            result.stderr = ''
+            return result
+        return _run
+
+    def test_stale_done_file_detected(self):
+        # Write a done file BEFORE the run (simulating leftover from a prior run).
+        # _run_extraction deletes it and checks mtime — a pre-existing file must be rejected.
+        done_file = self._tmpdir / '_EXTRACT_DONE.json'
+        done_file.write_text(json.dumps({'events': 5, 'timestamp': '2000-01-01T00:00:00Z'}),
+                              encoding='utf-8')
+        # Make the file clearly old
+        old_t = time.time() - 60
+        os.utime(done_file, (old_t, old_t))
+
+        # Claude runs but writes nothing new (no done file after deletion)
+        with patch('subprocess.run', side_effect=self._fake_claude(write_done=False)):
+            with self.assertRaises(RuntimeError) as ctx:
+                bot._run_extraction(self._tmpdir / '_chat.txt')
+        self.assertIn('_EXTRACT_DONE.json', str(ctx.exception))
+
+    def test_empty_events_guard_triggers(self):
+        # Seed events.json with real data
+        events_json = self._tmpdir / 'events.json'
+        events_json.write_text(json.dumps([{'title': 'old event'}]), encoding='utf-8')
+
+        # Claude writes done file reporting 0 events; events.json also becomes empty
+        events_json_after = []
+        def _run_and_clear(cmd, **kwargs):
+            done_file = self._tmpdir / '_EXTRACT_DONE.json'
+            done_file.write_text(json.dumps({'events': 0}), encoding='utf-8')
+            t = time.time() + 1
+            os.utime(done_file, (t, t))
+            events_json.write_text(json.dumps(events_json_after), encoding='utf-8')
+            r = MagicMock()
+            r.returncode = 0
+            r.stdout = r.stderr = ''
+            return r
+
+        with patch('subprocess.run', side_effect=_run_and_clear):
+            with self.assertRaises(RuntimeError) as ctx:
+                bot._run_extraction(self._tmpdir / '_chat.txt')
+        self.assertIn('0 events', str(ctx.exception))
+
+    def test_auth_keyword_raises(self):
+        with patch('subprocess.run', side_effect=self._fake_claude(
+            write_done=False, stdout='Error: invalid api key', returncode=0
+        )):
+            with self.assertRaises(RuntimeError) as ctx:
+                bot._run_extraction(self._tmpdir / '_chat.txt')
+        self.assertIn('auth/rate-limit', str(ctx.exception))
 
 
 if __name__ == '__main__':

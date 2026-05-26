@@ -11,12 +11,15 @@ Or for a quick smoke test:
 No extra dependencies — pure stdlib unittest.
 """
 
+import json
+import os
 import re
 import sys
 import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
+from unittest.mock import patch
 
 _ROOT = Path(__file__).resolve().parent.parent
 if str(_ROOT) not in sys.path:
@@ -621,10 +624,11 @@ class TestFindImage(unittest.TestCase):
                                  {100: 'photo.jpg'}),
             'photo.jpg')
 
-    def test_finds_within_3_lines_forward(self):
+    def test_finds_within_50_lines_forward(self):
+        # Implementation searches up to +50 lines to handle long WhatsApp event posts
         self.assertEqual(
             pipeline._find_image({'source_messages': [{'line_reference': 100}]},
-                                 {103: 'photo.jpg'}),
+                                 {149: 'photo.jpg'}),
             'photo.jpg')
 
     def test_does_not_find_backwards(self):
@@ -632,10 +636,10 @@ class TestFindImage(unittest.TestCase):
             pipeline._find_image({'source_messages': [{'line_reference': 100}]},
                                  {99: 'photo.jpg'}))
 
-    def test_does_not_find_4_lines_forward(self):
+    def test_does_not_find_beyond_50_lines(self):
         self.assertIsNone(
             pipeline._find_image({'source_messages': [{'line_reference': 100}]},
-                                 {104: 'photo.jpg'}))
+                                 {150: 'photo.jpg'}))
 
     def test_non_list_source_messages(self):
         for bad in BAD_VALUES_NON_LIST:
@@ -726,6 +730,60 @@ class TestEndToEndSmoke(unittest.TestCase):
         begin = sum(1 for L in lines if L == 'BEGIN:VEVENT')
         end = sum(1 for L in lines if L == 'END:VEVENT')
         self.assertEqual(begin, end, msg=f'VEVENT mismatch: {begin} BEGIN vs {end} END')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# step_clean — regression guard for fix #21 (dedup key includes start_time_only)
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestStepCleanDedup(unittest.TestCase):
+    '''Regression guard: same-title/same-date/different-time must NOT be deduped.'''
+
+    def _run_step_clean(self, events):
+        tmp = tempfile.NamedTemporaryFile(
+            mode='w', encoding='utf-8', suffix='.json', delete=False
+        )
+        try:
+            json.dump(events, tmp, ensure_ascii=False)
+            tmp.close()
+            events_path = Path(tmp.name)
+            with patch.object(pipeline, 'EVENTS_JSON', events_path):
+                pipeline.step_clean()
+            with open(events_path, encoding='utf-8') as f:
+                return json.load(f)
+        finally:
+            try:
+                os.unlink(tmp.name)
+            except OSError:
+                pass
+
+    def test_same_title_same_date_different_time_kept(self):
+        # Two sessions of the same workshop on same day at different times —
+        # must NOT be deduplicated (regression guard for fix #21)
+        events = [
+            {'title': 'סדנה', 'date_only': '2026-12-01', 'start_time_only': '10:00'},
+            {'title': 'סדנה', 'date_only': '2026-12-01', 'start_time_only': '18:00'},
+        ]
+        result = self._run_step_clean(events)
+        kept = result if isinstance(result, list) else result.get('events', [])
+        self.assertEqual(len(kept), 2, 'Different-time sessions were incorrectly deduplicated')
+
+    def test_exact_duplicate_removed(self):
+        events = [
+            {'title': 'סדנה', 'date_only': '2026-12-01', 'start_time_only': '10:00'},
+            {'title': 'סדנה', 'date_only': '2026-12-01', 'start_time_only': '10:00'},
+        ]
+        result = self._run_step_clean(events)
+        kept = result if isinstance(result, list) else result.get('events', [])
+        self.assertEqual(len(kept), 1, 'True duplicate was not removed')
+
+    def test_all_past_events_raises(self):
+        # step_clean should refuse to produce an empty output from non-empty input
+        events = [
+            {'title': 'עבר', 'date_only': '2000-01-01', 'start_time_only': '10:00'},
+        ]
+        with self.assertRaises(RuntimeError):
+            self._run_step_clean(events)
 
 
 if __name__ == '__main__':
