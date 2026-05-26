@@ -8,14 +8,14 @@ Please do a security and engineering review of the following Telegram bot projec
 
 **First, fetch and read the files below before answering. Do not answer based on memory or previous versions — verify every claim against the actual fetched code, with line numbers.**
 
-**Commit:** https://github.com/mim21/merhav-bari/tree/a8dbb05
+**Commit:** https://github.com/mim21/merhav-bari/tree/e33c7d5
 
 | File | URL |
 |------|-----|
-| `bot.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/bot.py |
-| `pipeline.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/pipeline.py |
-| `tests/test_bot_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/tests/test_bot_robustness.py |
-| `tests/test_pipeline_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/a8dbb05/tests/test_pipeline_robustness.py |
+| `bot.py` | https://raw.githubusercontent.com/mim21/merhav-bari/e33c7d5/bot.py |
+| `pipeline.py` | https://raw.githubusercontent.com/mim21/merhav-bari/e33c7d5/pipeline.py |
+| `tests/test_bot_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/e33c7d5/tests/test_bot_robustness.py |
+| `tests/test_pipeline_robustness.py` | https://raw.githubusercontent.com/mim21/merhav-bari/e33c7d5/tests/test_pipeline_robustness.py |
 
 **Project description:**
 
@@ -26,7 +26,7 @@ The bot runs locally on Windows (`python bot.py`). Two trigger paths:
 `python bot.py --run` is the CLI equivalent of `/run` — usable from terminal without the bot.
 
 **Architecture notes:**
-- `bot.py` is the only Python file in the bot repo.
+- `bot.py` and `pipeline.py` both live in the same repo (`merhav-bari`). `bot.py` triggers the pipeline; `pipeline.py` generates HTML and pushes to GitHub Pages.
 - `claude -p` runs with `cwd=MERHAV_BARI_DIR` directly in the real repo using `--permission-mode acceptEdits`. No isolated workspace. Deliberate tradeoff for local personal use.
 - `claude -p` is asked to write `events.json` and run `pipeline.py --push` itself.
 
@@ -83,7 +83,7 @@ Findings marked **[deleted]** applied only to files that have since been removed
 
 ## Evaluation tracks
 
-This prompt is split into three independent review tracks. Each reviewer should focus on their track only.
+This prompt is split into four independent review tracks. Each reviewer should focus on their track only.
 
 ---
 
