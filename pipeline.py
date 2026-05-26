@@ -28,6 +28,7 @@ import sys
 from datetime import date, datetime, timedelta, timezone
 from html import escape as h
 from pathlib import Path
+import urllib.request
 from urllib.parse import urlparse, quote
 
 sys.stdout.reconfigure(encoding='utf-8')
@@ -593,6 +594,23 @@ def _img_uri(chat_folder, filename):
     except: return None
 
 
+def _img_uri_remote(url):
+    '''Fetch a remote HTTPS image at build time and return a data URI.
+    Inlining avoids client-side requests to attacker-controlled hosts.'''
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            ct = (resp.headers.get_content_type() or '').split(';')[0].strip()
+            if not ct.startswith('image/'):
+                return None
+            data = resp.read(10_000_001)
+            if len(data) > 10_000_000:
+                return None
+            return f'data:{ct};base64,{base64.b64encode(data).decode("ascii")}'
+    except Exception:
+        return None
+
+
 def _find_image(event, line_to_image):
     msgs = event.get('source_messages')
     for msg in (msgs if isinstance(msgs, list) else []):
@@ -799,9 +817,11 @@ def _make_card(event, chat_folder, line_to_image):
         if uri:
             img_tag = f'<div class="card-img"><img src="{uri}" alt="" loading="lazy"/></div>'
     if not img_tag:
-        image_url = _str(event.get('image_url') or '')
-        if image_url.startswith('https://'):
-            img_tag = f'<div class="card-img"><img src="{h(image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer"/></div>'
+        image_url = _safe_url(_str(event.get('image_url') or ''))
+        if image_url:
+            uri = _img_uri_remote(image_url)
+            if uri:
+                img_tag = f'<div class="card-img"><img src="{uri}" alt="" loading="lazy"/></div>'
 
     etype = _str(event.get('event_type')) or 'other'
     icon, label = TYPE_LABELS.get(etype, ('📅', h(etype)))
@@ -914,7 +934,7 @@ def step_html():
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data: https:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>אירועים קרובים – מרחב בריא</title>
   <style>

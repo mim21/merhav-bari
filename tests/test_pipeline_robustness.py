@@ -19,7 +19,7 @@ import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 _ROOT = Path(__file__).resolve().parent.parent
 if str(_ROOT) not in sys.path:
@@ -784,6 +784,129 @@ class TestStepCleanDedup(unittest.TestCase):
         ]
         with self.assertRaises(RuntimeError):
             self._run_step_clean(events)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# step_validate — fix #22 regression guard
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestStepValidate(unittest.TestCase):
+
+    def _write_events(self, content):
+        tmp = tempfile.NamedTemporaryFile(
+            mode='w', encoding='utf-8', suffix='.json', delete=False
+        )
+        tmp.write(content)
+        tmp.close()
+        return Path(tmp.name)
+
+    def tearDown(self):
+        pass
+
+    def test_malformed_json_raises_validation_error(self):
+        p = self._write_events('{not valid json at all')
+        try:
+            with patch.object(pipeline, 'EVENTS_JSON', p):
+                with self.assertRaises(pipeline.ValidationError) as ctx:
+                    pipeline.step_validate()
+            self.assertIn('not valid JSON', str(ctx.exception))
+        finally:
+            os.unlink(p)
+
+    def test_valid_events_pass(self):
+        p = self._write_events(
+            json.dumps([{'title': 'Test', 'date_only': '2026-12-01'}])
+        )
+        try:
+            with patch.object(pipeline, 'EVENTS_JSON', p):
+                pipeline.step_validate()   # must not raise
+        finally:
+            os.unlink(p)
+
+    def test_unknown_event_type_raises(self):
+        p = self._write_events(
+            json.dumps([{'title': 'X', 'date_only': '2026-12-01',
+                         'event_type': 'totally_made_up'}])
+        )
+        try:
+            with patch.object(pipeline, 'EVENTS_JSON', p):
+                with self.assertRaises(pipeline.ValidationError):
+                    pipeline.step_validate()
+        finally:
+            os.unlink(p)
+
+    def test_out_of_range_confidence_raises(self):
+        p = self._write_events(
+            json.dumps([{'title': 'X', 'date_only': '2026-12-01', 'confidence': 1.5}])
+        )
+        try:
+            with patch.object(pipeline, 'EVENTS_JSON', p):
+                with self.assertRaises(pipeline.ValidationError):
+                    pipeline.step_validate()
+        finally:
+            os.unlink(p)
+
+    def test_missing_date_raises(self):
+        p = self._write_events(json.dumps([{'title': 'X'}]))
+        try:
+            with patch.object(pipeline, 'EVENTS_JSON', p):
+                with self.assertRaises(pipeline.ValidationError):
+                    pipeline.step_validate()
+        finally:
+            os.unlink(p)
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# _img_uri_remote — inline remote images at build time
+# ─────────────────────────────────────────────────────────────────────────────
+
+class TestImgUriRemote(unittest.TestCase):
+
+    def _mock_resp(self, content_type='image/jpeg', body=b'\xff\xd8\xff\xd9', status=200):
+        resp = MagicMock()
+        resp.__enter__ = lambda s: s
+        resp.__exit__ = MagicMock(return_value=False)
+        resp.headers.get_content_type.return_value = content_type
+        resp.read.return_value = body
+        return resp
+
+    def test_valid_jpeg_returns_data_uri(self):
+        resp = self._mock_resp(body=b'\xff\xd8\xff\xd9' * 10)
+        with patch('urllib.request.urlopen', return_value=resp):
+            with patch('urllib.request.Request', return_value=MagicMock()):
+                result = pipeline._img_uri_remote('https://example.com/img.jpg')
+        self.assertIsNotNone(result)
+        self.assertTrue(result.startswith('data:image/jpeg;base64,'))
+
+    def test_non_image_content_type_returns_none(self):
+        resp = self._mock_resp(content_type='text/html', body=b'<html>')
+        with patch('urllib.request.urlopen', return_value=resp):
+            with patch('urllib.request.Request', return_value=MagicMock()):
+                result = pipeline._img_uri_remote('https://example.com/page.html')
+        self.assertIsNone(result)
+
+    def test_oversized_image_returns_none(self):
+        resp = self._mock_resp(body=b'\x00' * 10_000_001)
+        with patch('urllib.request.urlopen', return_value=resp):
+            with patch('urllib.request.Request', return_value=MagicMock()):
+                result = pipeline._img_uri_remote('https://example.com/big.jpg')
+        self.assertIsNone(result)
+
+    def test_network_error_returns_none(self):
+        with patch('urllib.request.urlopen', side_effect=OSError('connection refused')):
+            with patch('urllib.request.Request', return_value=MagicMock()):
+                result = pipeline._img_uri_remote('https://example.com/img.jpg')
+        self.assertIsNone(result)
+
+    def test_result_does_not_embed_url(self):
+        body = b'\xff\xd8\xff\xd9'
+        resp = self._mock_resp(body=body)
+        with patch('urllib.request.urlopen', return_value=resp):
+            with patch('urllib.request.Request', return_value=MagicMock()):
+                result = pipeline._img_uri_remote('https://attacker.com/track.gif')
+        # The returned data URI must not contain the original URL
+        if result is not None:
+            self.assertNotIn('attacker.com', result)
 
 
 if __name__ == '__main__':

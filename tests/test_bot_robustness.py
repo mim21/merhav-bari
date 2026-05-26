@@ -308,6 +308,99 @@ class TestRunExtractionGuards(unittest.TestCase):
                 bot._run_extraction(self._tmpdir / '_chat.txt')
         self.assertIn('auth/rate-limit', str(ctx.exception))
 
+    def test_all_auth_keywords_raise(self):
+        keywords = [
+            'invalid api key', 'unauthorized', 'rate limit', 'please run /login',
+            'not authenticated', 'authentication required', 'auth failed',
+            'credit balance', 'insufficient credits', 'overloaded',
+            'context length', 'prompt is too long', 'session expired',
+        ]
+        for kw in keywords:
+            with self.subTest(keyword=kw):
+                with patch('subprocess.run', side_effect=self._fake_claude(
+                    write_done=False, stdout=f'Error: {kw} occurred', returncode=0
+                )):
+                    with self.assertRaises(RuntimeError):
+                        bot._run_extraction(self._tmpdir / '_chat.txt')
+
+    def test_dict_shape_prev_count_triggers_guard(self):
+        events_json = self._tmpdir / 'events.json'
+        events_json.write_text(
+            json.dumps({'events': [{'title': 'a'}, {'title': 'b'}]}), encoding='utf-8'
+        )
+
+        def empty_it(cmd, **kwargs):
+            done = self._tmpdir / '_EXTRACT_DONE.json'
+            done.write_text(json.dumps({'events': 0}), encoding='utf-8')
+            os.utime(done, (time.time() + 1, time.time() + 1))
+            events_json.write_text(json.dumps([]), encoding='utf-8')
+            r = MagicMock()
+            r.returncode = 0
+            r.stdout = r.stderr = ''
+            return r
+
+        with patch('subprocess.run', side_effect=empty_it):
+            with self.assertRaises(RuntimeError):
+                bot._run_extraction(self._tmpdir / '_chat.txt')
+
+
+class TestExtractionBackupRestore(unittest.TestCase):
+
+    def setUp(self):
+        self._tmpdir = Path(tempfile.mkdtemp())
+        self._orig = bot.MERHAV_BARI_DIR
+        bot.MERHAV_BARI_DIR = self._tmpdir
+
+    def tearDown(self):
+        bot.MERHAV_BARI_DIR = self._orig
+        import shutil
+        shutil.rmtree(self._tmpdir, ignore_errors=True)
+
+    def test_restore_on_failure(self):
+        good = '[{"title": "Original", "date_only": "2026-12-01"}]'
+        (self._tmpdir / 'events.json').write_text(good, encoding='utf-8')
+        with patch.object(bot, '_run_extraction',
+                          side_effect=RuntimeError('claude died')):
+            with self.assertRaises(RuntimeError):
+                bot._run_extraction_with_backup(self._tmpdir / 'chat.txt')
+        self.assertEqual(
+            (self._tmpdir / 'events.json').read_text(encoding='utf-8'), good,
+            'events.json must be restored after failed extraction',
+        )
+        self.assertFalse((self._tmpdir / 'events.json.bak').exists(),
+                         'backup must be gone after restore')
+
+    def test_backup_deleted_on_success(self):
+        good = '[{"title": "old"}]'
+        new  = '[{"title": "new"}]'
+        (self._tmpdir / 'events.json').write_text(good, encoding='utf-8')
+
+        def ok(_):
+            (self._tmpdir / 'events.json').write_text(new, encoding='utf-8')
+            return '1 events published'
+
+        with patch.object(bot, '_run_extraction', side_effect=ok):
+            result = bot._run_extraction_with_backup(self._tmpdir / 'chat.txt')
+        self.assertEqual((self._tmpdir / 'events.json').read_text(encoding='utf-8'), new)
+        self.assertFalse((self._tmpdir / 'events.json.bak').exists())
+        self.assertEqual(result, '1 events published')
+
+    def test_first_run_no_prior_events_json(self):
+        def ok(_):
+            (self._tmpdir / 'events.json').write_text('[]', encoding='utf-8')
+            return '0 events published'
+        with patch.object(bot, '_run_extraction', side_effect=ok):
+            bot._run_extraction_with_backup(self._tmpdir / 'chat.txt')
+        self.assertFalse((self._tmpdir / 'events.json.bak').exists())
+
+    def test_first_run_failure_no_backup_left(self):
+        with patch.object(bot, '_run_extraction',
+                          side_effect=RuntimeError('claude died')):
+            with self.assertRaises(RuntimeError):
+                bot._run_extraction_with_backup(self._tmpdir / 'chat.txt')
+        self.assertFalse((self._tmpdir / 'events.json.bak').exists())
+        self.assertFalse((self._tmpdir / 'events.json').exists())
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
