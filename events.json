@@ -1,35 +1,26 @@
 [
   {
-    "title": "Spring Nights – מקדש טנטרי",
-    "event_type": "workshop",
+    "title": "כרבולב",
+    "event_type": "cuddle_party",
     "status": "scheduled",
-    "date_only": "2026-05-28",
+    "date_only": "2026-05-26",
     "end_date_only": null,
     "start_time_only": "19:30",
-    "end_time_only": "00:00",
-    "raw_date_text": "יום חמישי | 28.5",
-    "location_name": "תל אביב (כתובת מלאה לנרשמים לאחר רישום ותשלום)",
+    "end_time_only": null,
+    "raw_date_text": "יום שלישי הקרוב 26.5",
+    "location_name": "שבט, תל אביב",
     "city": "תל אביב",
-    "price_text": "340₪ לאדם / 620₪ לזוג",
-    "price_unit": "person",
+    "price_text": null,
+    "price_unit": null,
     "price_note": null,
-    "price_details": [
-      "290₪ לאדם – הרשמה מוקדמת עד 21.5 (פג תוקף)",
-      "550₪ לזוג – הרשמה מוקדמת עד 21.5 (פג תוקף)",
-      "340₪ לאדם – מחיר רגיל מ-22.5",
-      "620₪ לזוג – מחיר רגיל מ-22.5"
-    ],
-    "description": "מקדש טנטרי מונחה באיזון מגדרי בתל אביב. ערב של נוכחות, הקשבה, מגע מוסכם ועונג. עירום חלקי אפשרי מבחירה. ללא אלכוהול וסמים. גברים – הרשמה עם מאזנת בלבד.",
-    "registration_link": "https://hagitmishali.wixsite.com/spring-nights",
+    "price_details": [],
+    "description": "מרחב חיבוקים, כרבולים ומגע אוהב בתל אביב בהנחיית ליאורה. נפתח במעגל פתיחה, טקס קקאו ותנועה חופשית, ולאחר מכן זמן חופשי למגע וכרבולים ללא הנחייה. מרחב מאוזן מגדרית – נשים יכולות להירשם לבד.",
+    "registration_link": "https://www.facebook.com/share/1ECYbYfg5p/",
     "contact_info": {
       "phone": [
         {
-          "number": "052-3501450",
-          "name": "חגית (מוהנה)"
-        },
-        {
-          "number": "054-4799145",
-          "name": "גילי (סנאנד)"
+          "number": "050-733-2754",
+          "name": "ליאורה"
         }
       ],
       "telegram": [],
@@ -38,18 +29,17 @@
     },
     "source_messages": [
       {
-        "line_reference": 39,
-        "source_excerpt": "[23/04/2026, 10:27:53] יצחק כרבולים: 🪷💐*Spring Nights*🪷💐",
-        "source_message_timestamp": "2026-04-23"
+        "line_reference": 11661,
+        "source_excerpt": "חיבוק אוהב ועוטף ללב המתוק שלך בואו לנשום, להרפות ולהתמלא מחדש באנרגיית חיים",
+        "source_message_timestamp": "2026-05-23"
       }
     ],
-    "confidence": 0.95,
-    "image_url": "https://static.wixstatic.com/media/cb4b2a_e6138971708e4d13b5f8cbe7c4faf10f~mv2.jpeg",
-    "_image_filename": "00001055-PHOTO-2026-04-23-10-26-38.jpg"
+    "_image_filename": "00001126-PHOTO-2026-05-23-19-04-28.jpg",
+    "confidence": 0.85
   },
   {
     "title": "מקדש מפת האינטימיות",
-    "event_type": "workshop",
+    "event_type": "party",
     "status": "scheduled",
     "date_only": "2026-05-28",
     "end_date_only": null,
@@ -58,24 +48,24 @@
     "raw_date_text": "28/5 בפרדס חנה",
     "location_name": "גן זן, פרדס חנה",
     "city": "פרדס חנה",
-    "price_text": "380₪ לאדם / 690₪ לזוג",
+    "price_text": "380",
     "price_unit": "person",
     "price_note": null,
     "price_details": [
-      "380₪ לאדם",
-      "690₪ לזוג מאוזן מגדרית"
+      "380 ליחיד",
+      "690 לצמד"
     ],
-    "description": "ערב חקירה משחקית של מפת האינטימיות דרך מגע אנרגטי, חושני ואיטי. שיתוף פעולה של ראדיקה ותמיר. הרשמה רק לאחר שיחת היכרות עם המנחים.",
+    "description": "ערב שכולו חקירה משחקית ושובבה של מפת האינטימיות. דרך מגע אנרגטי, חושני, עוצמתי ואיטי נרגיש כיצד האנרגיה נבנית מבפנים, זורמת ומתמלאת אור. שיתוף פעולה של ראדיקה ויצחק.",
     "registration_link": "https://forms.gle/4XzZnPZ69gWe3bCH9",
     "contact_info": {
       "phone": [
         {
-          "number": "054-8072424",
-          "name": "תמיר"
+          "number": "054-807-2424",
+          "name": "Tamir"
         },
         {
-          "number": "055-7046844",
-          "name": "ראדיקה"
+          "number": "055-704-6844",
+          "name": "Radica"
         }
       ],
       "telegram": [],
@@ -84,16 +74,55 @@
     },
     "source_messages": [
       {
-        "line_reference": 127,
-        "source_excerpt": "[05/05/2026, 18:14:54] יצחק כרבולים: *מקדש מפת האינטימיות*",
+        "line_reference": 11384,
+        "source_excerpt": "מקדש מפת האינטימיות",
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.9,
-    "_image_filename": "00001090-PHOTO-2026-05-05-18-13-39.jpg"
+    "_image_filename": "00001090-PHOTO-2026-05-05-18-13-39.jpg",
+    "confidence": 0.92
   },
   {
-    "title": "ערב מגע אוהב לזוגות בבריכה מחוממת",
+    "title": "Spring Nights – מקדש טנטרי",
+    "event_type": "party",
+    "status": "scheduled",
+    "date_only": "2026-05-28",
+    "end_date_only": null,
+    "start_time_only": "19:30",
+    "end_time_only": "00:00",
+    "raw_date_text": "יום חמישי | 28.5 | 19:30-00:00",
+    "location_name": "תל אביב (כתובת מדויקת לאחר אישור)",
+    "city": "תל אביב",
+    "price_text": "340",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "290 ליחיד – מכירה מוקדמת (עד 21.5)",
+      "550 לצמד – מכירה מוקדמת (עד 21.5)",
+      "340 ליחיד",
+      "620 לצמד"
+    ],
+    "description": "מקדש טנטרי מונחה בתל אביב, באיזון מגדרי. מרחב של מיניות מודעת לחקירת עצמנו דרך מגע, נוכחות והסכמה. הערב מתאים לזוגות וליחידים. גברים נרשמים עם מאזנת בלבד.",
+    "registration_link": "https://hagitmishali.wixsite.com/spring-nights",
+    "contact_info": {
+      "phone": null,
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 10981,
+        "source_excerpt": "Spring Nights",
+        "source_message_timestamp": "2026-04-23"
+      }
+    ],
+    "_image_filename": "00001055-PHOTO-2026-04-23-10-26-38.jpg",
+    "image_url": "https://static.wixstatic.com/media/cb4b2a_d31bf9dc70cd4a6c8657b0e2a6688f0f~mv2.jpg",
+    "confidence": 0.93
+  },
+  {
+    "title": "סדנת מגע אוהב במים לזוגות",
     "event_type": "workshop",
     "status": "scheduled",
     "date_only": "2026-05-28",
@@ -101,22 +130,19 @@
     "start_time_only": "19:30",
     "end_time_only": "22:00",
     "raw_date_text": "חמישי ה 28.5",
-    "location_name": "בריכה פרטית ומחוממת ליד בנימינה (כתובת מלאה לנרשמים)",
+    "location_name": "בריכה פרטית מחוממת, ליד בנימינה",
     "city": "בנימינה",
-    "price_text": "750₪ לזוג",
+    "price_text": "750",
     "price_unit": "couple",
     "price_note": null,
-    "price_details": [
-      "750₪ לזוג (תשלום ב-2 תשלומים אפשרי)",
-      "נותר מקום אחד אחרון"
-    ],
-    "description": "ערב זוגי חוויתי של מגע אוהב במים חמים, כולל תנועה משותפת ואינטימיות. בעירום אופציונלי. מוגבל ל-7 זוגות.",
+    "price_details": [],
+    "description": "סדנה זוגית חוויתית של מגע אוהב במים חמים, המכילה רגש, משחקיות, אירוטיקה, הרפיה ואינטימיות. בהנחיית רותם רם, בבריכה פרטית מחוממת ליד בנימינה. עירום אופציונלי.",
     "registration_link": "https://benoam.wixsite.com/couplesrotemnoam/aquaticlove",
     "contact_info": {
       "phone": [
         {
-          "number": "052-8698159",
-          "name": null
+          "number": "052-869-8159",
+          "name": "רותם"
         }
       ],
       "telegram": [],
@@ -125,53 +151,157 @@
     },
     "source_messages": [
       {
-        "line_reference": 153,
-        "source_excerpt": "[11/05/2026, 14:39:59] ~ רותם רם: *סדנה לזוגות של מגע אוהב במים (בעירום אופציונלי)*",
+        "line_reference": 11498,
+        "source_excerpt": "סדנה לזוגות של מגע אוהב במים (בעירום אופציונלי)",
         "source_message_timestamp": "2026-05-11"
       }
     ],
-    "confidence": 0.9,
+    "_image_filename": "00001101-PHOTO-2026-05-11-14-38-44.jpg",
     "image_url": "https://static.wixstatic.com/media/2912b3_c8286f16133a48d68eae4676b0c7b3fb~mv2.jpeg",
-    "_image_filename": "00001101-PHOTO-2026-05-11-14-38-44.jpg"
+    "confidence": 0.95
   },
   {
-    "title": "Soft Play Party Special – אבישג זלוף ואוקאס",
+    "title": "Cuddle Party – מריה מיטמי",
     "event_type": "cuddle_party",
     "status": "scheduled",
-    "date_only": "2026-05-29",
+    "date_only": "2026-05-28",
     "end_date_only": null,
-    "start_time_only": "20:00",
-    "end_time_only": "00:00",
-    "raw_date_text": "29.5 - שישי - תל אביב - 20:00",
-    "location_name": "בית להיוולד מחדש – רחוב מרדכי אנילביץ' 62, תל אביב-יפו",
+    "start_time_only": "19:00",
+    "end_time_only": "22:30",
+    "raw_date_text": "28.5 19:00-22:30",
+    "location_name": null,
     "city": "תל אביב",
-    "price_text": "200₪ לאדם / 400₪ לזוג",
+    "price_text": "150",
     "price_unit": "person",
     "price_note": null,
-    "price_details": [
-      "200₪ לאדם",
-      "400₪ לזוג (אישה+גבר)",
-      "180₪ עם קוד קופון: הנחהקטנה",
-      "170₪ עם קוד קופון: יותרהנחה"
-    ],
-    "description": "Soft Play Party חוגגת 4 שנים – ספיישל עם אבישג זלוף ואוקאס יחד. מסע של מוזיקה, קקאו, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית; גברים ברשימת המתנה.",
-    "registration_link": "https://www.yannivgold.com/spp",
+    "price_details": [],
+    "description": "מסיבת כרבולים עם מריה – ערב חם ומחבר בתל אביב. האחרון לפני שמריה עוזבת ביוני. מרחב רך ולא-מיני להאט, לנשום ולהתחבר דרך מגע אנושי. מתאים גם למי שמגיע לבד.",
+    "registration_link": "https://forms.gle/wU3XcScYVWsss94i6",
     "contact_info": {
-      "phone": [],
+      "phone": [
+        {
+          "number": "053-225-3661",
+          "name": "מריה"
+        }
+      ],
       "telegram": [],
       "instagram": [],
       "other": []
     },
     "source_messages": [
       {
-        "line_reference": 111,
-        "source_excerpt": "[05/05/2026, 11:07:36] יצחק כרבולים: ספיישל מיוחד! *Soft Play Party*",
+        "line_reference": 11677,
+        "source_excerpt": "Hey, dear ones!",
+        "source_message_timestamp": "2026-05-24"
+      }
+    ],
+    "_image_filename": "00001127-PHOTO-2026-05-24-15-49-23.jpg",
+    "confidence": 0.92
+  },
+  {
+    "title": "Temple Event – Ariel-Sarah",
+    "event_type": "party",
+    "status": "scheduled",
+    "date_only": "2026-05-28",
+    "end_date_only": null,
+    "start_time_only": null,
+    "end_time_only": null,
+    "raw_date_text": "Thursday May 28",
+    "location_name": "בית שמש",
+    "city": "בית שמש",
+    "price_text": "100",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [],
+    "description": "Temple event with good eyes, touch, eros and sensuality in Beit Shemesh. Focus on connection, love and intimacy – not swinger energy. Underwear stays on in the main room. Light food and drinks included.",
+    "registration_link": "https://forms.gle/7mS3AC1E1Zhg8gAx6",
+    "contact_info": {
+      "phone": null,
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": null,
+        "source_excerpt": "Temple event with Good Eyes, Touch Eros and Sensuality, (not swingers type energy, underwear on in main room)",
+        "source_message_timestamp": "2026-05-25"
+      }
+    ],
+    "confidence": 0.7
+  },
+  {
+    "title": "Soft Play Party – חגיגת 4 שנים",
+    "event_type": "party",
+    "status": "scheduled",
+    "date_only": "2026-05-29",
+    "end_date_only": null,
+    "start_time_only": "20:00",
+    "end_time_only": "00:00",
+    "raw_date_text": "29.5 - שישי - תל אביב - 20:00",
+    "location_name": "תל אביב",
+    "city": "תל אביב",
+    "price_text": "200",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "200 לאדם",
+      "400 לצמד (אישה+גבר)"
+    ],
+    "description": "ספיישל מיוחד של Soft Play Party עם אבישג זלוף ואוקאס, לרגל ארבע שנות Soft Play! מסע מוזיקלי עם קקאו, תנועה ומגע רך. מרחב בטוח לחיבורים אמיתיים דרך משחק, מגע ואינטימיות עדינה.",
+    "registration_link": "https://www.yannivgold.com/spp",
+    "contact_info": {
+      "phone": null,
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": 11368,
+        "source_excerpt": "ספיישל מיוחד!",
         "source_message_timestamp": "2026-05-05"
       }
     ],
-    "confidence": 0.95,
-    "image_url": "https://static.wixstatic.com/media/8004f8_3f69d67b10264d71b4663897aeaa7878~mv2.png",
-    "_image_filename": "00001089-PHOTO-2026-05-05-11-06-21.jpg"
+    "_image_filename": "00001089-PHOTO-2026-05-05-11-06-21.jpg",
+    "image_url": "https://static.wixstatic.com/media/8004f8_9be034d5095746a8862674fd23042bc4~mv2.jpeg",
+    "confidence": 0.95
+  },
+  {
+    "title": "מישהו לחמוד אותו במגע – גילאי 40-55",
+    "event_type": "meetup",
+    "status": "scheduled",
+    "date_only": "2026-05-30",
+    "end_date_only": null,
+    "start_time_only": "19:00",
+    "end_time_only": "22:00",
+    "raw_date_text": "שבת 30.5 קיסריה 19:00-22:00",
+    "location_name": "קיסריה",
+    "city": "קיסריה",
+    "price_text": "230",
+    "price_unit": "person",
+    "price_note": null,
+    "price_details": [
+      "230 ליחיד",
+      "199 לחוזרים (עד 6 מקומות)"
+    ],
+    "description": "מפגש חמידה במגע לאנשים פנויים בגילאי 40-55 בקיסריה. מתוודעים אחד לשני דרך מגע ומילה – בלי אפליקציות, בלי צ'טים, בלי פוטושופ. בהנחיית יובל איל וגל שחף.",
+    "registration_link": "https://www.covet.co.il",
+    "contact_info": {
+      "phone": null,
+      "telegram": [],
+      "instagram": [],
+      "other": []
+    },
+    "source_messages": [
+      {
+        "line_reference": null,
+        "source_excerpt": "השבוע נחמוד. נחמוד במגע.",
+        "source_message_timestamp": "2026-05-25"
+      }
+    ],
+    "image_url": "https://static.wixstatic.com/media/d36a2b_bad231e420094b1191fe9cc18bad8343~mv2.jpg",
+    "confidence": 0.93
   },
   {
     "title": "עונג שבת זוגי",
@@ -181,25 +311,23 @@
     "end_date_only": null,
     "start_time_only": "18:00",
     "end_time_only": "22:00",
-    "raw_date_text": "שבת 30.5.26",
-    "location_name": "LUST, תל אביב",
+    "raw_date_text": "שבת 30.5.26 18:00-22:00",
+    "location_name": "LUST, פלורנטין, תל אביב",
     "city": "תל אביב",
-    "price_text": "500₪ לזוג",
+    "price_text": "500",
     "price_unit": "couple",
     "price_note": null,
-    "price_details": [
-      "500₪ לזוג"
-    ],
-    "description": "סדנה זוגית לחקירת המפגש האינטימי דרך 4 סוגי מגע. ערב מחבר לזוגות שרוצים לגוון ולהרחיב את המיניות הזוגית שלהם.",
+    "price_details": [],
+    "description": "סדנה זוגית חוויתית לזוגות המבקשים להרחיב ולגוון את המיניות הזוגית. נשחק עם ארבעת סוגי המגע ונגלה אפשרויות מרגשות, מחיות ומחברות. מתקיים ב-LUST, פלורנטין, תל אביב.",
     "registration_link": "https://forms.gle/vKrfdfiWjuydy436A",
     "contact_info": {
       "phone": [
         {
-          "number": "054-4752034",
+          "number": "054-475-2034",
           "name": "אליה"
         },
         {
-          "number": "054-4730011",
+          "number": "054-473-0011",
           "name": "בועז"
         }
       ],
@@ -209,35 +337,35 @@
     },
     "source_messages": [
       {
-        "line_reference": 237,
-        "source_excerpt": "[19/05/2026, 15:26:48] יצחק כרבולים: מזמינים אתכםן ל- *עונג שבת זוגי*",
+        "line_reference": 11633,
+        "source_excerpt": "מזמינים אתכםן ל- עונג שבת זוגי",
         "source_message_timestamp": "2026-05-19"
       }
     ],
-    "confidence": 0.9,
-    "_image_filename": "00001121-PHOTO-2026-05-19-15-25-33.jpg"
+    "_image_filename": "00001121-PHOTO-2026-05-19-15-25-33.jpg",
+    "confidence": 0.95
   },
   {
-    "title": "סדנת נשים – חיבור לאנרגיה הנקבית במים",
+    "title": "סדנת טנטרה לנשים",
     "event_type": "workshop",
     "status": "scheduled",
     "date_only": "2026-06-03",
     "end_date_only": null,
     "start_time_only": "20:00",
     "end_time_only": "00:00",
-    "raw_date_text": "יום רביעי 3.6",
-    "location_name": "מרחב סדנאות עם בריכה מחוממת, רחובות",
+    "raw_date_text": "יום רביעי 3.6 בין השעות 20:00 לחצות",
+    "location_name": "מרחב סדנאות עם בריכה מקורה ומחוממת, רחובות",
     "city": "רחובות",
     "price_text": null,
     "price_unit": null,
     "price_note": null,
     "price_details": [],
-    "description": "סדנה לנשים בלבד: חיבור לאנרגיה הנקבית דרך תנועה בבריכה ברוח הביודאנסה, מגע אוהב בציפה ומגע דינאמי עם כיסוי עיניים בחדר חושך. יש מרחב מוגן.",
+    "description": "סדנת טנטרה לנשים בלבד: ארבע שעות של שחרור וחיבור הכוללות תנועה במים ברוח הביודאנסה, ציפת מלאכיות ומגע דינמי בכיסוי עיניים בחדר חושך. המרחב מאפשר אך לא מחייב עירום ומגע נועז.",
     "registration_link": null,
     "contact_info": {
       "phone": [
         {
-          "number": "052-5159812",
+          "number": "052-515-9812",
           "name": "הילה"
         }
       ],
@@ -247,37 +375,35 @@
     },
     "source_messages": [
       {
-        "line_reference": 180,
-        "source_excerpt": "[15/05/2026, 6:18:24] יצחק כרבולים: 📢📢📢 *שימו לב שימו לב !!!*",
+        "line_reference": 11576,
+        "source_excerpt": "שימו לב שימו לב !!! בעוד שלושה שבועות בדיוק תצא לדרך סדנת הדגל שלי לנשים בלבד.",
         "source_message_timestamp": "2026-05-15"
       }
     ],
-    "confidence": 0.8,
-    "_image_filename": "00001118-PHOTO-2026-05-15-06-17-09.jpg"
+    "_image_filename": "00001118-PHOTO-2026-05-15-06-17-09.jpg",
+    "confidence": 0.9
   },
   {
     "title": "Latihan – מסע קשוב בכיסוי עיניים",
-    "event_type": "workshop",
+    "event_type": "class",
     "status": "scheduled",
     "date_only": "2026-06-11",
     "end_date_only": null,
     "start_time_only": "20:30",
     "end_time_only": "23:30",
-    "raw_date_text": "יום חמישי 11.6",
-    "location_name": "פרדס חנה (מיקום מדויק לנרשמים)",
+    "raw_date_text": "יום חמישי 11.6 פרדס חנה",
+    "location_name": "פרדס חנה",
     "city": "פרדס חנה",
-    "price_text": "150₪",
+    "price_text": "150",
     "price_unit": "person",
     "price_note": null,
-    "price_details": [
-      "150₪ לכרטיס"
-    ],
-    "description": "סדנת תנועה עם כיסוי עיניים בהנחיית אבישג מאיה זלוף. תנועה מתוך נשימה והקשבה לגוף, מלווה במסע מוזיקלי. ללא מגע גניטלי; מגע קשוב אפשרי.",
+    "price_details": [],
+    "description": "סדנת תנועה עם כיסוי עיניים עם אבישג מאיה זלוף. נעים לאט מתוך נשימה והקשבה למה שעולה בגוף, במסע מוזיקלי לפגישה עם תחושות, רגשות ותנועה מתוך חקירה פנימית. ללא עירום ומגע באברי מין.",
     "registration_link": "https://lovemesoftly.my.canva.site/latihan",
     "contact_info": {
       "phone": [
         {
-          "number": "050-6789911",
+          "number": "050-678-9911",
           "name": null
         }
       ],
@@ -287,12 +413,12 @@
     },
     "source_messages": [
       {
-        "line_reference": 247,
-        "source_excerpt": "[20/05/2026, 12:11:08] יצחק כרבולים: latihan - מסע קשוב בכיסוי עיניים",
+        "line_reference": 11643,
+        "source_excerpt": "latihan - מסע קשוב בכיסוי עיניים",
         "source_message_timestamp": "2026-05-20"
       }
     ],
-    "confidence": 0.85,
-    "_image_filename": "00001122-PHOTO-2026-05-20-12-09-53.jpg"
+    "_image_filename": "00001122-PHOTO-2026-05-20-12-09-53.jpg",
+    "confidence": 0.88
   }
 ]

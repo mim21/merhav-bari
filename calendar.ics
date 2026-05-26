@@ -4,73 +4,113 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:b40e3331140aaa8b4cee15f339960f61@merhav-bari
-DTSTAMP:20260524T082655Z
-DTSTART:20260528T193000
-DTEND:20260529T000000
-SUMMARY:Spring Nights – מקדש טנטרי
-DESCRIPTION:מקדש טנטרי מונחה באיזון מגדרי בתל אביב. ערב של נוכחות\, הקשבה\, מגע מוסכם ועונג. עירום חלקי אפשרי מבחירה. ללא אלכוהול וסמים. גברים – הרשמה עם מאזנת בלבד.
-LOCATION:תל אביב (כתובת מלאה לנרשמים לאחר רישום ותשלום) · תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260528-1930
+UID:eca731cdef827b663334760d40b30c8e@merhav-bari
+DTSTAMP:20260526T071627Z
+DTSTART:20260526T193000
+DTEND:20260526T213000
+SUMMARY:כרבולב
+DESCRIPTION:מרחב חיבוקים\, כרבולים ומגע אוהב בתל אביב בהנחיית ליאורה. נפתח במעגל פתיחה\, טקס קקאו ותנועה חופשית\, ולאחר מכן זמן חופשי למגע וכרבולים ללא הנחייה. מרחב מאוזן מגדרית – נשים יכולות להירשם לבד.
+LOCATION:שבט\, תל אביב · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%91-20260526-1930
 END:VEVENT
 BEGIN:VEVENT
 UID:9407e5bc8b8e39de67363d0e576ed0c1@merhav-bari
-DTSTAMP:20260524T082655Z
+DTSTAMP:20260526T071627Z
 DTSTART:20260528T200000
 DTEND:20260529T010000
 SUMMARY:מקדש מפת האינטימיות
-DESCRIPTION:ערב חקירה משחקית של מפת האינטימיות דרך מגע אנרגטי\, חושני ואיטי. שיתוף פעולה של ראדיקה ותמיר. הרשמה רק לאחר שיחת היכרות עם המנחים.
+DESCRIPTION:ערב שכולו חקירה משחקית ושובבה של מפת האינטימיות. דרך מגע אנרגטי\, חושני\, עוצמתי ואיטי נרגיש כיצד האנרגיה נבנית מבפנים\, זורמת ומתמלאת אור. שיתוף פעולה של ראדיקה ויצחק.
 LOCATION:גן זן\, פרדס חנה · פרדס חנה
 URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A7%D7%93%D7%A9-%D7%9E%D7%A4%D7%AA-%D7%94%D7%90%D7%99%D7%A0%D7%98%D7%99%D7%9E%D7%99%D7%95%D7%AA-20260528-2000
 END:VEVENT
 BEGIN:VEVENT
-UID:01c168780fc6fc67b899587e6ed86b99@merhav-bari
-DTSTAMP:20260524T082655Z
+UID:293dad47eb3f022f20b5df4e3a91dddb@merhav-bari
+DTSTAMP:20260526T071627Z
+DTSTART:20260528T193000
+DTEND:20260529T000000
+SUMMARY:Spring Nights – מקדש טנטרי
+DESCRIPTION:מקדש טנטרי מונחה בתל אביב\, באיזון מגדרי. מרחב של מיניות מודעת לחקירת עצמנו דרך מגע\, נוכחות והסכמה. הערב מתאים לזוגות וליחידים. גברים נרשמים עם מאזנת בלבד.
+LOCATION:תל אביב (כתובת מדויקת לאחר אישור) · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-Spring-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260528-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:aa31550ec1f3b7414f2cc4ae19adf8bf@merhav-bari
+DTSTAMP:20260526T071627Z
 DTSTART:20260528T193000
 DTEND:20260528T220000
-SUMMARY:ערב מגע אוהב לזוגות בבריכה מחוממת
-DESCRIPTION:ערב זוגי חוויתי של מגע אוהב במים חמים\, כולל תנועה משותפת ואינטימיות. בעירום אופציונלי. מוגבל ל-7 זוגות.
-LOCATION:בריכה פרטית ומחוממת ליד בנימינה (כתובת מלאה לנרשמים) · בנימינה
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%A8%D7%91-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-%D7%91%D7%91%D7%A8%D7%99%D7%9B%D7%94-%D7%9E%D7%97%D7%95%D7%9E%D7%9E%D7%AA-20260528-1930
+SUMMARY:סדנת מגע אוהב במים לזוגות
+DESCRIPTION:סדנה זוגית חוויתית של מגע אוהב במים חמים\, המכילה רגש\, משחקיות\, אירוטיקה\, הרפיה ואינטימיות. בהנחיית רותם רם\, בבריכה פרטית מחוממת ליד בנימינה. עירום אופציונלי.
+LOCATION:בריכה פרטית מחוממת\, ליד בנימינה · בנימינה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%91%D7%9E%D7%99%D7%9D-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-20260528-1930
 END:VEVENT
 BEGIN:VEVENT
-UID:bb7cbf25bd2cf5a6cc6e53c9dcb54fc2@merhav-bari
-DTSTAMP:20260524T082655Z
+UID:1e6641e0b55bb5f66e61044080281677@merhav-bari
+DTSTAMP:20260526T071627Z
+DTSTART:20260528T190000
+DTEND:20260528T223000
+SUMMARY:Cuddle Party – מריה מיטמי
+DESCRIPTION:מסיבת כרבולים עם מריה – ערב חם ומחבר בתל אביב. האחרון לפני שמריה עוזבת ביוני. מרחב רך ולא-מיני להאט\, לנשום ולהתחבר דרך מגע אנושי. מתאים גם למי שמגיע לבד.
+LOCATION:תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Party-%D7%9E%D7%A8%D7%99%D7%94-%D7%9E%D7%99%D7%98%D7%9E%D7%99-20260528-1900
+END:VEVENT
+BEGIN:VEVENT
+UID:572efde9648a4f5493fdbae47bc0dffb@merhav-bari
+DTSTAMP:20260526T071627Z
+DTSTART;VALUE=DATE:20260528
+DTEND;VALUE=DATE:20260529
+SUMMARY:Temple Event – Ariel-Sarah
+DESCRIPTION:Temple event with good eyes\, touch\, eros and sensuality in Beit Shemesh. Focus on connection\, love and intimacy – not swinger energy. Underwear stays on in the main room. Light food and drinks included.
+LOCATION:בית שמש · בית שמש
+URL:https://mim21.github.io/merhav-bari/#event-Temple-Event-Ariel-Sarah-20260528
+END:VEVENT
+BEGIN:VEVENT
+UID:0e2434d26d42c9f16c330164c2d823d3@merhav-bari
+DTSTAMP:20260526T071627Z
 DTSTART:20260529T200000
 DTEND:20260530T000000
-SUMMARY:Soft Play Party Special – אבישג זלוף ואוקאס
-DESCRIPTION:Soft Play Party חוגגת 4 שנים – ספיישל עם אבישג זלוף ואוקאס יחד. מסע של מוזיקה\, קקאו\, תנועה ומגע רך. נשים וצמדים בהרשמה מיידית\; גברים ברשימת המתנה.
-LOCATION:בית להיוולד מחדש – רחוב מרדכי אנילביץ' 62\, תל אביב-יפו · תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-Special-%D7%90%D7%91%D7%99%D7%A9%D7%92-%D7%96%D7%9C%D7%95%D7%A3-%D7%95%D7%90%D7%95%D7%A7%D7%90%D7%A1-20260529-2000
+SUMMARY:Soft Play Party – חגיגת 4 שנים
+DESCRIPTION:ספיישל מיוחד של Soft Play Party עם אבישג זלוף ואוקאס\, לרגל ארבע שנות Soft Play! מסע מוזיקלי עם קקאו\, תנועה ומגע רך. מרחב בטוח לחיבורים אמיתיים דרך משחק\, מגע ואינטימיות עדינה.
+LOCATION:תל אביב · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-%D7%97%D7%92%D7%99%D7%92%D7%AA-4-%D7%A9%D7%A0%D7%99%D7%9D-20260529-2000
 END:VEVENT
 BEGIN:VEVENT
-UID:9983f487084cfa25940c75be3ce0969f@merhav-bari
-DTSTAMP:20260524T082655Z
+UID:0ce18d35055dfb682013d057475cd13f@merhav-bari
+DTSTAMP:20260526T071627Z
+DTSTART:20260530T190000
+DTEND:20260530T220000
+SUMMARY:מישהו לחמוד אותו במגע – גילאי 40-55
+DESCRIPTION:מפגש חמידה במגע לאנשים פנויים בגילאי 40-55 בקיסריה. מתוודעים אחד לשני דרך מגע ומילה – בלי אפליקציות\, בלי צ'טים\, בלי פוטושופ. בהנחיית יובל איל וגל שחף.
+LOCATION:קיסריה · קיסריה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%99%D7%A9%D7%94%D7%95-%D7%9C%D7%97%D7%9E%D7%95%D7%93-%D7%90%D7%95%D7%AA%D7%95-%D7%91%D7%9E%D7%92%D7%A2-%D7%92%D7%99%D7%9C%D7%90%D7%99-40-55-20260530-1900
+END:VEVENT
+BEGIN:VEVENT
+UID:21d78368c16f2601ce714d5dcdbbd95c@merhav-bari
+DTSTAMP:20260526T071627Z
 DTSTART:20260530T180000
 DTEND:20260530T220000
 SUMMARY:עונג שבת זוגי
-DESCRIPTION:סדנה זוגית לחקירת המפגש האינטימי דרך 4 סוגי מגע. ערב מחבר לזוגות שרוצים לגוון ולהרחיב את המיניות הזוגית שלהם.
-LOCATION:LUST\, תל אביב · תל אביב
+DESCRIPTION:סדנה זוגית חוויתית לזוגות המבקשים להרחיב ולגוון את המיניות הזוגית. נשחק עם ארבעת סוגי המגע ונגלה אפשרויות מרגשות\, מחיות ומחברות. מתקיים ב-LUST\, פלורנטין\, תל אביב.
+LOCATION:LUST\, פלורנטין\, תל אביב · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%A9%D7%91%D7%AA-%D7%96%D7%95%D7%92%D7%99-20260530-1800
 END:VEVENT
 BEGIN:VEVENT
-UID:6413f8325423bcd74392d7dd9e4d9326@merhav-bari
-DTSTAMP:20260524T082655Z
+UID:e5e8a47529d744b126d3a5c087ac7681@merhav-bari
+DTSTAMP:20260526T071627Z
 DTSTART:20260603T200000
 DTEND:20260604T000000
-SUMMARY:סדנת נשים – חיבור לאנרגיה הנקבית במים
-DESCRIPTION:סדנה לנשים בלבד: חיבור לאנרגיה הנקבית דרך תנועה בבריכה ברוח הביודאנסה\, מגע אוהב בציפה ומגע דינאמי עם כיסוי עיניים בחדר חושך. יש מרחב מוגן.
-LOCATION:מרחב סדנאות עם בריכה מחוממת\, רחובות · רחובות
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%A0%D7%A9%D7%99%D7%9D-%D7%97%D7%99%D7%91%D7%95%D7%A8-%D7%9C%D7%90%D7%A0%D7%A8%D7%92%D7%99%D7%94-%D7%94%D7%A0%D7%A7%D7%91%D7%99%D7%AA-%D7%91%D7%9E%D7%99%D7%9D-20260603-2000
+SUMMARY:סדנת טנטרה לנשים
+DESCRIPTION:סדנת טנטרה לנשים בלבד: ארבע שעות של שחרור וחיבור הכוללות תנועה במים ברוח הביודאנסה\, ציפת מלאכיות ומגע דינמי בכיסוי עיניים בחדר חושך. המרחב מאפשר אך לא מחייב עירום ומגע נועז.
+LOCATION:מרחב סדנאות עם בריכה מקורה ומחוממת\, רחובות · רחובות
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%98%D7%A0%D7%98%D7%A8%D7%94-%D7%9C%D7%A0%D7%A9%D7%99%D7%9D-20260603-2000
 END:VEVENT
 BEGIN:VEVENT
-UID:a0fc5b24a3cd52954a346ad231401835@merhav-bari
-DTSTAMP:20260524T082655Z
+UID:a95b9d92fce968bf5c6e546d3d8c0bae@merhav-bari
+DTSTAMP:20260526T071627Z
 DTSTART:20260611T203000
 DTEND:20260611T233000
 SUMMARY:Latihan – מסע קשוב בכיסוי עיניים
-DESCRIPTION:סדנת תנועה עם כיסוי עיניים בהנחיית אבישג מאיה זלוף. תנועה מתוך נשימה והקשבה לגוף\, מלווה במסע מוזיקלי. ללא מגע גניטלי\; מגע קשוב אפשרי.
-LOCATION:פרדס חנה (מיקום מדויק לנרשמים) · פרדס חנה
+DESCRIPTION:סדנת תנועה עם כיסוי עיניים עם אבישג מאיה זלוף. נעים לאט מתוך נשימה והקשבה למה שעולה בגוף\, במסע מוזיקלי לפגישה עם תחושות\, רגשות ותנועה מתוך חקירה פנימית. ללא עירום ומגע באברי מין.
+LOCATION:פרדס חנה · פרדס חנה
 URL:https://mim21.github.io/merhav-bari/#event-Latihan-%D7%9E%D7%A1%D7%A2-%D7%A7%D7%A9%D7%95%D7%91-%D7%91%D7%9B%D7%99%D7%A1%D7%95%D7%99-%D7%A2%D7%99%D7%A0%D7%99%D7%99%D7%9D-20260611-2030
 END:VEVENT
 END:VCALENDAR
