@@ -313,11 +313,12 @@
     },
     "source_messages": [
       {
-        "line_reference": 330,
+        "line_reference": null,
         "source_excerpt": "השבוע נחמוד.",
         "source_message_timestamp": "2026-05-25"
       }
     ],
+    "image_url": "https://static.wixstatic.com/media/d36a2b_36079565e1de4f0682c38b55618ad1b2~mv2.jpg",
     "confidence": 0.85
   },
   {
