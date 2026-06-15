@@ -1,55 +1,95 @@
-BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//merhav-bari//pipeline//HE
-X-WR-CALNAME:מרחב בריא – אירועים
-X-WR-TIMEZONE:Asia/Jerusalem
-BEGIN:VEVENT
-UID:5c4f2d19cc22576abf05587270708463@merhav-bari
-DTSTAMP:20260613T101515Z
-DTSTART:20260617T190000
-DTEND:20260618T010000
-SUMMARY:Cuddle+ Workshop
-DESCRIPTION:סדנת Cuddle+ עם יצחק וטל לחקירת מגע חושני ואירוטי מתוך הסכמה וביטחון. הערב כולל מעגל פתיחה\, תרגילים מונחים\, זמן חקירה חופשי ומעגל סגירה\; עירום חלקי אפשרי\, ללא מגע באיברי מין וללא אלכוהול או משני תודעה.
-LOCATION:סטודיו בשכונת פלורנטין\, תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-20260617-1900
-END:VEVENT
-BEGIN:VEVENT
-UID:7d37968895621da0b6df8cdceab01c17@merhav-bari
-DTSTAMP:20260613T101515Z
-DTSTART:20260618T203000
-DTEND:20260619T010000
-SUMMARY:Heavenly Temple Cuddles and More
-DESCRIPTION:Evening temple gathering with old and new friends\, cuddles\, soft touch\, rising eros and playfulness. The time is described as flexible.
-LOCATION:בית שמש
-URL:https://mim21.github.io/merhav-bari/#event-Heavenly-Temple-Cuddles-and-More-20260618-2030
-END:VEVENT
-BEGIN:VEVENT
-UID:cd1b452691e22a48525c5c9ac240bb41@merhav-bari
-DTSTAMP:20260613T101515Z
-DTSTART:20260618T193000
-DTEND:20260618T213000
-SUMMARY:סדנת זוגות על קינק והתמסרות
-DESCRIPTION:סדנה לזוגות שרוצים להכיר את עולמות הקינק וההתמסרות בצורה משחקית\, מונחית ומלאת ידע. אין צורך בניסיון קודם.
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%96%D7%95%D7%92%D7%95%D7%AA-%D7%A2%D7%9C-%D7%A7%D7%99%D7%A0%D7%A7-%D7%95%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260618-1930
-END:VEVENT
-BEGIN:VEVENT
-UID:23f333ad92610e70abe2fb4592b2d828@merhav-bari
-DTSTAMP:20260613T101515Z
-DTSTART:20260625T140000
-DTEND:20260625T160000
-SUMMARY:ריטריט ליפול לאיזון
-DESCRIPTION:ריטריט קונטקט אימפרוביזציה של 3 ימים בטבע לצד מקור מים מתוקים\, עם סשנים מונחים ביום וג'אמים אל תוך הלילה. מרחב לתנועה\, מנוחה\, מפגש והקשבה.
-LOCATION:יער\, כ-45 דקות דרומית מתל אביב
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D7%9C%D7%90%D7%99%D7%96%D7%95%D7%9F-20260625-1400
-END:VEVENT
-BEGIN:VEVENT
-UID:58146e608b1b705cb4f840b610e8e291@merhav-bari
-DTSTAMP:20260613T101515Z
-DTSTART:20260627T160000
-DTEND:20260627T223000
-SUMMARY:משחקי מגע אנפילטרד
-DESCRIPTION:מרחב מונחה של מגע\, יצירתיות וחיבור אנושי בסביבה בטוחה עם גבולות ברורים\, איזון מגדרי ומקום לביטוי אישי. במקום יש מרחב מוגן ומזגן.
-LOCATION:פרדס חנה כרכור
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%9E%D7%92%D7%A2-%D7%90%D7%A0%D7%A4%D7%99%D7%9C%D7%98%D7%A8%D7%93-20260627-1600
-END:VEVENT
-END:VCALENDAR
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//merhav-bari//pipeline//HE
+X-WR-CALNAME:מרחב בריא – אירועים
+X-WR-TIMEZONE:Asia/Jerusalem
+BEGIN:VEVENT
+UID:0c348527af01154008f5791f516be458@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260617T190000
+DTEND:20260618T010000
+SUMMARY:Cuddle+ Workshop עם יצחק וטל
+DESCRIPTION:סדנת ערב לחקירת מגע חושני ואירוטי מתוך עקרונות של ביטחון והסכמה\, בהמשך לעולם מסיבות הכרבולים. עירום חלקי (תחתונים)\, ללא מגע באיברי מין. מתכנסים ב-19:00\, מעגל פתיחה 19:15\, סיום סביב חצות-01:00.
+LOCATION:סטודיו בשכונת פלורנטין\, תל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-%D7%A2%D7%9D-%D7%99%D7%A6%D7%97%D7%A7-%D7%95%D7%98%D7%9C-20260617-1900
+END:VEVENT
+BEGIN:VEVENT
+UID:8aa31a45f6fd18ddd36d6e68b0d475ce@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260618T193000
+DTEND:20260618T213000
+SUMMARY:סדנת קינק/התמסרות לזוגות (Play Lab)
+DESCRIPTION:סדנה לזוגות שרוצים ללמוד על עולמות הקינק וההתמסרות בצורה משחקית\, מונחית ומלאת ידע. אין צורך בניסיון קודם — באים ללמוד הכל מההתחלה.
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%A7%D7%99%D7%A0%D7%A7-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-Play-Lab-20260618-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:73170bffb79118bce8f3593e2c90a5b3@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260618T200000
+DTEND:20260619T000000
+SUMMARY:מסיבת כירבולים עם אבישג מאיה זלוף
+DESCRIPTION:מסיבת כרבולים בהנחיית אבישג מאיה זלוף\, מרחב מגע נוכח וקשוב\, הקשבה לגוף ותקשורת של גבולות. מתכנסים ב-20:00\, התחלה 20:30 עד חצות. כל אחד מביא מאכל צמחוני לשולחן משותף. הנחה אפשרית למי שצריך.
+LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A1%D7%99%D7%91%D7%AA-%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D-%D7%A2%D7%9D-%D7%90%D7%91%D7%99%D7%A9%D7%92-%D7%9E%D7%90%D7%99%D7%94-%D7%96%D7%9C%D7%95%D7%A3-20260618-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:26c8863af9e40ba36c640dd7bd216bb3@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260618T203000
+DTEND:20260619T010000
+SUMMARY:Heavenly Temple Cuddles and More
+DESCRIPTION:A warm evening of old and new friends — cuddles\, soft touch and some rising eros and playfulness. Price includes light food and drinks\; discount for two women registering together as friends. Hosted by Ariella in Beit Shemesh.
+LOCATION:בית שמש (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-Heavenly-Temple-Cuddles-and-More-20260618-2030
+END:VEVENT
+BEGIN:VEVENT
+UID:fb82be6bb6f4386b97630820c2275779@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260619T080000
+DTEND:20260619T100000
+SUMMARY:קונטקט במים בקיסריה (ים)
+DESCRIPTION:מפגש קונטקט במים בים בקיסריה בהנחיית עילי — מסע בחלל בין מים לארץ\, ריחוף\, צלילה והרחבת תנועות וקשרים. מוזמנים לפנות לפרטים נוספים.
+LOCATION:הים בקיסריה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%91%D7%9E%D7%99%D7%9D-%D7%91%D7%A7%D7%99%D7%A1%D7%A8%D7%99%D7%94-%D7%99%D7%9D-20260619-0800
+END:VEVENT
+BEGIN:VEVENT
+UID:d86e869c2c4d252e303df3ba4d27a5a8@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260625T140000
+DTEND:20260625T160000
+SUMMARY:ריטריט ליפול לאיזון — קונטקט\, תנועה וטבע
+DESCRIPTION:שלושה ימים של קונטקט\, תנועה\, טבע ויחד לצד מקור מים מתוקים — סשנים מונחים ביום וג'אמים אל תוך הלילה. מתחיל ביום חמישי ב-14:00 ומסתיים בשבת ב-16:00. אפשרות לתשלומים ולתמיכה כלכלית.
+LOCATION:יער כ-45 דקות דרומית לתל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D7%9C%D7%90%D7%99%D7%96%D7%95%D7%9F-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%AA%D7%A0%D7%95%D7%A2%D7%94-%D7%95%D7%98%D7%91%D7%A2-20260625-1400
+END:VEVENT
+BEGIN:VEVENT
+UID:8f81ab0a982ac0ddcfa3443c2daa1594@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260625T200000
+DTEND:20260626T000000
+SUMMARY:טקס המשיחה הטנטרי
+DESCRIPTION:ערב עונג טהור ונועז עטוף בשמן חם בהנחיית אלון גושן ודודי מיכאל וויסבורט. מרחב מקודש המיועד למנוסים\, כולל עירום מלא ומגע גופני קבוצתי. מתכנסים 19:30\, התחלה 20:00\, סיום בחצות. ההרשמה מותנית בשיחת התאמה אישית.
+LOCATION:סטודיו אינטימי בפרדס חנה (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%94%D7%9E%D7%A9%D7%99%D7%97%D7%94-%D7%94%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260625-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:36a2570cd9f7d88840e36484d8dd98d1@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260627T160000
+DTEND:20260627T223000
+SUMMARY:משחקי מגע unfiltered
+DESCRIPTION:שש וחצי שעות של חגיגת מגע\, יצירתיות וחיבור אנושי. מרחב מונחה עם גבולות ברורים\, איזון מגדרי ומרחב מוגן. מרחב חקירה למגע ולסקרנות חושית מבוסס דמיון\, אסוציאציות והומור.
+LOCATION:פרדס חנה כרכור
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%9E%D7%92%D7%A2-unfiltered-20260627-1600
+END:VEVENT
+BEGIN:VEVENT
+UID:e09ed8e2ef914be38567a9d7c5d4bcaf@merhav-bari
+DTSTAMP:20260615T221531Z
+DTSTART:20260704T193000
+DTEND:20260704T220000
+SUMMARY:סדנה לזוגות של מגע אוהב במים
+DESCRIPTION:מפגש זוגי חוויתי במים החמים בהנחיית רותם רם\, המכיל רגש\, משחקיות\, אירוטיקה\, הרפיה ואינטימיות (בעירום אופציונלי). בבריכה פרטית ליד בנימינה\, מוגבל ל-7 זוגות.
+LOCATION:בריכה פרטית ליד בנימינה (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%94-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-%D7%A9%D7%9C-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%91%D7%9E%D7%99%D7%9D-20260704-1930
+END:VEVENT
+END:VCALENDAR
