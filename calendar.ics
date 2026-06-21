@@ -4,57 +4,18 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:0c348527af01154008f5791f516be458@merhav-bari
-DTSTAMP:20260615T221531Z
-DTSTART:20260617T190000
-DTEND:20260618T010000
-SUMMARY:Cuddle+ Workshop עם יצחק וטל
-DESCRIPTION:סדנת ערב לחקירת מגע חושני ואירוטי מתוך עקרונות של ביטחון והסכמה\, בהמשך לעולם מסיבות הכרבולים. עירום חלקי (תחתונים)\, ללא מגע באיברי מין. מתכנסים ב-19:00\, מעגל פתיחה 19:15\, סיום סביב חצות-01:00.
-LOCATION:סטודיו בשכונת פלורנטין\, תל אביב (מיקום מדויק נשלח לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-%D7%A2%D7%9D-%D7%99%D7%A6%D7%97%D7%A7-%D7%95%D7%98%D7%9C-20260617-1900
-END:VEVENT
-BEGIN:VEVENT
-UID:8aa31a45f6fd18ddd36d6e68b0d475ce@merhav-bari
-DTSTAMP:20260615T221531Z
-DTSTART:20260618T193000
-DTEND:20260618T213000
-SUMMARY:סדנת קינק/התמסרות לזוגות (Play Lab)
-DESCRIPTION:סדנה לזוגות שרוצים ללמוד על עולמות הקינק וההתמסרות בצורה משחקית\, מונחית ומלאת ידע. אין צורך בניסיון קודם — באים ללמוד הכל מההתחלה.
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%AA-%D7%A7%D7%99%D7%A0%D7%A7-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-Play-Lab-20260618-1930
-END:VEVENT
-BEGIN:VEVENT
-UID:73170bffb79118bce8f3593e2c90a5b3@merhav-bari
-DTSTAMP:20260615T221531Z
-DTSTART:20260618T200000
-DTEND:20260619T000000
-SUMMARY:מסיבת כירבולים עם אבישג מאיה זלוף
-DESCRIPTION:מסיבת כרבולים בהנחיית אבישג מאיה זלוף\, מרחב מגע נוכח וקשוב\, הקשבה לגוף ותקשורת של גבולות. מתכנסים ב-20:00\, התחלה 20:30 עד חצות. כל אחד מביא מאכל צמחוני לשולחן משותף. הנחה אפשרית למי שצריך.
-LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A1%D7%99%D7%91%D7%AA-%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D-%D7%A2%D7%9D-%D7%90%D7%91%D7%99%D7%A9%D7%92-%D7%9E%D7%90%D7%99%D7%94-%D7%96%D7%9C%D7%95%D7%A3-20260618-2000
-END:VEVENT
-BEGIN:VEVENT
-UID:26c8863af9e40ba36c640dd7bd216bb3@merhav-bari
-DTSTAMP:20260615T221531Z
-DTSTART:20260618T203000
-DTEND:20260619T010000
-SUMMARY:Heavenly Temple Cuddles and More
-DESCRIPTION:A warm evening of old and new friends — cuddles\, soft touch and some rising eros and playfulness. Price includes light food and drinks\; discount for two women registering together as friends. Hosted by Ariella in Beit Shemesh.
-LOCATION:בית שמש (מיקום מדויק נשלח לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-Heavenly-Temple-Cuddles-and-More-20260618-2030
-END:VEVENT
-BEGIN:VEVENT
-UID:fb82be6bb6f4386b97630820c2275779@merhav-bari
-DTSTAMP:20260615T221531Z
-DTSTART:20260619T080000
-DTEND:20260619T100000
-SUMMARY:קונטקט במים בקיסריה (ים)
-DESCRIPTION:מפגש קונטקט במים בים בקיסריה בהנחיית עילי — מסע בחלל בין מים לארץ\, ריחוף\, צלילה והרחבת תנועות וקשרים. מוזמנים לפנות לפרטים נוספים.
-LOCATION:הים בקיסריה
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%91%D7%9E%D7%99%D7%9D-%D7%91%D7%A7%D7%99%D7%A1%D7%A8%D7%99%D7%94-%D7%99%D7%9D-20260619-0800
+UID:46a54862ffeba9f9974674323360d0b5@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260623T194000
+DTEND:20260623T231000
+SUMMARY:כרבולב — מרחב מחבק
+DESCRIPTION:מרחב כרבולים ומגע אוהב עם מעגל פתיחה\, טקס קקאו\, תנועה חופשית והרבה זמן חופשי למגע וכרבולים. נשים יכולות להירשם לבד או באיזון\; גבר ללא איזון נכנס לרשימת המתנה.
+LOCATION:שבט\, Paul Kor 16\, תל אביב-יפו
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%91-%D7%9E%D7%A8%D7%97%D7%91-%D7%9E%D7%97%D7%91%D7%A7-20260623-1940
 END:VEVENT
 BEGIN:VEVENT
 UID:d86e869c2c4d252e303df3ba4d27a5a8@merhav-bari
-DTSTAMP:20260615T221531Z
+DTSTAMP:20260621T121617Z
 DTSTART:20260625T140000
 DTEND:20260625T160000
 SUMMARY:ריטריט ליפול לאיזון — קונטקט\, תנועה וטבע
@@ -64,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:8f81ab0a982ac0ddcfa3443c2daa1594@merhav-bari
-DTSTAMP:20260615T221531Z
+DTSTAMP:20260621T121617Z
 DTSTART:20260625T200000
 DTEND:20260626T000000
 SUMMARY:טקס המשיחה הטנטרי
@@ -74,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%94%D7%9E%D
 END:VEVENT
 BEGIN:VEVENT
 UID:36a2570cd9f7d88840e36484d8dd98d1@merhav-bari
-DTSTAMP:20260615T221531Z
+DTSTAMP:20260621T121617Z
 DTSTART:20260627T160000
 DTEND:20260627T223000
 SUMMARY:משחקי מגע unfiltered
@@ -83,13 +44,63 @@ LOCATION:פרדס חנה כרכור
 URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%9E%D7%92%D7%A2-unfiltered-20260627-1600
 END:VEVENT
 BEGIN:VEVENT
+UID:96240c9d593ce60cfb48eebf81b76afd@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260702T194500
+DTEND:20260703T040000
+SUMMARY:לילה שלם של קונטקט במים
+DESCRIPTION:לילה טקסי וחוויתי של קונטקט במים במרחב ביתי\, נעים ובטוח. המפגש כולל מעגל פתיחה\, תרגילים מונחים\, זמן חופשי במים ומחוץ להם\, קקאו טקסי וסשן עומק משותף עד לפנות בוקר.
+LOCATION:בריכה מחוממת בפרדס חנה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%99%D7%9C%D7%94-%D7%A9%D7%9C%D7%9D-%D7%A9%D7%9C-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%91%D7%9E%D7%99%D7%9D-20260702-1945
+END:VEVENT
+BEGIN:VEVENT
 UID:e09ed8e2ef914be38567a9d7c5d4bcaf@merhav-bari
-DTSTAMP:20260615T221531Z
+DTSTAMP:20260621T121617Z
 DTSTART:20260704T193000
 DTEND:20260704T220000
 SUMMARY:סדנה לזוגות של מגע אוהב במים
 DESCRIPTION:מפגש זוגי חוויתי במים החמים בהנחיית רותם רם\, המכיל רגש\, משחקיות\, אירוטיקה\, הרפיה ואינטימיות (בעירום אופציונלי). בבריכה פרטית ליד בנימינה\, מוגבל ל-7 זוגות.
 LOCATION:בריכה פרטית ליד בנימינה (מיקום מדויק נשלח לנרשמים)
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%94-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-%D7%A9%D7%9C-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%91%D7%9E%D7%99%D7%9D-20260704-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:a28134c219390a9938798e82a5bca5ab@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260716T193000
+DTEND:20260717T000000
+SUMMARY:Summer Nights — מקדש התמסרות
+DESCRIPTION:מקדש התמסרות מונחה באיזון מגדרי\, בהנחיית חגית וגילי. ערב של היכרות\, פתיחת לב\, עונג וארוס במרחב של נוכחות\, בחירה והסכמה עם גבולות ברורים.
+LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260716-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:89d6cba55f878bfb5429e1be0778f66c@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260728T200000
+DTEND:20260729T000000
+SUMMARY:לָעוֹמֶק 2 — סדנת זוגות
+DESCRIPTION:סדנת מגע חוויתית ונועזת לזוגות מבית Arts of Love בהנחיית אוקאס. כל זוג מתרגל עם עצמו בלבד\, עם תרגולי מגע חושני ואירוטי\, תקשורת\, גבולות\, סנכרון ומוזיקה חיה לאורך הערב.
+LOCATION:בית להיוולד מחדש\, תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7-2-%D7%A1%D7%93%D7%A0%D7%AA-%D7%96%D7%95%D7%92%D7%95%D7%AA-20260728-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:ac8530998bc292dd280eb53f31e935d5@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260813T193000
+DTEND:20260814T000000
+SUMMARY:Summer Nights — מקדש התמסרות
+DESCRIPTION:מקדש התמסרות מונחה באיזון מגדרי\, בהנחיית חגית וגילי. ערב של היכרות\, פתיחת לב\, עונג וארוס במרחב של נוכחות\, בחירה והסכמה עם גבולות ברורים.
+LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260813-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
+DTSTAMP:20260621T121617Z
+DTSTART:20260910T193000
+DTEND:20260911T000000
+SUMMARY:Summer Nights — מקדש התמסרות
+DESCRIPTION:מקדש התמסרות מונחה באיזון מגדרי\, בהנחיית חגית וגילי. ערב של היכרות\, פתיחת לב\, עונג וארוס במרחב של נוכחות\, בחירה והסכמה עם גבולות ברורים.
+LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260910-1930
 END:VEVENT
 END:VCALENDAR
