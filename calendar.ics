@@ -4,28 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:74411dce5b9cfe1a8e4015b32a73d3e8@merhav-bari
-DTSTAMP:20260726T173936Z
-DTSTART:20260724T150000
-DTEND:20260724T173000
-SUMMARY:ריטריטון DeepContact
-DESCRIPTION:ריטריטון של DeepContact: יממה של תנועה\, מפגש\, הקשבה ומגע\, עם לינה בסטודיו תנע בעין שמר.\nhttps://mim21.github.io/merhav-bari/#event-ריטריטון-DeepContact-20260724-1500
-LOCATION:סטודיו תנע\, עין שמר
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98%D7%95%D7%9F-DeepContact-20260724-1500
-END:VEVENT
-BEGIN:VEVENT
-UID:1fde81d2331fc9d1d0497d5e95d9a893@merhav-bari
-DTSTAMP:20260726T173936Z
-DTSTART:20260725T160000
-DTEND:20260725T223000
-SUMMARY:גל שחף — משחקי מגע Unfiltered
-DESCRIPTION:בהנחיית גל שחף\nמרחב משחקי מגע לאנשים בגילאי 28–53\, עם חקירה\, משחקיות\, תקשורת והסכמה. בהנחיית גל.\nhttps://mim21.github.io/merhav-bari/#event-משחקי-מגע-Unfiltered-20260725-1600
-LOCATION:פרדס חנה כרכור (מיקום מדויק נשלח לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%9E%D7%92%D7%A2-Unfiltered-20260725-1600
-END:VEVENT
-BEGIN:VEVENT
 UID:c21b62d0df867be95b1eb89718ed9cdd@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260728T190000
 DTEND:20260728T230000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -35,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:c335d54b0322152ffb8c6efd3d61adf7@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260730T210000
 DTEND:20260731T020000
 SUMMARY:מסעות הלב — צוקריה — ערב פנטזיה ומשחקיות
@@ -45,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A6%D7%95%D7%A7%D7%A8%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:606b19c22d827eff1b61f3093dcfe152@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260730T190000
 DTEND:20260730T230000
 SUMMARY:Vishvas Kamerer — אלכימיית המגע — ערב מגע מודע
@@ -55,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%90%D7%9C%D7%9B%D7%99%D7%9E%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:b1ad602b491b200dce7ff069bcb896a9@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260730T183000
 DTEND:20260730T213000
 SUMMARY:אודליה ואבי — נוגעים באהבה — סדנת רפלקסולוגיה זוגית
@@ -65,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A0%D7%95%D7%92%D7%A2%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:2a175583749a92d875da0c823f9ce5a1@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260730T200000
 DTEND:20260731T003000
 SUMMARY:אבישג מאיה זלוף — Soft Play Party — ערב משחקיות ומגע
@@ -75,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Soft-Play-Party-%D7%A2%D7%A8%D7%9
 END:VEVENT
 BEGIN:VEVENT
 UID:6f0d6a5db753f1fc170e7f973ba3902b@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260805T190000
 DTEND:20260805T230000
 SUMMARY:מאיה לב קורן — דייט טנטרי זוגי — אורגזמת פטמה
@@ -85,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%93%D7%99%D7%99%D7%98-%D7%98%D
 END:VEVENT
 BEGIN:VEVENT
 UID:127a4bf6cfb57bf4c5ffb5f03002a8fa@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260806T193000
 DTEND:20260806T220000
 SUMMARY:רותם רם — סדנה לזוגות של מגע אוהב במים
@@ -95,7 +75,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%94-%D7%9C%D
 END:VEVENT
 BEGIN:VEVENT
 UID:ac8530998bc292dd280eb53f31e935d5@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260813T193000
 DTEND:20260814T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -105,7 +85,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -115,7 +95,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260726T173936Z
+DTSTAMP:20260727T173554Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
