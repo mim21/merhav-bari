@@ -3,7 +3,7 @@
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-src https://calendar.google.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>אירועים קרובים – מרחב בריא</title>
   <style>
@@ -62,6 +62,8 @@
     .cal-link.full-cal-apple:hover { background: #1b4332; }
     .cal-link.full-cal-gcal { background: #4361ee; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
     .cal-link.full-cal-gcal:hover { background: #3451d1; }
+    .cal-embed { max-width: 900px; margin: 0 auto 28px; }
+    .cal-embed iframe { width: 100%; height: 600px; border: 0; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: #fff; }
 .header-actions { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
     footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }
     .last-updated { font-size: 0.8rem; color: #9ca3af; margin-top: 4px; }
@@ -72,8 +74,9 @@
     <h1>🌿 אירועים קרובים</h1>
     <p>מרחב בריא – פרסום מרחבים ואירועים &nbsp;|&nbsp; 11 אירועים</p>
     <p class="last-updated">עודכן לאחרונה: 01/08/2026 04:01 · 4133963</p>
-    <div class="header-actions"><a class="cal-link full-cal-apple" href="webcal://mim21.github.io/merhav-bari/calendar.ics">📅 Apple – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/r?cid=https%3A//mim21.github.io/merhav-bari/calendar.ics" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a></div>
+    <div class="header-actions"><a class="cal-link full-cal-apple" href="webcal://mim21.github.io/merhav-bari/calendar.ics">📅 Apple – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/render?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a></div>
   </header>
+  <section class="cal-embed" aria-label="לוח אירועים"><iframe title="לוח אירועים – Google Calendar" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=Asia%2FJerusalem&amp;mode=AGENDA&amp;showTz=0&amp;showCalendars=0&amp;showTitle=0&amp;showPrint=0&amp;src=ZDhhOTU5ZDNjZThjOTdiYWQwYmJhZjQ1ZmMyYjgxNTcxYzM5YTU5NGVkZjY1N2U3NDE0OWEzNTc3YWNlOWRhOEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&amp;color=%232d6a4f" style="border:0" width="100%" height="600" frameborder="0" scrolling="no" loading="lazy"></iframe></section>
   <div class="grid">
     <div class="card" id="event-צוקריה-ערב-פנטזיה-ומשחקיות-20260730-2100" style="background:white">
   
