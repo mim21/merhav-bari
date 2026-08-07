@@ -5,7 +5,7 @@ X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
 UID:7237917d9e7137f388ef12b4d26db32b@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260808T180000
 DTEND:20260808T220000
 SUMMARY:אדר ושיה — Wild Women Temple — מרחב לחקירה נשית
@@ -15,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Wild-Women-Temple-%D7%9E%D7%A8%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:ac8530998bc292dd280eb53f31e935d5@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260813T193000
 DTEND:20260814T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -24,8 +24,18 @@ LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
 URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260813-1930
 END:VEVENT
 BEGIN:VEVENT
+UID:f02a91e9f58c62bd6526c90eedaeba0b@merhav-bari
+DTSTAMP:20260807T055250Z
+DTSTART:20260819T190000
+DTEND:20260820T000000
+SUMMARY:יצחק וטל — Cuddle+ Workshop — מגע חושני בטוח
+DESCRIPTION:בהנחיית יצחק וטל\nסדנת Cuddle+ עם יצחק וטל לחקירת מגע חושני ואירוטי מתוך ביטחון\, הסכמה ותקשורת\, ללא מגע באברי מין. הגעה ב-19:00 ומעגל פתיחה ב-19:15\; אין כניסה לאחר תחילת המעגל. ההשתתפות מותנית ברישום ובשיחת התאמה למי שטרם השתתפו.\nhttps://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-מגע-חושני-בטוח-20260819-1900
+LOCATION:סטודיו בשכונת פלורנטין (מיקום מדויק נשלח לנרשמים) · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-%D7%9E%D7%92%D7%A2-%D7%97%D7%95%D7%A9%D7%A0%D7%99-%D7%91%D7%98%D7%95%D7%97-20260819-1900
+END:VEVENT
+BEGIN:VEVENT
 UID:e770bd3bb3b5ee267eb9674bf841c618@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260828T160000
 DTEND:20260829T000000
 SUMMARY:ArtTemple — מרחב טנטרי
@@ -34,7 +44,7 @@ URL:https://mim21.github.io/merhav-bari/#event-ArtTemple-%D7%9E%D7%A8%D7%97%D7%9
 END:VEVENT
 BEGIN:VEVENT
 UID:7c6311b5a5a792994a86bee2f2c7a8b7@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260829T190000
 DTEND:20260829T213000
 SUMMARY:רותם רם — סדנה לזוגות של מגע אוהב במים
@@ -44,7 +54,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A1%D7%93%D7%A0%D7%94-%D7%9C%D
 END:VEVENT
 BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -54,7 +64,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -64,7 +74,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:5da0a42c34836d776c970bd2a68014f3@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20260918T080000
 DTEND:20260918T190000
 SUMMARY:מיכאל פינקל ומנחי הכנס — כנס קונסטלציה משפחתית והעברה בין־דורית
@@ -74,7 +84,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9B%D7%A0%D7%A1-%D7%A7%D7%95%D
 END:VEVENT
 BEGIN:VEVENT
 UID:5283deb75c591aee2a7da9401f92987f@merhav-bari
-DTSTAMP:20260807T054701Z
+DTSTAMP:20260807T055250Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:סער אוסטרייכר ועטר שילה — קורס יסודות DeepContact — עין שמר
