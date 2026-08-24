@@ -4,28 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:995d7b73f08a78c97543547c6c96e945@merhav-bari
-DTSTAMP:20260819T115642Z
-DTSTART:20260819T190000
-DTEND:20260820T000000
-SUMMARY:יצחק וטל — Cuddle+ Workshop — מגע חושני ובטוח
-DESCRIPTION:בהנחיית יצחק וטל\nסדנת מגע חושני ואירוטי בהשראת מרחבי כרבולים\, עם תרגול תקשורת\, גבולות והסכמה\, חלק מונחה וזמן חקירה חופשי. עירום חלקי אפשרי\; ללא מגע באיברי מין וללא משני תודעה.\nhttps://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-מגע-חושני-ובטוח-20260819-1900
-LOCATION:סטודיו בפלורנטין · תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-Cuddle-Workshop-%D7%9E%D7%92%D7%A2-%D7%97%D7%95%D7%A9%D7%A0%D7%99-%D7%95%D7%91%D7%98%D7%95%D7%97-20260819-1900
-END:VEVENT
-BEGIN:VEVENT
-UID:c95234fe6c2b9a2f3009aab3d061f82c@merhav-bari
-DTSTAMP:20260819T115642Z
-DTSTART:20260822T160000
-DTEND:20260822T223000
-SUMMARY:גל — משחקי מגע Unfiltered
-DESCRIPTION:בהנחיית גל\nמרחב מונחה בן שש וחצי שעות של משחקי מגע\, דמיון\, סקרנות וגבולות\, בזוגות ולעיתים בשלשות. חושניות\, אירוטיקה ועירום אפשריים לפי בחירה.\nhttps://mim21.github.io/merhav-bari/#event-משחקי-מגע-Unfiltered-20260822-1600
-LOCATION:פרדס חנה כרכור · פרדס חנה-כרכור
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A9%D7%97%D7%A7%D7%99-%D7%9E%D7%92%D7%A2-Unfiltered-20260822-1600
-END:VEVENT
-BEGIN:VEVENT
 UID:799351319294a9c8d5d452e41e12e16d@merhav-bari
-DTSTAMP:20260819T115642Z
+DTSTAMP:20260824T075419Z
 DTSTART:20260827T203000
 DTEND:20260828T000000
 SUMMARY:מילה מאיר — תודעת עונג — סדנה חווייתית לזוגות
@@ -34,8 +14,17 @@ LOCATION:תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-%D7%AA%D7%95%D7%93%D7%A2%D7%AA-%D7%A2%D7%95%D7%A0%D7%92-%D7%A1%D7%93%D7%A0%D7%94-%D7%97%D7%95%D7%95%D7%99%D7%99%D7%AA%D7%99%D7%AA-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-20260827-2030
 END:VEVENT
 BEGIN:VEVENT
+UID:80cf569f01caa2c105ddbfe05886af4f@merhav-bari
+DTSTAMP:20260824T075419Z
+DTSTART:20260904T093000
+DTEND:20260904T173000
+SUMMARY:עונג זוגי — סודות השפיכה הנשית וגבריות מעונגת
+DESCRIPTION:סדנת עיסוי טנטרי לזוגות המוקדשת לחיבור\, תשוקה\, מגע מודע\, עונג זוגי ועקרונות השפיכה הנשית\, בתהליך זוגי ואישי.\nhttps://mim21.github.io/merhav-bari/#event-עונג-זוגי-סודות-השפיכה-הנשית-וגבריות-מעונגת-20260904-0930
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%96%D7%95%D7%92%D7%99-%D7%A1%D7%95%D7%93%D7%95%D7%AA-%D7%94%D7%A9%D7%A4%D7%99%D7%9B%D7%94-%D7%94%D7%A0%D7%A9%D7%99%D7%AA-%D7%95%D7%92%D7%91%D7%A8%D7%99%D7%95%D7%AA-%D7%9E%D7%A2%D7%95%D7%A0%D7%92%D7%AA-20260904-0930
+END:VEVENT
+BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260819T115642Z
+DTSTAMP:20260824T075419Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -45,7 +34,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260819T115642Z
+DTSTAMP:20260824T075419Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -55,7 +44,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260819T115642Z
+DTSTAMP:20260824T075419Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
