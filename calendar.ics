@@ -5,7 +5,7 @@ X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
 UID:799351319294a9c8d5d452e41e12e16d@merhav-bari
-DTSTAMP:20260824T075419Z
+DTSTAMP:20260825T094646Z
 DTSTART:20260827T203000
 DTEND:20260828T000000
 SUMMARY:מילה מאיר — תודעת עונג — סדנה חווייתית לזוגות
@@ -15,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%AA%D7%95%D7%93%D7%A2%D7%AA-%D
 END:VEVENT
 BEGIN:VEVENT
 UID:80cf569f01caa2c105ddbfe05886af4f@merhav-bari
-DTSTAMP:20260824T075419Z
+DTSTAMP:20260825T094646Z
 DTSTART:20260904T093000
 DTEND:20260904T173000
 SUMMARY:עונג זוגי — סודות השפיכה הנשית וגבריות מעונגת
@@ -23,8 +23,18 @@ DESCRIPTION:סדנת עיסוי טנטרי לזוגות המוקדשת לחיב�
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%96%D7%95%D7%92%D7%99-%D7%A1%D7%95%D7%93%D7%95%D7%AA-%D7%94%D7%A9%D7%A4%D7%99%D7%9B%D7%94-%D7%94%D7%A0%D7%A9%D7%99%D7%AA-%D7%95%D7%92%D7%91%D7%A8%D7%99%D7%95%D7%AA-%D7%9E%D7%A2%D7%95%D7%A0%D7%92%D7%AA-20260904-0930
 END:VEVENT
 BEGIN:VEVENT
+UID:418af030dbaf1b7542380043aa0b4772@merhav-bari
+DTSTAMP:20260825T094646Z
+DTSTART:20260909T190000
+DTEND:20260909T230000
+SUMMARY:מאיה לב-קורן — העונג שבכאב — מסע לחקר עולם הקינק והשליטה
+DESCRIPTION:בהנחיית מאיה לב-קורן\nערב חווייתי ומונחה להיכרות בטוחה ומודעת עם דינמיקות של שליטה והתמסרות\, משחקי חושים ואביזרים. הערב כולל שיח על הסכמה\, תקשורת וגבולות\, הדגמה חיה והתנסות מודרכת\; פתוח ליחידים ולזוגות.\nhttps://mim21.github.io/merhav-bari/#event-העונג-שבכאב-מסע-לחקר-עולם-הקינק-והשליטה-20260909-1900
+LOCATION:פרדס חנה (מיקום מדויק יישלח לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%A2%D7%95%D7%A0%D7%92-%D7%A9%D7%91%D7%9B%D7%90%D7%91-%D7%9E%D7%A1%D7%A2-%D7%9C%D7%97%D7%A7%D7%A8-%D7%A2%D7%95%D7%9C%D7%9D-%D7%94%D7%A7%D7%99%D7%A0%D7%A7-%D7%95%D7%94%D7%A9%D7%9C%D7%99%D7%98%D7%94-20260909-1900
+END:VEVENT
+BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260824T075419Z
+DTSTAMP:20260825T094646Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -34,7 +44,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260824T075419Z
+DTSTAMP:20260825T094646Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -43,13 +53,33 @@ LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
 URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260910-1930
 END:VEVENT
 BEGIN:VEVENT
+UID:67b61781635003a4f2f25022494b1b19@merhav-bari
+DTSTAMP:20260825T094646Z
+DTSTART:20260915T180000
+DTEND:20260915T213000
+SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור ספטמבר
+DESCRIPTION:בהנחיית יניב גולד (אוקאס)\nקורס מעשי בן עשרה מפגשים באומנויות האהבה\, היחסים והמיניות בדרך הטנטרה\, בשילוב ידע מערבי\, התפתחות אישית\, מגע ומיניות מודעת. הקורס מתקיים ללא עירום וללא מגע נועז.\nhttps://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-מחזור-ספטמבר-20260915-1800
+LOCATION:תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A1%D7%A4%D7%98%D7%9E%D7%91%D7%A8-20260915-1800
+END:VEVENT
+BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260824T075419Z
+DTSTAMP:20260825T094646Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
 DESCRIPTION:בהנחיית DeepContact\nקורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact\, בקבוצה תהליכית ובמרחב בטוח.\nhttps://mim21.github.io/merhav-bari/#event-קורס-יסודות-DeepContact-עין-שמר-20261013-2000
 LOCATION:סטודיו תנע\, עין שמר
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%A2%D7%99%D7%9F-%D7%A9%D7%9E%D7%A8-20261013-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
+DTSTAMP:20260825T094646Z
+DTSTART:20261130T180000
+DTEND:20261130T213000
+SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
+DESCRIPTION:בהנחיית יניב גולד (אוקאס)\nקורס מעשי בן עשרה מפגשים באומנויות האהבה\, היחסים והמיניות בדרך הטנטרה\, בשילוב ידע מערבי\, התפתחות אישית\, מגע ומיניות מודעת. הקורס מתקיים ללא עירום וללא מגע נועז.\nhttps://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-מחזור-נובמבר-20261130-1800
+LOCATION:תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8-20261130-1800
 END:VEVENT
 END:VCALENDAR
