@@ -69,6 +69,27 @@
     .cal-embed { max-width: 900px; margin: 0 auto 28px; }
     .cal-embed iframe { width: 100%; height: clamp(300px, 42vh, 480px); border: 0; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: #fff; }
 .header-actions { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    @media (max-width: 600px) {
+      .header-actions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 4px;
+        width: 100%;
+        max-width: 100%;
+      }
+      .header-actions .cal-link {
+        min-width: 0;
+        width: 100%;
+        padding: 7px 3px;
+        font-size: 0.68rem;
+        line-height: 1.15;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .cal-embed { height: 220px; overflow: hidden; border-radius: 8px; }
+      .cal-embed iframe { display: block; height: 250px; border-radius: 8px; }
+    }
     footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }
     .last-updated { font-size: 0.8rem; color: #9ca3af; margin-top: 4px; }
   </style>
@@ -78,7 +99,7 @@
     <h1>🌿 אירועים קרובים</h1>
     <p>מרחב בריא – פרסום מרחבים ואירועים &nbsp;|&nbsp; 11 אירועים</p>
     <p class="last-updated">עודכן לאחרונה: 26/08/2026 01:26 · 0befb66</p>
-    <div class="header-actions"><a class="cal-link full-cal-apple" href="webcal://merhav-bari-calendar.merhav-bari.workers.dev/calendar.ics?src=apple">📅 Apple – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/render?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer">📅 Google – הרשם</a></div>
+    <div class="header-actions"><a class="cal-link full-cal-apple" href="webcal://merhav-bari-calendar.merhav-bari.workers.dev/calendar.ics?src=apple">📅 Apple – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/render?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer" data-subscribe-mode="legacy-render">📅 Google – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/r?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer" data-subscribe-mode="embed-plus" title="+ Google Calendar">➕ Google – הוספה</a></div>
     <div class="developer-contact" role="note">
       <a href="https://t.me/merhav_bari_contact_bot" target="_blank" rel="noopener noreferrer">💬 משוב או הצעה ליומן</a>
       <span>הפנייה היא למפתח היומן בלבד — לא למנהל או למארגן קבוצת ה-WhatsApp „מרחב בריא“.</span>
