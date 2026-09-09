@@ -4,37 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:c62d4f1b67d2b3f1537990a05b4532f6@merhav-bari
-DTSTAMP:20260903T053646Z
-DTSTART:20260903T200000
-DTEND:20260903T220000
-SUMMARY:אלון גושן — מעיין העונג — מאסטר קלאס לעונג נשי
-DESCRIPTION:בהנחיית אלון גושן\nמאסטר קלאס לחקירת עונג ואורגזמיות נרתיקית\, הרחבת היכולת האורגזמית ושפיכה נשית.\nhttps://mim21.github.io/merhav-bari/#event-מעיין-העונג-מאסטר-קלאס-לעונג-נשי-20260903-2000
-LOCATION:פרדס חנה
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%A2%D7%99%D7%99%D7%9F-%D7%94%D7%A2%D7%95%D7%A0%D7%92-%D7%9E%D7%90%D7%A1%D7%98%D7%A8-%D7%A7%D7%9C%D7%90%D7%A1-%D7%9C%D7%A2%D7%95%D7%A0%D7%92-%D7%A0%D7%A9%D7%99-20260903-2000
-END:VEVENT
-BEGIN:VEVENT
-UID:0e7c26288db27bf26e169b937d9bab42@merhav-bari
-DTSTAMP:20260903T053646Z
-DTSTART:20260903T210000
-DTEND:20260903T230000
-SUMMARY:House of Mew — GAME NIGHT
-DESCRIPTION:בהנחיית House of Mew\nHouse of Mew — GAME NIGHT. Couple price: 350₪. Singles registration opens 30.08.2026. Exact address and end time were not published in the supplied announcement.\nhttps://mim21.github.io/merhav-bari/#event-GAME-NIGHT-20260903-2100
-LOCATION:Tel Aviv
-URL:https://mim21.github.io/merhav-bari/#event-GAME-NIGHT-20260903-2100
-END:VEVENT
-BEGIN:VEVENT
-UID:80cf569f01caa2c105ddbfe05886af4f@merhav-bari
-DTSTAMP:20260903T053646Z
-DTSTART:20260904T093000
-DTEND:20260904T173000
-SUMMARY:עונג זוגי — סודות השפיכה הנשית וגבריות מעונגת
-DESCRIPTION:סדנת עיסוי טנטרי לזוגות המוקדשת לחיבור\, תשוקה\, מגע מודע\, עונג זוגי ועקרונות השפיכה הנשית\, בתהליך זוגי ואישי.\nhttps://mim21.github.io/merhav-bari/#event-עונג-זוגי-סודות-השפיכה-הנשית-וגבריות-מעונגת-20260904-0930
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A2%D7%95%D7%A0%D7%92-%D7%96%D7%95%D7%92%D7%99-%D7%A1%D7%95%D7%93%D7%95%D7%AA-%D7%94%D7%A9%D7%A4%D7%99%D7%9B%D7%94-%D7%94%D7%A0%D7%A9%D7%99%D7%AA-%D7%95%D7%92%D7%91%D7%A8%D7%99%D7%95%D7%AA-%D7%9E%D7%A2%D7%95%D7%A0%D7%92%D7%AA-20260904-0930
-END:VEVENT
-BEGIN:VEVENT
 UID:418af030dbaf1b7542380043aa0b4772@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260909T190000
 DTEND:20260909T230000
 SUMMARY:מאיה לב-קורן — העונג שבכאב — מסע לחקר עולם הקינק והשליטה
@@ -44,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%A2%D7%95%D7%A0%D7%92-%D
 END:VEVENT
 BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -54,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -64,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:266ea1915d69094fa6ec1858023eec29@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260910T200000
 DTEND:20260910T220000
 SUMMARY:נועם וסטאר — Divine Ceremony — טקס מעבר לשנה החדשה
@@ -74,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Divine-Ceremony-%D7%98%D7%A7%D7%A
 END:VEVENT
 BEGIN:VEVENT
 UID:67b61781635003a4f2f25022494b1b19@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260915T180000
 DTEND:20260915T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור ספטמבר
@@ -84,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D
 END:VEVENT
 BEGIN:VEVENT
 UID:01547e214c90a02d61918eaa67655e70@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20260915T193000
 DTEND:20260915T220000
 SUMMARY:רות אהרוני — קורס יסודות DeepContact — תל אביב
@@ -93,8 +64,18 @@ LOCATION:האחים מסלאוויטה 7 · תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-20260915-1930
 END:VEVENT
 BEGIN:VEVENT
+UID:3091d7993bf2e35c4f6f28d1ccbe512c@merhav-bari
+DTSTAMP:20260909T204921Z
+DTSTART:20260917T200000
+DTEND:20260917T220000
+SUMMARY:אלון גושן ודודי וויסבורט — טקס משיחה טנטרי
+DESCRIPTION:בהנחיית אלון גושן ודודי וויסבורט\nטקס משיחה טנטרי בהנחיית אלון גושן ודודי וויסבורט. ההשתתפות מותנית בשיחת התאמה אישית ובהרשמה מראש\, תוך שמירה על איזון מגדרי.\nhttps://mim21.github.io/merhav-bari/#event-טקס-משיחה-טנטרי-20260917-2000
+LOCATION:פרדס חנה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A9%D7%99%D7%97%D7%94-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260917-2000
+END:VEVENT
+BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -104,7 +85,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20260903T053646Z
+DTSTAMP:20260909T204921Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
