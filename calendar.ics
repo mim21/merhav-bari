@@ -5,7 +5,7 @@ X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
 UID:418af030dbaf1b7542380043aa0b4772@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260909T190000
 DTEND:20260909T230000
 SUMMARY:מאיה לב-קורן — העונג שבכאב — מסע לחקר עולם הקינק והשליטה
@@ -15,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%A2%D7%95%D7%A0%D7%92-%D
 END:VEVENT
 BEGIN:VEVENT
 UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260910T193000
 DTEND:20260910T233000
 SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
@@ -25,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7
 END:VEVENT
 BEGIN:VEVENT
 UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260910T193000
 DTEND:20260911T000000
 SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
@@ -35,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%
 END:VEVENT
 BEGIN:VEVENT
 UID:266ea1915d69094fa6ec1858023eec29@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260910T200000
 DTEND:20260910T220000
 SUMMARY:נועם וסטאר — Divine Ceremony — טקס מעבר לשנה החדשה
@@ -45,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Divine-Ceremony-%D7%98%D7%A7%D7%A
 END:VEVENT
 BEGIN:VEVENT
 UID:67b61781635003a4f2f25022494b1b19@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260915T180000
 DTEND:20260915T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור ספטמבר
@@ -54,18 +54,28 @@ LOCATION:תל אביב
 URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A1%D7%A4%D7%98%D7%9E%D7%91%D7%A8-20260915-1800
 END:VEVENT
 BEGIN:VEVENT
-UID:01547e214c90a02d61918eaa67655e70@merhav-bari
-DTSTAMP:20260909T204921Z
-DTSTART:20260915T193000
-DTEND:20260915T220000
+UID:9da0a313d2bc7b00e6c805f4040a3d32@merhav-bari
+DTSTAMP:20260910T174234Z
+DTSTART:20260915T190000
+DTEND:20260915T213000
 SUMMARY:רות אהרוני — קורס יסודות DeepContact — תל אביב
-DESCRIPTION:בהנחיית רות אהרוני\nקורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact\, בקבוצה תהליכית ובמרחב בטוח. טקסט ההודעה מציין 19:30–22:00\, בעוד הפוסטר המצורף מציין 19:00–21:30.\nhttps://mim21.github.io/merhav-bari/#event-קורס-יסודות-DeepContact-תל-אביב-20260915-1930
+DESCRIPTION:בהנחיית רות אהרוני\nקורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact\, בקבוצה תהליכית ובמרחב בטוח. ניתן להצטרף לשיעור הראשון לניסיון.\nhttps://mim21.github.io/merhav-bari/#event-קורס-יסודות-DeepContact-תל-אביב-20260915-1900
 LOCATION:האחים מסלאוויטה 7 · תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-20260915-1930
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-20260915-1900
+END:VEVENT
+BEGIN:VEVENT
+UID:48d290b21c80642d677fdcce9f26c827@merhav-bari
+DTSTAMP:20260910T174234Z
+DTSTART:20260915T193000
+DTEND:20260915T213000
+SUMMARY:כרבולב — מפגש כרבולים וטקס קקאו
+DESCRIPTION:מעגל פתיחה\, טקס קקאו\, תנועה חופשית וזמן למגע וכרבולים במרחב מאוזן. ההרשמה לגברים ללא איזון היא לרשימת המתנה.\nhttps://mim21.github.io/merhav-bari/#event-כרבולב-מפגש-כרבולים-וטקס-קקאו-20260915-1930
+LOCATION:שבט · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%91-%D7%9E%D7%A4%D7%92%D7%A9-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D-%D7%95%D7%98%D7%A7%D7%A1-%D7%A7%D7%A7%D7%90%D7%95-20260915-1930
 END:VEVENT
 BEGIN:VEVENT
 UID:3091d7993bf2e35c4f6f28d1ccbe512c@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20260917T200000
 DTEND:20260917T220000
 SUMMARY:אלון גושן ודודי וויסבורט — טקס משיחה טנטרי
@@ -74,8 +84,18 @@ LOCATION:פרדס חנה
 URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A9%D7%99%D7%97%D7%94-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260917-2000
 END:VEVENT
 BEGIN:VEVENT
+UID:1a5925c31c611f098160cd034ac03182@merhav-bari
+DTSTAMP:20260910T174234Z
+DTSTART:20260919T180000
+DTEND:20260920T000000
+SUMMARY:Wild Ginger — לא יאומן כי יכורבל — כירבוליית פסטיגל
+DESCRIPTION:בהנחיית Wild Ginger\nערב כרבולים אפלטוני עם הקרנת פסטיגלים מכל התקופות. אין ציפייה למגע\, וכל משתתף ומשתתפת בוחרים את הקצב והמרחב המתאימים להם. במקום יש ממ״ד.\nhttps://mim21.github.io/merhav-bari/#event-לא-יאומן-כי-יכורבל-כירבוליית-פסטיגל-20260919-1800
+LOCATION:פנטהאוז בחולון
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%90-%D7%99%D7%90%D7%95%D7%9E%D7%9F-%D7%9B%D7%99-%D7%99%D7%9B%D7%95%D7%A8%D7%91%D7%9C-%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%99%D7%AA-%D7%A4%D7%A1%D7%98%D7%99%D7%92%D7%9C-20260919-1800
+END:VEVENT
+BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -85,7 +105,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20260909T204921Z
+DTSTAMP:20260910T174234Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
