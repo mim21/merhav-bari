@@ -4,38 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:e2b52fbd890d6e1ddbf6442b0c871704@merhav-bari
-DTSTAMP:20260911T053648Z
-DTSTART:20260910T193000
-DTEND:20260910T233000
-SUMMARY:יניב גולד (אוקאס) — לָעוֹמֶק 2 — סדנת זוגות
-DESCRIPTION:בהנחיית יניב גולד (אוקאס)\nסדנת מגע חוויתית ונועזת לזוגות מבית Arts of Love בהנחיית אוקאס. כל זוג מתרגל עם עצמו בלבד\, עם תרגולי מגע חושני ואירוטי\, תקשורת\, גבולות\, סנכרון ומוזיקה חיה לאורך הערב.\nhttps://mim21.github.io/merhav-bari/#event-ל-עו-מ-ק-2-סדנת-זוגות-20260910-1930
-LOCATION:בית להיוולד מחדש\, תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9C-%D7%A2%D7%95-%D7%9E-%D7%A7-2-%D7%A1%D7%93%D7%A0%D7%AA-%D7%96%D7%95%D7%92%D7%95%D7%AA-20260910-1930
-END:VEVENT
-BEGIN:VEVENT
-UID:7f0fd1ad23bd7e7eb287eae928332cfb@merhav-bari
-DTSTAMP:20260911T053648Z
-DTSTART:20260910T193000
-DTEND:20260911T000000
-SUMMARY:חגית וגילי — Summer Nights — מקדש התמסרות
-DESCRIPTION:בהנחיית חגית וגילי\nמקדש התמסרות מונחה באיזון מגדרי\, בהנחיית חגית וגילי. ערב של היכרות\, פתיחת לב\, עונג וארוס במרחב של נוכחות\, בחירה והסכמה עם גבולות ברורים.\nhttps://mim21.github.io/merhav-bari/#event-Summer-Nights-מקדש-התמסרות-20260910-1930
-LOCATION:תל אביב (מיקום מדויק נשלח לנרשמים)
-URL:https://mim21.github.io/merhav-bari/#event-Summer-Nights-%D7%9E%D7%A7%D7%93%D7%A9-%D7%94%D7%AA%D7%9E%D7%A1%D7%A8%D7%95%D7%AA-20260910-1930
-END:VEVENT
-BEGIN:VEVENT
-UID:266ea1915d69094fa6ec1858023eec29@merhav-bari
-DTSTAMP:20260911T053648Z
-DTSTART:20260910T200000
-DTEND:20260910T220000
-SUMMARY:נועם וסטאר — Divine Ceremony — טקס מעבר לשנה החדשה
-DESCRIPTION:בהנחיית נועם וסטאר\nמרחב טקסי לסגירת מעגלים\, פרידה ממה שהגיע זמנו להסתיים וזריעת משאלות בגוף לקראת השנה החדשה.\nhttps://mim21.github.io/merhav-bari/#event-Divine-Ceremony-טקס-מעבר-לשנה-החדשה-20260910-2000
-LOCATION:ליד פרדס חנה
-URL:https://mim21.github.io/merhav-bari/#event-Divine-Ceremony-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A2%D7%91%D7%A8-%D7%9C%D7%A9%D7%A0%D7%94-%D7%94%D7%97%D7%93%D7%A9%D7%94-20260910-2000
-END:VEVENT
-BEGIN:VEVENT
 UID:67b61781635003a4f2f25022494b1b19@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20260915T180000
 DTEND:20260915T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור ספטמבר
@@ -45,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D
 END:VEVENT
 BEGIN:VEVENT
 UID:9da0a313d2bc7b00e6c805f4040a3d32@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20260915T190000
 DTEND:20260915T213000
 SUMMARY:רות אהרוני — קורס יסודות DeepContact — תל אביב
@@ -55,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:48d290b21c80642d677fdcce9f26c827@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20260915T193000
 DTEND:20260915T213000
 SUMMARY:כרבולב — מפגש כרבולים וטקס קקאו
@@ -65,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:3091d7993bf2e35c4f6f28d1ccbe512c@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20260917T200000
 DTEND:20260917T220000
 SUMMARY:אלון גושן ודודי וויסבורט — טקס משיחה טנטרי
@@ -75,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A9%D
 END:VEVENT
 BEGIN:VEVENT
 UID:1a5925c31c611f098160cd034ac03182@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20260919T180000
 DTEND:20260920T000000
 SUMMARY:Wild Ginger — לא יאומן כי יכורבל — כירבוליית פסטיגל
@@ -85,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%90-%D7%99%D7%90%D7%95%D
 END:VEVENT
 BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -95,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20260911T053648Z
+DTSTAMP:20260912T173758Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
