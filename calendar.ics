@@ -4,26 +4,4 @@ PRODID:-//calcore//Calendar Core 1.0.0//HE
 CALSCALE:GREGORIAN
 X-WR-CALNAME:Merhav Bari
 X-WR-CALDESC:Merhav Bari published events calendar
-BEGIN:VEVENT
-UID:a1202bf44bd1cfed03ca1f3820e72f56@merhav-bari
-DTSTAMP:20231010T144849Z
-DTSTART:20260917T170000Z
-DTEND:20260917T190000Z
-SUMMARY:*טקס משיחה טנטרי* בהנחיית אלון גושן ו
- דודי וויסבורט *17.9* | *חמישי* | *20:00* | *פרדס חנ
- ה* ההשתתפות לאחר שיחת התאמה אישית ובהרשמ
- ה מראש\, תוך שמירה על איזון מגדרי. לפרטים 
- והרשמה >> https://alongoshen.co.il/oil-ceremony/
-END:VEVENT
-BEGIN:VEVENT
-UID:1789ee78bbb523be79b5dc22151a55ca@merhav-bari
-DTSTAMP:20231010T144849Z
-DTSTART;VALUE=DATE:20260918
-DTEND;VALUE=DATE:20260919
-SUMMARY:סדנת זוגות להעמקת הדינמיקות של התמסר
- ות מול הובלה\, בצורה מודעת\, משחקית ומונחת
- \, לעוד עולמות של עונג כאב ותקשורת זוגית ע
- ם גבולות רצונות וצרכים. 18/9 בתל אביב. https://w
- ww.facebook.com/share/1CjoVs2rct/
-END:VEVENT
 END:VCALENDAR
