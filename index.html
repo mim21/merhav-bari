@@ -1,295 +1,36 @@
-<!-- commit 07d1412 -->
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; frame-src https://calendar.google.com; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>אירועים קרובים – מרחב בריא</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf0 100%);
-      min-height: 100vh; padding: 24px 16px; direction: rtl;
-    }
-    header { text-align: center; margin-bottom: 32px; }
-    header h1 { font-size: 2rem; color: #2c3e50; margin-bottom: 4px; }
-    header p { color: #6c757d; font-size: 0.95rem; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 20px; max-width: 1400px; margin: 0 auto;
-    }
-    .card {
-      border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-      overflow: hidden; display: flex; flex-direction: column;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.14); }
-    .status-banner { background: #e74c3c; color: white; font-size: 0.8rem; font-weight: 700; padding: 4px 12px; text-align: center; }
-    .card-img { background: #f0f0f0; }
-    .card-img img { width: 100%; max-height: 380px; object-fit: contain; display: block; }
-    .card-body { padding: 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
-    .card-header-row { display: flex; justify-content: space-between; align-items: center; }
-    .badge { font-size: 0.75rem; padding: 3px 10px; border-radius: 999px; background: #eef2ff; color: #4361ee; font-weight: 600; }
-    .confidence { font-size: 0.7rem; letter-spacing: 1px; }
-    .card-title { font-size: 1.1rem; font-weight: 700; color: #1a202c; margin: 4px 0; line-height: 1.3; }
-    .card-date   { color: #2d6a4f; font-size: 0.9rem; font-weight: 600; }
-    .card-time   { color: #457b9d; font-size: 0.85rem; }
-    .card-location { color: #6b7280; font-size: 0.85rem; }
-    .card-price  { color: #b45309; font-size: 0.85rem; font-weight: 600; }
-    .price-note  { font-size: 0.78rem; font-weight: 400; color: #92400e; }
-    .price-tier  { font-size: 0.8rem; color: #92400e; margin-top: 2px; }
-    .price-tier.expired { color: #aaa; }
-    .expired-label { font-size: 0.72rem; color: #aaa; font-weight: 400; margin-right: 4px; }
-    .card-desc   { color: #374151; font-size: 0.85rem; line-height: 1.5; margin-top: 4px; flex: 1; }
-    .card-facilitator { color: #4b5563; font-size: 0.9rem; margin-top: 5px; font-weight: 600; }
-    .card-footer { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-    .reg-link { display: inline-block; padding: 6px 14px; background: #4361ee; color: white; border-radius: 8px; font-size: 0.8rem; font-weight: 600; text-decoration: none; }
-    .reg-link:hover { background: #3451d1; }
-    .contact { font-size: 0.78rem; color: #6b7280; }
-    .contact-wa { font-size: 0.78rem; color: #25d366; text-decoration: none; font-weight: 500; }
-    .contact-wa:hover { text-decoration: underline; }
-    .location-private { font-size: 0.78rem; color: #9061d4; font-style: italic; }
-    .cal-links { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-    .cal-link { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-decoration: none; }
-    .cal-link.gcal { background: #eef2ff; color: #4361ee; }
-    .cal-link.gcal:hover { background: #dce4ff; }
-    .cal-link.apple { background: #f0f0f0; color: #333; }
-    .cal-link.apple:hover { background: #e0e0e0; }
-    .cal-link.full-cal-apple { background: #2d6a4f; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-    .cal-link.full-cal-apple:hover { background: #1b4332; }
-    .cal-link.full-cal-gcal { background: #4361ee; color: white; padding: 8px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; }
-    .cal-link.full-cal-gcal:hover { background: #3451d1; }
-    .developer-contact { max-width: 720px; margin: 14px auto 0; padding: 12px 16px; border: 1px solid #b9d8c6; border-radius: 12px; background: #f3faf6; display: flex; flex-direction: column; gap: 5px; align-items: center; }
-    .developer-contact a { color: #146c43; font-weight: 800; text-decoration: none; }
-    .developer-contact a:hover { text-decoration: underline; }
-    .developer-contact span { color: #53635a; font-size: 0.8rem; line-height: 1.45; }
-    .cal-embed { max-width: 900px; margin: 0 auto 28px; }
-    .cal-embed iframe { width: 100%; height: clamp(300px, 42vh, 480px); border: 0; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); background: #fff; }
-.header-actions { margin-top: 14px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
-    footer { text-align: center; margin-top: 40px; color: #9ca3af; font-size: 0.8rem; }
-    .last-updated { font-size: 0.8rem; color: #9ca3af; margin-top: 4px; }
-
-    @media (max-width: 600px) {
-      .header-actions {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 4px;
-        width: 100%;
-        max-width: 100%;
-      }
-      .header-actions .cal-link {
-        min-width: 0;
-        width: 100%;
-        padding: 7px 3px;
-        font-size: 0.68rem;
-        line-height: 1.15;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      .cal-embed {
-        height: 220px;
-        overflow: hidden;
-        border-radius: 8px;
-      }
-      .cal-embed iframe {
-        display: block;
-        height: 250px;
-        border-radius: 8px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Merhav Bari</title>
+<meta name="generator" content="calcore/1.0.0">
+<meta name="artifact-identity" content="58523ec3751b2b10f070b8e310857823f39f8c68f8ed0bb1dd921c3ee7220e64">
+<meta name="description" content="Merhav Bari published events calendar">
+<link rel="stylesheet" href="assets/theme.css">
+<link rel="alternate" type="text/calendar" href="calendar.ics" title="קובץ היומן">
 </head>
 <body>
-  <header>
-    <h1>🌿 אירועים קרובים</h1>
-    <p>מרחב בריא – פרסום מרחבים ואירועים &nbsp;|&nbsp; 9 אירועים</p>
-    <!-- automation-status:start -->
-    <p class="last-updated" aria-label="אירוע חדש נוסף לאחרונה: 10/09/2026 20:42; ההרצה היומית האחרונה הצליחה: 16/09/2026 23:40" style="white-space:nowrap;font-size:0.78rem">חדש: 10/09 · סריקה: 16/09 23:40 ✓</p>
-    <!-- automation-status:end -->
-    <div class="header-actions"><a class="cal-link full-cal-apple" href="webcal://merhav-bari-calendar.merhav-bari.workers.dev/calendar.ics?src=apple">📅 Apple – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/render?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer" data-subscribe-mode="legacy-render">📅 Google – הרשם</a><a class="cal-link full-cal-gcal" href="https://calendar.google.com/calendar/u/0/r?cid=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com" target="_blank" rel="noopener noreferrer" data-subscribe-mode="embed-plus" title="+ Google Calendar">➕ Google – הוספה</a></div>
-    <div class="developer-contact" role="note">
-      <a href="https://t.me/merhav_bari_contact_bot" target="_blank" rel="noopener noreferrer">💬 משוב או הצעה ליומן</a>
-      <span>הפנייה היא למפתח היומן בלבד — לא למנהל או למארגן קבוצת ה-WhatsApp „מרחב בריא“.</span>
-    </div>
-  </header>
-  <section class="cal-embed" aria-label="לוח אירועים"><iframe title="לוח אירועים – Google Calendar" src="https://calendar.google.com/calendar/embed?height=600&amp;wkst=1&amp;ctz=Asia%2FJerusalem&amp;mode=AGENDA&amp;showTz=0&amp;showCalendars=0&amp;showTitle=0&amp;showPrint=0&amp;src=d8a959d3ce8c97bad0bbaf45fc2b81571c39a594edf657e74149a3577ace9da8%40group.calendar.google.com&amp;color=%232d6a4f" style="border:0" width="100%" height="360" frameborder="0" scrolling="no" loading="lazy"></iframe></section>
-  <div class="grid">
-    <div class="card" id="event-ARTS-OF-LOVE-מחזור-ספטמבר-20260915-1800" style="background:white">
-  
-  <div class="card-img"><img src="assets/0305ca508655d103cb0c0e3c.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">ARTS OF LOVE — מחזור ספטמבר</h2>
-    <div class='card-date'>📅 יום שלישי, 15 בספטמבר 2026</div>
-    <div class='card-time'>🕐 18:00 - 21:30</div>
-    <div class='card-location'>📍 תל אביב</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית יניב גולד (אוקאס)</div>
-    
-    <div class='card-desc'>קורס מעשי בן עשרה מפגשים באומנויות האהבה, היחסים והמיניות בדרך הטנטרה, בשילוב ידע מערבי, התפתחות אישית, מגע ומיניות מודעת. הקורס מתקיים ללא עירום וללא מגע נועז.</div>
-    <div class="card-footer"><a class="reg-link" href="https://www.yannivgold.com/artsoflove" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%99%D7%A0%D7%99%D7%91%20%D7%92%D7%95%D7%9C%D7%93%20%28%D7%90%D7%95%D7%A7%D7%90%D7%A1%29%20%E2%80%94%20ARTS%20OF%20LOVE%20%E2%80%94%20%D7%9E%D7%97%D7%96%D7%95%D7%A8%20%D7%A1%D7%A4%D7%98%D7%9E%D7%91%D7%A8&amp;dates=20260915T180000/20260915T213000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20%D7%99%D7%A0%D7%99%D7%91%20%D7%92%D7%95%D7%9C%D7%93%20%28%D7%90%D7%95%D7%A7%D7%90%D7%A1%29%0A%D7%A7%D7%95%D7%A8%D7%A1%20%D7%9E%D7%A2%D7%A9%D7%99%20%D7%91%D7%9F%20%D7%A2%D7%A9%D7%A8%D7%94%20%D7%9E%D7%A4%D7%92%D7%A9%D7%99%D7%9D%20%D7%91%D7%90%D7%95%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA%20%D7%94%D7%90%D7%94%D7%91%D7%94%2C%20%D7%94%D7%99%D7%97%D7%A1%D7%99%D7%9D%20%D7%95%D7%94%D7%9E%D7%99%D7%A0%D7%99%D7%95%D7%AA%20%D7%91%D7%93%D7%A8%D7%9A%20%D7%94%D7%98%D7%A0%D7%98%D7%A8%D7%94%2C%20%D7%91%D7%A9%D7%99%D7%9C%D7%95%D7%91%20%D7%99%D7%93%D7%A2%20%D7%9E%D7%A2%D7%A8%D7%91%D7%99%2C%20%D7%94%D7%AA%D7%A4%D7%AA%D7%97%D7%95%D7%AA%20%D7%90%D7%99%D7%A9%D7%99%D7%AA%2C%20%D7%9E%D7%92%D7%A2%20%D7%95%D7%9E%D7%99%D7%A0%D7%99%D7%95%D7%AA%20%D7%9E%D7%95%D7%93%D7%A2%D7%AA.%20%D7%94%D7%A7%D7%95%D7%A8%D7%A1%20%D7%9E%D7%AA%D7%A7%D7%99%D7%99%D7%9D%20%D7%9C%D7%9C%D7%90%20%D7%A2%D7%99%D7%A8%D7%95%D7%9D%20%D7%95%D7%9C%D7%9C%D7%90%20%D7%9E%D7%92%D7%A2%20%D7%A0%D7%95%D7%A2%D7%96.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A1%D7%A4%D7%98%D7%9E%D7%91%D7%A8-20260915-1800&amp;location=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjY3YjYxNzgxNjM1MDAzYTRmMmYyNTAyMjQ5NGIxYjE5QG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjA5MTVUMTgwMDAwDQpEVEVORDoyMDI2MDkxNVQyMTMwMDANClNVTU1BUlk615nXoNeZ15Eg15LXldec15MgKNeQ15XXp9eQ16EpIOKAlCBBUlRTIE9GIExPVkUg4oCUINee15fXlteV16gg16HXpNeY157XkdeoDQpERVNDUklQVElPTjrXkdeU16DXl9eZ15nXqiDXmdeg15nXkSDXkteV15zXkyAo15DXlden15DXoSlcbten15XXqNehINee16LXqdeZINeR158g16LXqdeo15Qg157XpNeS16nXmdedINeR15DXldee16DXldeZ15XXqiDXlNeQ15TXkdeUXCwg15TXmdeX16HXmdedINeV15TXnteZ16DXmdeV16og15HXk9eo15og15TXmNeg15jXqNeUXCwg15HXqdeZ15zXldeRINeZ15PXoiDXntei16jXkdeZXCwg15TXqtek16rXl9eV16og15DXmdep15nXqlwsINee15LXoiDXldee15nXoNeZ15XXqiDXnteV15PXoteqLiDXlNen15XXqNehINee16rXp9eZ15nXnSDXnNec15Ag16LXmdeo15XXnSDXldec15zXkCDXnteS16Ig16DXldei15YuXG5odHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtQVJUUy1PRi1MT1ZFLdee15fXlteV16gt16HXpNeY157XkdeoLTIwMjYwOTE1LTE4MDANCkxPQ0FUSU9OOteq15wg15DXkdeZ15ENClVSTDpodHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtQVJUUy1PRi1MT1ZFLSVENyU5RSVENyU5NyVENyU5NiVENyU5NSVENyVBOC0lRDclQTElRDclQTQlRDclOTglRDclOUUlRDclOTElRDclQTgtMjAyNjA5MTUtMTgwMA0KRU5EOlZFVkVOVA0KRU5EOlZDQUxFTkRBUg0K" download="ARTS OF LOVE — מחזור ספטמבר.ics">📅 Apple</a></div>
-  </div>
+<div class="cc-page">
+<header class="site-header">
+<img class="site-logo" src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2048%2032%27%3E%3Crect%20width=%2748%27%20height=%2732%27%20fill=%27%23e8e8e8%27/%3E%3Cpath%20d=%27M4%2027l12-14%209%2010%206-6%2013%2010z%27%20fill=%27%23c4c4c4%27/%3E%3Ccircle%20cx=%2714%27%20cy=%2710%27%20r=%274%27%20fill=%27%23c4c4c4%27/%3E%3C/svg%3E" alt="" data-image="missing">
+<h1 class="site-title"><bdi>Merhav Bari</bdi></h1>
+<p class="site-description"><bdi>Merhav Bari published events calendar</bdi></p>
+<p class="site-subscribe-unavailable">ההרשמה ליומן אינה זמינה כרגע</p>
+</header>
+<main class="event-main">
+<ol class="event-list" data-events>
+<li class="event" data-occurrence="a1202bf44bd1cfed03ca1f3820e72f56">
+<h2 class="event-title"><bdi>*טקס משיחה טנטרי* בהנחיית אלון גושן ודודי וויסבורט *17.9* | *חמישי* | *20:00* | *פרדס חנה* ההשתתפות לאחר שיחת התאמה אישית ובהרשמה מראש, תוך שמירה על איזון מגדרי. לפרטים והרשמה &gt;&gt; https://alongoshen.co.il/oil-ceremony/</bdi></h2>
+<p class="event-when"><time class="event-time" datetime="2026-09-17T20:00:00+03:00"><bdi>יום חמישי, 17 בספטמבר 2026</bdi> <bdi dir="ltr">20:00</bdi></time></p>
+</li>
+<li class="event" data-occurrence="1789ee78bbb523be79b5dc22151a55ca">
+<h2 class="event-title"><bdi>סדנת זוגות להעמקת הדינמיקות של התמסרות מול הובלה, בצורה מודעת, משחקית ומונחת, לעוד עולמות של עונג כאב ותקשורת זוגית עם גבולות רצונות וצרכים. 18/9 בתל אביב. https://www.facebook.com/share/1CjoVs2rct/</bdi></h2>
+<p class="event-when"><time class="event-time" datetime="2026-09-18"><bdi>יום שישי, 18 בספטמבר 2026</bdi> <span class="event-all-day">כל היום</span></time></p>
+</li>
+</ol>
+</main>
+<footer class="site-footer"><a class="site-feed" href="calendar.ics">קובץ היומן</a></footer>
 </div>
-<div class="card" id="event-קורס-יסודות-DeepContact-תל-אביב-20260915-1900" style="background:white">
-  
-  <div class="card-img"><img src="assets/652f259f905339f1631061a0.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">קורס יסודות DeepContact — תל אביב</h2>
-    <div class='card-date'>📅 יום שלישי, 15 בספטמבר 2026</div>
-    <div class='card-time'>🕐 19:00 - 21:30</div>
-    <div class='card-location'>📍 האחים מסלאוויטה 7 · תל אביב</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית רות אהרוני</div>
-    
-    <div class='card-desc'>קורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact, בקבוצה תהליכית ובמרחב בטוח. ניתן להצטרף לשיעור הראשון לניסיון.</div>
-    <div class="card-footer"><a class="reg-link" href="https://deepcontact.org/yesodot/yesodot_tlv_tue/" target="_blank" rel="noopener noreferrer">להרשמה ←</a><a href="https://wa.me/972503010073" target="_blank" rel="noopener noreferrer" class="contact-wa">&#x202A;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="#25d366" style="vertical-align:middle;margin-left:3px"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.488 2.042 7.788L0 32l8.418-2.01A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.784-1.857l-.486-.29-5.001 1.194 1.227-4.865-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.778c-.398-.199-2.354-1.162-2.718-1.294-.364-.133-.629-.199-.894.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.681-.62-3.203-1.976-1.184-1.056-1.983-2.36-2.215-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.894-2.155-1.225-2.95-.322-.775-.649-.67-.894-.682l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.361-1.393 3.317s1.426 3.847 1.625 4.112c.199.265 2.807 4.285 6.802 6.01.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.364-.265-.762-.464z"/></svg> 050-301-0073&#x202C;</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%A8%D7%95%D7%AA%20%D7%90%D7%94%D7%A8%D7%95%D7%A0%D7%99%20%E2%80%94%20%D7%A7%D7%95%D7%A8%D7%A1%20%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA%20DeepContact%20%E2%80%94%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91&amp;dates=20260915T190000/20260915T213000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20%D7%A8%D7%95%D7%AA%20%D7%90%D7%94%D7%A8%D7%95%D7%A0%D7%99%0A%D7%A7%D7%95%D7%A8%D7%A1%20%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA%20%D7%91%D7%9F%2014%20%D7%9E%D7%A4%D7%92%D7%A9%D7%99%D7%9D%20%D7%9C%D7%9C%D7%99%D7%9E%D7%95%D7%93%20%D7%98%D7%9B%D7%A0%D7%99%D7%A7%D7%94%20%D7%95%D7%A2%D7%91%D7%95%D7%93%D7%AA%20%D7%92%D7%95%D7%A3%20%D7%95%D7%9C%D7%94%D7%A2%D7%9E%D7%A7%D7%AA%20%D7%AA%D7%A7%D7%A9%D7%95%D7%A8%D7%AA%20%D7%95%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA%20%D7%99%D7%97%D7%A1%D7%99%D7%9D%20%D7%91%D7%90%D7%9E%D7%A6%D7%A2%D7%95%D7%AA%20DeepContact%2C%20%D7%91%D7%A7%D7%91%D7%95%D7%A6%D7%94%20%D7%AA%D7%94%D7%9C%D7%99%D7%9B%D7%99%D7%AA%20%D7%95%D7%91%D7%9E%D7%A8%D7%97%D7%91%20%D7%91%D7%98%D7%95%D7%97.%20%D7%A0%D7%99%D7%AA%D7%9F%20%D7%9C%D7%94%D7%A6%D7%98%D7%A8%D7%A3%20%D7%9C%D7%A9%D7%99%D7%A2%D7%95%D7%A8%20%D7%94%D7%A8%D7%90%D7%A9%D7%95%D7%9F%20%D7%9C%D7%A0%D7%99%D7%A1%D7%99%D7%95%D7%9F.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%AA%D7%9C-%D7%90%D7%91%D7%99%D7%91-20260915-1900&amp;location=%D7%94%D7%90%D7%97%D7%99%D7%9D%20%D7%9E%D7%A1%D7%9C%D7%90%D7%95%D7%95%D7%99%D7%98%D7%94%207%20%C2%B7%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjlkYTBhMzEzZDJiYzdiMDBlNmM4MDVmNDA0MGEzZDMyQG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjA5MTVUMTkwMDAwDQpEVEVORDoyMDI2MDkxNVQyMTMwMDANClNVTU1BUlk616jXldeqINeQ15TXqNeV16DXmSDigJQg16fXldeo16Eg15nXodeV15PXldeqIERlZXBDb250YWN0IOKAlCDXqtecINeQ15HXmdeRDQpERVNDUklQVElPTjrXkdeU16DXl9eZ15nXqiDXqNeV16og15DXlNeo15XXoNeZXG7Xp9eV16jXoSDXmdeh15XXk9eV16og15HXnyAxNCDXntek15LXqdeZ150g15zXnNeZ157XldeTINeY15vXoNeZ16fXlCDXldei15HXldeT16og15LXldejINeV15zXlNei157Xp9eqINeq16fXqdeV16jXqiDXldee16LXqNeb15XXqiDXmdeX16HXmdedINeR15DXntem16LXldeqIERlZXBDb250YWN0XCwg15HXp9eR15XXpteUINeq15TXnNeZ15vXmdeqINeV15HXnteo15fXkSDXkdeY15XXly4g16DXmdeq158g15zXlNem15jXqNejINec16nXmdei15XXqCDXlNeo15DXqdeV158g15zXoNeZ16HXmdeV158uXG5odHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQt16fXldeo16Et15nXodeV15PXldeqLURlZXBDb250YWN0Ldeq15wt15DXkdeZ15EtMjAyNjA5MTUtMTkwMA0KTE9DQVRJT04615TXkNeX15nXnSDXnteh15zXkNeV15XXmdeY15QgNyDCtyDXqtecINeQ15HXmdeRDQpVUkw6aHR0cHM6Ly9taW0yMS5naXRodWIuaW8vbWVyaGF2LWJhcmkvI2V2ZW50LSVENyVBNyVENyU5NSVENyVBOCVENyVBMS0lRDclOTklRDclQTElRDclOTUlRDclOTMlRDclOTUlRDclQUEtRGVlcENvbnRhY3QtJUQ3JUFBJUQ3JTlDLSVENyU5MCVENyU5MSVENyU5OSVENyU5MS0yMDI2MDkxNS0xOTAwDQpFTkQ6VkVWRU5UDQpFTkQ6VkNBTEVOREFSDQo=" download="קורס יסודות DeepContact — תל אביב.ics">📅 Apple</a></div>
-  </div>
-</div>
-<div class="card" id="event-כרבולב-מפגש-כרבולים-וטקס-קקאו-20260915-1930" style="background:white">
-  
-  <div class="card-img"><img src="assets/320cfc9cea420f5283262900.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">📅 אירוע</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">כרבולב — מפגש כרבולים וטקס קקאו</h2>
-    <div class='card-date'>📅 יום שלישי, 15 בספטמבר 2026</div>
-    <div class='card-time'>🕐 19:30</div>
-    <div class='card-location'>📍 שבט · תל אביב</div>
-    
-    
-    <div class='card-desc'>מעגל פתיחה, טקס קקאו, תנועה חופשית וזמן למגע וכרבולים במרחב מאוזן. ההרשמה לגברים ללא איזון היא לרשימת המתנה.</div>
-    <div class="card-footer"><a class="reg-link" href="https://www.facebook.com/share/1ECYbYfg5p/" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%91%20%E2%80%94%20%D7%9E%D7%A4%D7%92%D7%A9%20%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D%20%D7%95%D7%98%D7%A7%D7%A1%20%D7%A7%D7%A7%D7%90%D7%95&amp;dates=20260915T193000/20260915T213000&amp;details=%D7%9E%D7%A2%D7%92%D7%9C%20%D7%A4%D7%AA%D7%99%D7%97%D7%94%2C%20%D7%98%D7%A7%D7%A1%20%D7%A7%D7%A7%D7%90%D7%95%2C%20%D7%AA%D7%A0%D7%95%D7%A2%D7%94%20%D7%97%D7%95%D7%A4%D7%A9%D7%99%D7%AA%20%D7%95%D7%96%D7%9E%D7%9F%20%D7%9C%D7%9E%D7%92%D7%A2%20%D7%95%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D%20%D7%91%D7%9E%D7%A8%D7%97%D7%91%20%D7%9E%D7%90%D7%95%D7%96%D7%9F.%20%D7%94%D7%94%D7%A8%D7%A9%D7%9E%D7%94%20%D7%9C%D7%92%D7%91%D7%A8%D7%99%D7%9D%20%D7%9C%D7%9C%D7%90%20%D7%90%D7%99%D7%96%D7%95%D7%9F%20%D7%94%D7%99%D7%90%20%D7%9C%D7%A8%D7%A9%D7%99%D7%9E%D7%AA%20%D7%94%D7%9E%D7%AA%D7%A0%D7%94.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%91-%D7%9E%D7%A4%D7%92%D7%A9-%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D-%D7%95%D7%98%D7%A7%D7%A1-%D7%A7%D7%A7%D7%90%D7%95-20260915-1930&amp;location=%D7%A9%D7%91%D7%98%20%C2%B7%20%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjQ4ZDI5MGIyMWM4MDY0MmQ2NzdmZGNjZTlmMjZjODI3QG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjA5MTVUMTkzMDAwDQpEVEVORDoyMDI2MDkxNVQyMTMwMDANClNVTU1BUlk615vXqNeR15XXnNeRIOKAlCDXntek15LXqSDXm9eo15HXldec15nXnSDXldeY16fXoSDXp9en15DXlQ0KREVTQ1JJUFRJT046157XoteS15wg16TXqteZ15fXlFwsINeY16fXoSDXp9en15DXlVwsINeq16DXldei15Qg15fXldek16nXmdeqINeV15bXntefINec157XkteiINeV15vXqNeR15XXnNeZ150g15HXnteo15fXkSDXnteQ15XXltefLiDXlNeU16jXqdee15Qg15zXkteR16jXmdedINec15zXkCDXkNeZ15bXldefINeU15nXkCDXnNeo16nXmdee16og15TXnteq16DXlC5cbmh0dHBzOi8vbWltMjEuZ2l0aHViLmlvL21lcmhhdi1iYXJpLyNldmVudC3Xm9eo15HXldec15Et157XpNeS16kt15vXqNeR15XXnNeZ150t15XXmNen16Et16fXp9eQ15UtMjAyNjA5MTUtMTkzMA0KTE9DQVRJT04616nXkdeYIMK3INeq15wg15DXkdeZ15ENClVSTDpodHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtJUQ3JTlCJUQ3JUE4JUQ3JTkxJUQ3JTk1JUQ3JTlDJUQ3JTkxLSVENyU5RSVENyVBNCVENyU5MiVENyVBOS0lRDclOUIlRDclQTglRDclOTElRDclOTUlRDclOUMlRDclOTklRDclOUQtJUQ3JTk1JUQ3JTk4JUQ3JUE3JUQ3JUExLSVENyVBNyVENyVBNyVENyU5MCVENyU5NS0yMDI2MDkxNS0xOTMwDQpFTkQ6VkVWRU5UDQpFTkQ6VkNBTEVOREFSDQo=" download="כרבולב — מפגש כרבולים וטקס קקאו.ics">📅 Apple</a></div>
-  </div>
-</div>
-<div class="card" id="event-טקס-משיחה-טנטרי-20260917-2000" style="background:white">
-  
-  
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">📅 אירוע</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">טקס משיחה טנטרי</h2>
-    <div class='card-date'>📅 יום חמישי, 17 בספטמבר 2026</div>
-    <div class='card-time'>🕐 20:00</div>
-    <div class='card-location'>📍 פרדס חנה</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית אלון גושן ודודי וויסבורט</div>
-    
-    <div class='card-desc'>טקס משיחה טנטרי בהנחיית אלון גושן ודודי וויסבורט. ההשתתפות מותנית בשיחת התאמה אישית ובהרשמה מראש, תוך שמירה על איזון מגדרי.</div>
-    <div class="card-footer"><a class="reg-link" href="https://alongoshen.co.il/oil-ceremony/" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%90%D7%9C%D7%95%D7%9F%20%D7%92%D7%95%D7%A9%D7%9F%20%D7%95%D7%93%D7%95%D7%93%D7%99%20%D7%95%D7%95%D7%99%D7%A1%D7%91%D7%95%D7%A8%D7%98%20%E2%80%94%20%D7%98%D7%A7%D7%A1%20%D7%9E%D7%A9%D7%99%D7%97%D7%94%20%D7%98%D7%A0%D7%98%D7%A8%D7%99&amp;dates=20260917T200000/20260917T220000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20%D7%90%D7%9C%D7%95%D7%9F%20%D7%92%D7%95%D7%A9%D7%9F%20%D7%95%D7%93%D7%95%D7%93%D7%99%20%D7%95%D7%95%D7%99%D7%A1%D7%91%D7%95%D7%A8%D7%98%0A%D7%98%D7%A7%D7%A1%20%D7%9E%D7%A9%D7%99%D7%97%D7%94%20%D7%98%D7%A0%D7%98%D7%A8%D7%99%20%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20%D7%90%D7%9C%D7%95%D7%9F%20%D7%92%D7%95%D7%A9%D7%9F%20%D7%95%D7%93%D7%95%D7%93%D7%99%20%D7%95%D7%95%D7%99%D7%A1%D7%91%D7%95%D7%A8%D7%98.%20%D7%94%D7%94%D7%A9%D7%AA%D7%AA%D7%A4%D7%95%D7%AA%20%D7%9E%D7%95%D7%AA%D7%A0%D7%99%D7%AA%20%D7%91%D7%A9%D7%99%D7%97%D7%AA%20%D7%94%D7%AA%D7%90%D7%9E%D7%94%20%D7%90%D7%99%D7%A9%D7%99%D7%AA%20%D7%95%D7%91%D7%94%D7%A8%D7%A9%D7%9E%D7%94%20%D7%9E%D7%A8%D7%90%D7%A9%2C%20%D7%AA%D7%95%D7%9A%20%D7%A9%D7%9E%D7%99%D7%A8%D7%94%20%D7%A2%D7%9C%20%D7%90%D7%99%D7%96%D7%95%D7%9F%20%D7%9E%D7%92%D7%93%D7%A8%D7%99.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A9%D7%99%D7%97%D7%94-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260917-2000&amp;location=%D7%A4%D7%A8%D7%93%D7%A1%20%D7%97%D7%A0%D7%94" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjMwOTFkNzk5M2JmMmUzNWM0ZjZmMjhkMWNjYmU1MTJjQG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjA5MTdUMjAwMDAwDQpEVEVORDoyMDI2MDkxN1QyMjAwMDANClNVTU1BUlk615DXnNeV158g15LXldep158g15XXk9eV15PXmSDXldeV15nXodeR15XXqNeYIOKAlCDXmNen16Eg157XqdeZ15fXlCDXmNeg15jXqNeZDQpERVNDUklQVElPTjrXkdeU16DXl9eZ15nXqiDXkNec15XXnyDXkteV16nXnyDXldeT15XXk9eZINeV15XXmdeh15HXldeo15hcbteY16fXoSDXntep15nXl9eUINeY16DXmNeo15kg15HXlNeg15fXmdeZ16og15DXnNeV158g15LXldep158g15XXk9eV15PXmSDXldeV15nXodeR15XXqNeYLiDXlNeU16nXqteq16TXldeqINee15XXqteg15nXqiDXkdep15nXl9eqINeU16rXkNee15Qg15DXmdep15nXqiDXldeR15TXqNep157XlCDXnteo15DXqVwsINeq15XXmiDXqdee15nXqNeUINei15wg15DXmdeW15XXnyDXnteS15PXqNeZLlxuaHR0cHM6Ly9taW0yMS5naXRodWIuaW8vbWVyaGF2LWJhcmkvI2V2ZW50LdeY16fXoS3Xntep15nXl9eULdeY16DXmNeo15ktMjAyNjA5MTctMjAwMA0KTE9DQVRJT04616TXqNeT16Eg15fXoNeUDQpVUkw6aHR0cHM6Ly9taW0yMS5naXRodWIuaW8vbWVyaGF2LWJhcmkvI2V2ZW50LSVENyU5OCVENyVBNyVENyVBMS0lRDclOUUlRDclQTklRDclOTklRDclOTclRDclOTQtJUQ3JTk4JUQ3JUEwJUQ3JTk4JUQ3JUE4JUQ3JTk5LTIwMjYwOTE3LTIwMDANCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVINCg==" download="טקס משיחה טנטרי.ics">📅 Apple</a></div>
-  </div>
-</div>
-<div class="card" id="event-סדנת-זוגות-להעמקת-דינמיקות-התמסרות-והובלה-20260918" style="background:white">
-  
-  
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="80%">●●●●○</span>
-    </div>
-    <h2 class="card-title">סדנת זוגות להעמקת דינמיקות התמסרות והובלה</h2>
-    <div class='card-date'>📅 יום שישי, 18 בספטמבר 2026</div>
-    <div class='card-time'>🕐 שעת האירוע תופיע בקישור האירוע</div>
-    <div class='card-location'>📍 תל אביב</div>
-    
-    
-    <div class='card-desc'>סדנת זוגות מונחית להעמקת דינמיקות של התמסרות והובלה, עונג וכאב, תקשורת זוגית, גבולות, רצונות וצרכים.</div>
-    <div class="card-footer"><a class="reg-link" href="https://www.facebook.com/share/1CjoVs2rct/" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    
-  </div>
-</div>
-<div class="card" id="event-לא-יאומן-כי-יכורבל-כירבוליית-פסטיגל-20260919-1800" style="background:white">
-  
-  <div class="card-img"><img src="assets/9578fe7c191464ecc4d19d43.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">📅 אירוע</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">לא יאומן כי יכורבל — כירבוליית פסטיגל</h2>
-    <div class='card-date'>📅 יום שבת–ראשון, 19–20 בספטמבר 2026</div>
-    <div class='card-time'>🕐 18:00 - 00:00</div>
-    <div class='card-location'>📍 פנטהאוז בחולון</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית Wild Ginger</div>
-    
-    <div class='card-desc'>ערב כרבולים אפלטוני עם הקרנת פסטיגלים מכל התקופות. אין ציפייה למגע, וכל משתתף ומשתתפת בוחרים את הקצב והמרחב המתאימים להם. במקום יש ממ״ד.</div>
-    <div class="card-footer"><a class="reg-link" href="https://wildginger.fillout.com/festigalcuddle?source=WAItz" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=Wild%20Ginger%20%E2%80%94%20%D7%9C%D7%90%20%D7%99%D7%90%D7%95%D7%9E%D7%9F%20%D7%9B%D7%99%20%D7%99%D7%9B%D7%95%D7%A8%D7%91%D7%9C%20%E2%80%94%20%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%99%D7%AA%20%D7%A4%D7%A1%D7%98%D7%99%D7%92%D7%9C&amp;dates=20260919T180000/20260920T000000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20Wild%20Ginger%0A%D7%A2%D7%A8%D7%91%20%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%9D%20%D7%90%D7%A4%D7%9C%D7%98%D7%95%D7%A0%D7%99%20%D7%A2%D7%9D%20%D7%94%D7%A7%D7%A8%D7%A0%D7%AA%20%D7%A4%D7%A1%D7%98%D7%99%D7%92%D7%9C%D7%99%D7%9D%20%D7%9E%D7%9B%D7%9C%20%D7%94%D7%AA%D7%A7%D7%95%D7%A4%D7%95%D7%AA.%20%D7%90%D7%99%D7%9F%20%D7%A6%D7%99%D7%A4%D7%99%D7%99%D7%94%20%D7%9C%D7%9E%D7%92%D7%A2%2C%20%D7%95%D7%9B%D7%9C%20%D7%9E%D7%A9%D7%AA%D7%AA%D7%A3%20%D7%95%D7%9E%D7%A9%D7%AA%D7%AA%D7%A4%D7%AA%20%D7%91%D7%95%D7%97%D7%A8%D7%99%D7%9D%20%D7%90%D7%AA%20%D7%94%D7%A7%D7%A6%D7%91%20%D7%95%D7%94%D7%9E%D7%A8%D7%97%D7%91%20%D7%94%D7%9E%D7%AA%D7%90%D7%99%D7%9E%D7%99%D7%9D%20%D7%9C%D7%94%D7%9D.%20%D7%91%D7%9E%D7%A7%D7%95%D7%9D%20%D7%99%D7%A9%20%D7%9E%D7%9E%D7%B4%D7%93.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-%D7%9C%D7%90-%D7%99%D7%90%D7%95%D7%9E%D7%9F-%D7%9B%D7%99-%D7%99%D7%9B%D7%95%D7%A8%D7%91%D7%9C-%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%99%D7%AA-%D7%A4%D7%A1%D7%98%D7%99%D7%92%D7%9C-20260919-1800&amp;location=%D7%A4%D7%A0%D7%98%D7%94%D7%90%D7%95%D7%96%20%D7%91%D7%97%D7%95%D7%9C%D7%95%D7%9F" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjFhNTkyNWMzMWM2MTFmMDk4MTYwY2QwMzRhYzAzMTgyQG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjA5MTlUMTgwMDAwDQpEVEVORDoyMDI2MDkyMFQwMDAwMDANClNVTU1BUlk6V2lsZCBHaW5nZXIg4oCUINec15Ag15nXkNeV157XnyDXm9eZINeZ15vXldeo15HXnCDigJQg15vXmdeo15HXldec15nXmdeqINek16HXmNeZ15LXnA0KREVTQ1JJUFRJT04615HXlNeg15fXmdeZ16ogV2lsZCBHaW5nZXJcbtei16jXkSDXm9eo15HXldec15nXnSDXkNek15zXmNeV16DXmSDXotedINeU16fXqNeg16og16TXodeY15nXktec15nXnSDXnteb15wg15TXqten15XXpNeV16ouINeQ15nXnyDXpteZ16TXmdeZ15Qg15zXnteS16JcLCDXldeb15wg157Xqdeq16rXoyDXldee16nXqteq16TXqiDXkdeV15fXqNeZ150g15DXqiDXlNen16bXkSDXldeU157XqNeX15Eg15TXnteq15DXmdee15nXnSDXnNeU150uINeR157Xp9eV150g15nXqSDXntee17TXky5cbmh0dHBzOi8vbWltMjEuZ2l0aHViLmlvL21lcmhhdi1iYXJpLyNldmVudC3XnNeQLdeZ15DXldee158t15vXmS3Xmdeb15XXqNeR15wt15vXmdeo15HXldec15nXmdeqLdek16HXmNeZ15LXnC0yMDI2MDkxOS0xODAwDQpMT0NBVElPTjrXpNeg15jXlNeQ15XXliDXkdeX15XXnNeV158NClVSTDpodHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtJUQ3JTlDJUQ3JTkwLSVENyU5OSVENyU5MCVENyU5NSVENyU5RSVENyU5Ri0lRDclOUIlRDclOTktJUQ3JTk5JUQ3JTlCJUQ3JTk1JUQ3JUE4JUQ3JTkxJUQ3JTlDLSVENyU5QiVENyU5OSVENyVBOCVENyU5MSVENyU5NSVENyU5QyVENyU5OSVENyU5OSVENyVBQS0lRDclQTQlRDclQTElRDclOTglRDclOTklRDclOTIlRDclOUMtMjAyNjA5MTktMTgwMA0KRU5EOlZFVkVOVA0KRU5EOlZDQUxFTkRBUg0K" download="לא יאומן כי יכורבל — כירבוליית פסטיגל.ics">📅 Apple</a></div>
-  </div>
-</div>
-<div class="card" id="event-HypNaughty-kink-ריטריט-היפנוטיקינק-20260922" style="background:white">
-  
-  <div class="card-img"><img src="assets/7a2efe5b33884aab598058cd.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">HypNaughty-kink — ריטריט היפנוטיקינק</h2>
-    <div class='card-date'>📅 יום שלישי–שני, 22–28 בספטמבר 2026</div>
-    <div class='card-time'>🕐 שעת האירוע תופיע בקישור האירוע</div>
-    <div class='card-location'>📍 מרחב ריטריטים בגליל</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית סשה בלבין וסאמאיה עוז</div>
-    <div class='card-price'>💰 <div class='price-tier expired'><s>4,200₪ עד 12.7 או עד תפיסת 5 המקומות הראשונים</s> <span class='expired-label'>פג תוקף</span></div><div class='price-tier expired'><s>4,500₪ עד 16.8</s> <span class='expired-label'>פג תוקף</span></div><div class='price-tier'>5,200₪ מ-17.8 ועד מילוי הקבוצה</div></div>
-    <div class='card-desc'>ריטריט עומק בן שבעה ימים לחקירת התת־מודע הארוטי והקינקי, יחסי כוח, טראנס וסוגסטיה, שיבארי, גבולות ומשחקי חושים. ההשתתפות מותנית בשיחת התאמה.</div>
-    <div class="card-footer"><a class="reg-link" href="https://sashabalabin.com/retreats/hypnokink/" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    
-  </div>
-</div>
-<div class="card" id="event-קורס-יסודות-DeepContact-עין-שמר-20261013-2000" style="background:white">
-  
-  <div class="card-img"><img src="assets/0d52ca2d2efdf0c46ad11c1e.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">קורס יסודות DeepContact — עין שמר</h2>
-    <div class='card-date'>📅 יום שלישי, 13 באוקטובר 2026</div>
-    <div class='card-time'>🕐 20:00 - 22:30</div>
-    <div class='card-location'>📍 סטודיו תנע, עין שמר</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית DeepContact</div>
-    
-    <div class='card-desc'>קורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact, בקבוצה תהליכית ובמרחב בטוח.</div>
-    <div class="card-footer"><a class="reg-link" href="https://deepcontact.org/yesodot/yesodot_einshemer/" target="_blank" rel="noopener noreferrer">להרשמה ←</a><a href="https://wa.me/972503010073" target="_blank" rel="noopener noreferrer" class="contact-wa">&#x202A;<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="14" height="14" fill="#25d366" style="vertical-align:middle;margin-left:3px"><path d="M16 0C7.163 0 0 7.163 0 16c0 2.833.742 5.488 2.042 7.788L0 32l8.418-2.01A15.938 15.938 0 0016 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.333a13.27 13.27 0 01-6.784-1.857l-.486-.29-5.001 1.194 1.227-4.865-.317-.5A13.267 13.267 0 012.667 16C2.667 8.636 8.636 2.667 16 2.667S29.333 8.636 29.333 16 23.364 29.333 16 29.333zm7.27-9.778c-.398-.199-2.354-1.162-2.718-1.294-.364-.133-.629-.199-.894.199-.265.398-1.028 1.294-1.26 1.56-.232.265-.464.298-.862.1-.398-.2-1.681-.62-3.203-1.976-1.184-1.056-1.983-2.36-2.215-2.758-.232-.398-.025-.613.174-.811.179-.178.398-.464.597-.696.199-.232.265-.398.398-.663.133-.265.066-.497-.033-.696-.1-.199-.894-2.155-1.225-2.95-.322-.775-.649-.67-.894-.682l-.762-.013c-.265 0-.696.1-1.061.497-.364.398-1.393 1.361-1.393 3.317s1.426 3.847 1.625 4.112c.199.265 2.807 4.285 6.802 6.01.951.41 1.693.655 2.271.839.954.304 1.823.261 2.51.158.766-.114 2.354-.962 2.686-1.891.332-.929.332-1.725.232-1.891-.099-.166-.364-.265-.762-.464z"/></svg> DeepContact 050-301-0073&#x202C;</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%A7%D7%95%D7%A8%D7%A1%20%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA%20DeepContact%20%E2%80%94%20%D7%A2%D7%99%D7%9F%20%D7%A9%D7%9E%D7%A8&amp;dates=20261013T200000/20261013T223000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20DeepContact%0A%D7%A7%D7%95%D7%A8%D7%A1%20%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA%20%D7%91%D7%9F%2014%20%D7%9E%D7%A4%D7%92%D7%A9%D7%99%D7%9D%20%D7%9C%D7%9C%D7%99%D7%9E%D7%95%D7%93%20%D7%98%D7%9B%D7%A0%D7%99%D7%A7%D7%94%20%D7%95%D7%A2%D7%91%D7%95%D7%93%D7%AA%20%D7%92%D7%95%D7%A3%20%D7%95%D7%9C%D7%94%D7%A2%D7%9E%D7%A7%D7%AA%20%D7%AA%D7%A7%D7%A9%D7%95%D7%A8%D7%AA%20%D7%95%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA%20%D7%99%D7%97%D7%A1%D7%99%D7%9D%20%D7%91%D7%90%D7%9E%D7%A6%D7%A2%D7%95%D7%AA%20DeepContact%2C%20%D7%91%D7%A7%D7%91%D7%95%D7%A6%D7%94%20%D7%AA%D7%94%D7%9C%D7%99%D7%9B%D7%99%D7%AA%20%D7%95%D7%91%D7%9E%D7%A8%D7%97%D7%91%20%D7%91%D7%98%D7%95%D7%97.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%A2%D7%99%D7%9F-%D7%A9%D7%9E%D7%A8-20261013-2000&amp;location=%D7%A1%D7%98%D7%95%D7%93%D7%99%D7%95%20%D7%AA%D7%A0%D7%A2%2C%20%D7%A2%D7%99%D7%9F%20%D7%A9%D7%9E%D7%A8" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOmRlODBjNDg2MWNkYTBhY2MwOTllZGVmN2I1NzU5MDMyQG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjEwMTNUMjAwMDAwDQpEVEVORDoyMDI2MTAxM1QyMjMwMDANClNVTU1BUlk616fXldeo16Eg15nXodeV15PXldeqIERlZXBDb250YWN0IOKAlCDXoteZ158g16nXnteoDQpERVNDUklQVElPTjrXkdeU16DXl9eZ15nXqiBEZWVwQ29udGFjdFxu16fXldeo16Eg15nXodeV15PXldeqINeR158gMTQg157XpNeS16nXmdedINec15zXmdee15XXkyDXmNeb16DXmden15Qg15XXoteR15XXk9eqINeS15XXoyDXldec15TXotee16fXqiDXqten16nXldeo16og15XXntei16jXm9eV16og15nXl9eh15nXnSDXkdeQ157Xptei15XXqiBEZWVwQ29udGFjdFwsINeR16fXkdeV16bXlCDXqteU15zXmdeb15nXqiDXldeR157XqNeX15Eg15HXmNeV15cuXG5odHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQt16fXldeo16Et15nXodeV15PXldeqLURlZXBDb250YWN0Ldei15nXny3Xqdee16gtMjAyNjEwMTMtMjAwMA0KTE9DQVRJT04616HXmNeV15PXmdeVINeq16DXolwsINei15nXnyDXqdee16gNClVSTDpodHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtJUQ3JUE3JUQ3JTk1JUQ3JUE4JUQ3JUExLSVENyU5OSVENyVBMSVENyU5NSVENyU5MyVENyU5NSVENyVBQS1EZWVwQ29udGFjdC0lRDclQTIlRDclOTklRDclOUYtJUQ3JUE5JUQ3JTlFJUQ3JUE4LTIwMjYxMDEzLTIwMDANCkVORDpWRVZFTlQNCkVORDpWQ0FMRU5EQVINCg==" download="קורס יסודות DeepContact — עין שמר.ics">📅 Apple</a></div>
-  </div>
-</div>
-<div class="card" id="event-ARTS-OF-LOVE-מחזור-נובמבר-20261130-1800" style="background:white">
-  
-  <div class="card-img"><img src="assets/0305ca508655d103cb0c0e3c.jpg" alt="" loading="lazy" decoding="async"/></div>
-  <div class="card-body">
-    <div class="card-header-row">
-      <span class="badge">🛠 סדנה</span>
-      <span class="confidence" style="color:#28a745" title="100%">●●●●●</span>
-    </div>
-    <h2 class="card-title">ARTS OF LOVE — מחזור נובמבר</h2>
-    <div class='card-date'>📅 יום שני, 30 בנובמבר 2026</div>
-    <div class='card-time'>🕐 18:00 - 21:30</div>
-    <div class='card-location'>📍 תל אביב</div>
-    <div class='card-facilitator'>🧑‍🏫 בהנחיית יניב גולד (אוקאס)</div>
-    
-    <div class='card-desc'>קורס מעשי בן עשרה מפגשים באומנויות האהבה, היחסים והמיניות בדרך הטנטרה, בשילוב ידע מערבי, התפתחות אישית, מגע ומיניות מודעת. הקורס מתקיים ללא עירום וללא מגע נועז.</div>
-    <div class="card-footer"><a class="reg-link" href="https://www.yannivgold.com/artsoflove" target="_blank" rel="noopener noreferrer">להרשמה ←</a></div>
-    <div class="cal-links"><a class="cal-link gcal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=%D7%99%D7%A0%D7%99%D7%91%20%D7%92%D7%95%D7%9C%D7%93%20%28%D7%90%D7%95%D7%A7%D7%90%D7%A1%29%20%E2%80%94%20ARTS%20OF%20LOVE%20%E2%80%94%20%D7%9E%D7%97%D7%96%D7%95%D7%A8%20%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8&amp;dates=20261130T180000/20261130T213000&amp;details=%D7%91%D7%94%D7%A0%D7%97%D7%99%D7%99%D7%AA%20%D7%99%D7%A0%D7%99%D7%91%20%D7%92%D7%95%D7%9C%D7%93%20%28%D7%90%D7%95%D7%A7%D7%90%D7%A1%29%0A%D7%A7%D7%95%D7%A8%D7%A1%20%D7%9E%D7%A2%D7%A9%D7%99%20%D7%91%D7%9F%20%D7%A2%D7%A9%D7%A8%D7%94%20%D7%9E%D7%A4%D7%92%D7%A9%D7%99%D7%9D%20%D7%91%D7%90%D7%95%D7%9E%D7%A0%D7%95%D7%99%D7%95%D7%AA%20%D7%94%D7%90%D7%94%D7%91%D7%94%2C%20%D7%94%D7%99%D7%97%D7%A1%D7%99%D7%9D%20%D7%95%D7%94%D7%9E%D7%99%D7%A0%D7%99%D7%95%D7%AA%20%D7%91%D7%93%D7%A8%D7%9A%20%D7%94%D7%98%D7%A0%D7%98%D7%A8%D7%94%2C%20%D7%91%D7%A9%D7%99%D7%9C%D7%95%D7%91%20%D7%99%D7%93%D7%A2%20%D7%9E%D7%A2%D7%A8%D7%91%D7%99%2C%20%D7%94%D7%AA%D7%A4%D7%AA%D7%97%D7%95%D7%AA%20%D7%90%D7%99%D7%A9%D7%99%D7%AA%2C%20%D7%9E%D7%92%D7%A2%20%D7%95%D7%9E%D7%99%D7%A0%D7%99%D7%95%D7%AA%20%D7%9E%D7%95%D7%93%D7%A2%D7%AA.%20%D7%94%D7%A7%D7%95%D7%A8%D7%A1%20%D7%9E%D7%AA%D7%A7%D7%99%D7%99%D7%9D%20%D7%9C%D7%9C%D7%90%20%D7%A2%D7%99%D7%A8%D7%95%D7%9D%20%D7%95%D7%9C%D7%9C%D7%90%20%D7%9E%D7%92%D7%A2%20%D7%A0%D7%95%D7%A2%D7%96.%0Ahttps%3A//mim21.github.io/merhav-bari/%23event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8-20261130-1800&amp;location=%D7%AA%D7%9C%20%D7%90%D7%91%D7%99%D7%91" target="_blank" rel="noopener noreferrer">📅 Google</a><a class="cal-link apple" href="data:text/calendar;base64,QkVHSU46VkNBTEVOREFSDQpWRVJTSU9OOjIuMA0KUFJPRElEOi0vL21lcmhhdi1iYXJpLy9waXBlbGluZS8vSEUNCkJFR0lOOlZFVkVOVA0KVUlEOjYxOTZlZjE5M2YyN2Q0NjkwZmUxMjA5MTJjYTUyYzc1QG1lcmhhdi1iYXJpDQpEVFNUQU1QOjIwMjYwOTEyVDE3Mzc1OFoNCkRUU1RBUlQ6MjAyNjExMzBUMTgwMDAwDQpEVEVORDoyMDI2MTEzMFQyMTMwMDANClNVTU1BUlk615nXoNeZ15Eg15LXldec15MgKNeQ15XXp9eQ16EpIOKAlCBBUlRTIE9GIExPVkUg4oCUINee15fXlteV16gg16DXldeR157XkdeoDQpERVNDUklQVElPTjrXkdeU16DXl9eZ15nXqiDXmdeg15nXkSDXkteV15zXkyAo15DXlden15DXoSlcbten15XXqNehINee16LXqdeZINeR158g16LXqdeo15Qg157XpNeS16nXmdedINeR15DXldee16DXldeZ15XXqiDXlNeQ15TXkdeUXCwg15TXmdeX16HXmdedINeV15TXnteZ16DXmdeV16og15HXk9eo15og15TXmNeg15jXqNeUXCwg15HXqdeZ15zXldeRINeZ15PXoiDXntei16jXkdeZXCwg15TXqtek16rXl9eV16og15DXmdep15nXqlwsINee15LXoiDXldee15nXoNeZ15XXqiDXnteV15PXoteqLiDXlNen15XXqNehINee16rXp9eZ15nXnSDXnNec15Ag16LXmdeo15XXnSDXldec15zXkCDXnteS16Ig16DXldei15YuXG5odHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtQVJUUy1PRi1MT1ZFLdee15fXlteV16gt16DXldeR157XkdeoLTIwMjYxMTMwLTE4MDANCkxPQ0FUSU9OOteq15wg15DXkdeZ15ENClVSTDpodHRwczovL21pbTIxLmdpdGh1Yi5pby9tZXJoYXYtYmFyaS8jZXZlbnQtQVJUUy1PRi1MT1ZFLSVENyU5RSVENyU5NyVENyU5NiVENyU5NSVENyVBOC0lRDclQTAlRDclOTUlRDclOTElRDclOUUlRDclOTElRDclQTgtMjAyNjExMzAtMTgwMA0KRU5EOlZFVkVOVA0KRU5EOlZDQUxFTkRBUg0K" download="ARTS OF LOVE — מחזור נובמבר.ics">📅 Apple</a></div>
-  </div>
-</div>
-  </div>
-  <footer>נוצר מייצוא WhatsApp</footer>
 </body>
 </html>
