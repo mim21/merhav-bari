@@ -4,28 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:3091d7993bf2e35c4f6f28d1ccbe512c@merhav-bari
-DTSTAMP:20260918T091300Z
-DTSTART:20260917T200000
-DTEND:20260917T220000
-SUMMARY:אלון גושן ודודי וויסבורט — טקס משיחה טנטרי
-DESCRIPTION:בהנחיית אלון גושן ודודי וויסבורט\nטקס משיחה טנטרי בהנחיית אלון גושן ודודי וויסבורט. ההשתתפות מותנית בשיחת התאמה אישית ובהרשמה מראש\, תוך שמירה על איזון מגדרי.\nhttps://mim21.github.io/merhav-bari/#event-טקס-משיחה-טנטרי-20260917-2000
-LOCATION:פרדס חנה
-URL:https://mim21.github.io/merhav-bari/#event-%D7%98%D7%A7%D7%A1-%D7%9E%D7%A9%D7%99%D7%97%D7%94-%D7%98%D7%A0%D7%98%D7%A8%D7%99-20260917-2000
-END:VEVENT
-BEGIN:VEVENT
-UID:1a5925c31c611f098160cd034ac03182@merhav-bari
-DTSTAMP:20260918T091300Z
-DTSTART:20260919T180000
-DTEND:20260920T000000
-SUMMARY:Wild Ginger — לא יאומן כי יכורבל — כירבוליית פסטיגל
-DESCRIPTION:בהנחיית Wild Ginger\nערב כרבולים אפלטוני עם הקרנת פסטיגלים מכל התקופות. אין ציפייה למגע\, וכל משתתף ומשתתפת בוחרים את הקצב והמרחב המתאימים להם. במקום יש ממ״ד.\nhttps://mim21.github.io/merhav-bari/#event-לא-יאומן-כי-יכורבל-כירבוליית-פסטיגל-20260919-1800
-LOCATION:פנטהאוז בחולון
-URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%90-%D7%99%D7%90%D7%95%D7%9E%D7%9F-%D7%9B%D7%99-%D7%99%D7%9B%D7%95%D7%A8%D7%91%D7%9C-%D7%9B%D7%99%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%99%D7%AA-%D7%A4%D7%A1%D7%98%D7%99%D7%92%D7%9C-20260919-1800
-END:VEVENT
-BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20260918T091300Z
+DTSTAMP:20260925T134620Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -35,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20260918T091300Z
+DTSTAMP:20260925T134620Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
