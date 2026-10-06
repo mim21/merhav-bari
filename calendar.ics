@@ -1,26 +1,41 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//merhav-bari//pipeline//HE
-X-WR-CALNAME:מרחב בריא – אירועים
-X-WR-TIMEZONE:Asia/Jerusalem
+PRODID:-//calcore//Calendar Core 1.0.0//HE
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Merhav Bari
+X-WR-CALDESC:Merhav Bari published events calendar
 BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20261005T112415Z
-DTSTART:20261013T200000
-DTEND:20261013T223000
+DTSTAMP:20210428T225104Z
+DTSTART:20261013T170000Z
+DTEND:20261013T193000Z
 SUMMARY:קורס יסודות DeepContact — עין שמר
-DESCRIPTION:בהנחיית DeepContact\nקורס יסודות בן 14 מפגשים ללימוד טכניקה ועבודת גוף ולהעמקת תקשורת ומערכות יחסים באמצעות DeepContact\, בקבוצה תהליכית ובמרחב בטוח.\nhttps://mim21.github.io/merhav-bari/#event-קורס-יסודות-DeepContact-עין-שמר-20261013-2000
 LOCATION:סטודיו תנע\, עין שמר
-URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%A2%D7%99%D7%9F-%D7%A9%D7%9E%D7%A8-20261013-2000
+DESCRIPTION:בהנחיית DeepContact\nקורס יסודות בן 14 מפ
+ גשים ללימוד טכניקה ועבודת גוף ולהעמקת תק
+ שורת ומערכות יחסים באמצעות DeepContact\, בקבוצ
+ ה תהליכית ובמרחב בטוח.\nhttps://mim21.github.io/merhav-b
+ ari/#event-קורס-יסודות-DeepContact-עין-שמר-20261013-2000
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7
+ %99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%A2%D7%99%D7%9F-%D7%A9%D7
+ %9E%D7%A8-20261013-2000
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20261005T112415Z
-DTSTART:20261130T180000
-DTEND:20261130T213000
-SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
-DESCRIPTION:בהנחיית יניב גולד (אוקאס)\nקורס מעשי בן עשרה מפגשים באומנויות האהבה\, היחסים והמיניות בדרך הטנטרה\, בשילוב ידע מערבי\, התפתחות אישית\, מגע ומיניות מודעת. הקורס מתקיים ללא עירום וללא מגע נועז.\nhttps://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-מחזור-נובמבר-20261130-1800
+DTSTAMP:20210428T225104Z
+DTSTART:20261130T160000Z
+DTEND:20261130T193000Z
+SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נו
+ במבר
 LOCATION:תל אביב
-URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7%96%D7%95%D7%A8-%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8-20261130-1800
+DESCRIPTION:בהנחיית יניב גולד (אוקאס)\nקורס מעש
+ י בן עשרה מפגשים באומנויות האהבה\, היחסים
+  והמיניות בדרך הטנטרה\, בשילוב ידע מערבי\,
+  התפתחות אישית\, מגע ומיניות מודעת. הקורס 
+ מתקיים ללא עירום וללא מגע נועז.\nhttps://mim21.gi
+ thub.io/merhav-bari/#event-ARTS-OF-LOVE-מחזור-נובמבר-20261130-1
+ 800
+URL:https://mim21.github.io/merhav-bari/#event-ARTS-OF-LOVE-%D7%9E%D7%97%D7
+ %96%D7%95%D7%A8-%D7%A0%D7%95%D7%91%D7%9E%D7%91%D7%A8-20261130-1800
 END:VEVENT
 END:VCALENDAR
