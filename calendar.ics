@@ -4,8 +4,58 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
+UID:995dceab849ebd613f940fa352e24373@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261006T200000
+DTEND:20261006T223000
+SUMMARY:אמנות האמון — סדנת מבוא DeepContact
+DESCRIPTION:בהנחיית DeepContact\nסדנת מבוא של DeepContact לחקירת אמון דרך תנועה\, מגע וריקוד: הישענות\, תמיכה\, הרפיה והקשבה לגוף. מתאימה למתחילים ולבעלי ניסיון.\nhttps://mim21.github.io/merhav-bari/#event-אמנות-האמון-סדנת-מבוא-DeepContact-20261006-2000
+LOCATION:סטודיו תנע\, עין שמר
+URL:https://mim21.github.io/merhav-bari/#event-%D7%90%D7%9E%D7%A0%D7%95%D7%AA-%D7%94%D7%90%D7%9E%D7%95%D7%9F-%D7%A1%D7%93%D7%A0%D7%AA-%D7%9E%D7%91%D7%95%D7%90-DeepContact-20261006-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:b947d6412dd13757ddcccfd1b05880d6@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261007T200000
+DTEND:20261008T000000
+SUMMARY:יצחק — הכרבולייה — ערב מגע קשוב בהרי ירושלים
+DESCRIPTION:בהנחיית יצחק\nערב מונחה של מגע אפלטוני\, תקשורת\, הסכמה וגבולות\, עם זמן לתרגול ולכרבול במרחב ללא עירום\, מיניות\, אלכוהול או משני תודעה. ההשתתפות מותנית בשאלון ובהתאמה לקבוצה ולאיזון המגדרי.\nhttps://mim21.github.io/merhav-bari/#event-הכרבולייה-ערב-מגע-קשוב-בהרי-ירושלים-20261007-2000
+LOCATION:סטודיו במושב אבן ספיר\, סמוך להדסה עין כרם
+URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%9B%D7%A8%D7%91%D7%95%D7%9C%D7%99%D7%99%D7%94-%D7%A2%D7%A8%D7%91-%D7%9E%D7%92%D7%A2-%D7%A7%D7%A9%D7%95%D7%91-%D7%91%D7%94%D7%A8%D7%99-%D7%99%D7%A8%D7%95%D7%A9%D7%9C%D7%99%D7%9D-20261007-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:e98a5954278c2513ad0d794890ec5444@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261008T200000
+DTEND:20261008T230000
+SUMMARY:גלי גאולה — מיינדפול-דאנס לזוגות
+DESCRIPTION:בהנחיית גלי גאולה\nסדנה אינטימית לזוגות המשלבת תנועה אינטואיטיבית\, מגע ללא מטרה\, נשימה\, מיינדפולנס וכלים מעולם הטנטרה להעמקת נוכחות\, תקשורת וחיבור. מתקיימת בלבוש מלא וללא צורך בניסיון קודם.\nhttps://mim21.github.io/merhav-bari/#event-מיינדפול-דאנס-לזוגות-20261008-2000
+LOCATION:סטודיו פרמטה\, פלורנטין · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%99%D7%99%D7%A0%D7%93%D7%A4%D7%95%D7%9C-%D7%93%D7%90%D7%A0%D7%A1-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-20261008-2000
+END:VEVENT
+BEGIN:VEVENT
+UID:234134f6583ad55e84a06e264a7bf743@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261009T150000
+DTEND:20261009T173000
+SUMMARY:ריטריטון DeepContact — סטודיו תנע
+DESCRIPTION:בהנחיית DeepContact\nסוף שבוע מרוכז ואינטימי של DeepContact עם תנועה מחברת\, שיעורי טכניקה\, במה פתוחה\, ג'אמים וחניכה בין מנוסים לחדשים. מתאים גם ללא ניסיון קודם\; הלינה בסטודיו עם ציוד מהבית והארוחות משותפות.\nhttps://mim21.github.io/merhav-bari/#event-ריטריטון-DeepContact-סטודיו-תנע-20261009-1500
+LOCATION:סטודיו תנע\, עין שמר
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98%D7%95%D7%9F-DeepContact-%D7%A1%D7%98%D7%95%D7%93%D7%99%D7%95-%D7%AA%D7%A0%D7%A2-20261009-1500
+END:VEVENT
+BEGIN:VEVENT
+UID:2e92eebcdbadd0d57d764247ce4ebbf7@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261010T140000
+DTEND:20261010T220000
+SUMMARY:Sacred Space — מקדש טנטרי רך
+DESCRIPTION:בהנחיית Sacred Space\nמסע טנטרי רך ומונחה הכולל תרגילי חיבור\, קקאו טקסי וזמן חקירה חופשית וקשובה. תחתונים נשארים לאורך האירוע\; אין עירום מלא או חדירה\, והאירוע ללא אלכוהול וסמים.\nhttps://mim21.github.io/merhav-bari/#event-Sacred-Space-מקדש-טנטרי-רך-20261010-1400
+LOCATION:סטודיו בפלורנטין (מיקום מדויק יימסר לאחר ההרשמה) · תל אביב
+URL:https://mim21.github.io/merhav-bari/#event-Sacred-Space-%D7%9E%D7%A7%D7%93%D7%A9-%D7%98%D7%A0%D7%98%D7%A8%D7%99-%D7%A8%D7%9A-20261010-1400
+END:VEVENT
+BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20261006T073935Z
+DTSTAMP:20261006T090300Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -14,8 +64,48 @@ LOCATION:סטודיו תנע\, עין שמר
 URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D7%A1%D7%95%D7%93%D7%95%D7%AA-DeepContact-%D7%A2%D7%99%D7%9F-%D7%A9%D7%9E%D7%A8-20261013-2000
 END:VEVENT
 BEGIN:VEVENT
+UID:b0455dc7cc07b3eb6eb8933bd52d404f@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261015T193000
+DTEND:20261015T220000
+SUMMARY:רותם רם — מתנת המים — סדנת מגע אוהב לזוגות
+DESCRIPTION:בהנחיית רותם רם\nסדנה זוגית חווייתית במים חמים המשלבת מגע אוהב\, משחקיות\, הרפיה\, רגש ואינטימיות. עירום אופציונלי.\nhttps://mim21.github.io/merhav-bari/#event-מתנת-המים-סדנת-מגע-אוהב-לזוגות-20261015-1930
+LOCATION:בריכה פרטית מחוממת ליד בנימינה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%AA%D7%A0%D7%AA-%D7%94%D7%9E%D7%99%D7%9D-%D7%A1%D7%93%D7%A0%D7%AA-%D7%9E%D7%92%D7%A2-%D7%90%D7%95%D7%94%D7%91-%D7%9C%D7%96%D7%95%D7%92%D7%95%D7%AA-20261015-1930
+END:VEVENT
+BEGIN:VEVENT
+UID:3470ca98fdac4f67ad3c3c472d00e773@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261021T190000
+DTEND:20261021T233000
+SUMMARY:מאיה לב-קורן — איך לענג אישה — ערב זוגי
+DESCRIPTION:בהנחיית מאיה לב-קורן\nערב זוגי לחקירת עינוג האישה\, פתיחת הגוף האירוטי\, עיסוי יוני ומעשה אהבה מקודש\, עם הדגמה ותרגול מונחה. ייתכן עירום חלקי או מלא למי שבוחר/ת בכך.\nhttps://mim21.github.io/merhav-bari/#event-איך-לענג-אישה-ערב-זוגי-20261021-1900
+LOCATION:פרדס חנה (מיקום מדויק יינתן לנרשמים)
+URL:https://mim21.github.io/merhav-bari/#event-%D7%90%D7%99%D7%9A-%D7%9C%D7%A2%D7%A0%D7%92-%D7%90%D7%99%D7%A9%D7%94-%D7%A2%D7%A8%D7%91-%D7%96%D7%95%D7%92%D7%99-20261021-1900
+END:VEVENT
+BEGIN:VEVENT
+UID:33d99c28695b2cbfc0489a3a81cdae1d@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261022T143000
+DTEND:20261022T170000
+SUMMARY:אביגיל רות לב — ריטריט מיניות נשית
+DESCRIPTION:בהנחיית אביגיל רות לב\nשלושה ימים לנשים של חיבור לגוף\, למיניות ולנשיות דרך טנטרה\, עבודה סומטית\, תנועה\, נשימה\, קול\, רגש והיכרות עם האגן הנשי\, במרחב תומך ובקצב אישי.\nhttps://mim21.github.io/merhav-bari/#event-ריטריט-מיניות-נשית-20261022-1430
+LOCATION:חוות ירוק עז\, אילניה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7%98-%D7%9E%D7%99%D7%A0%D7%99%D7%95%D7%AA-%D7%A0%D7%A9%D7%99%D7%AA-20261022-1430
+END:VEVENT
+BEGIN:VEVENT
+UID:ee6ed09ecd318d0a75546b7d3dcfb27a@merhav-bari
+DTSTAMP:20261006T090300Z
+DTSTART:20261119T140000
+DTEND:20261119T160000
+SUMMARY:נדב שרון ורותם רם — ליפול לאיזון — קונטקט ותנועה במדבר
+DESCRIPTION:בהנחיית נדב שרון ורותם רם\nשלושה ימים של קונטקט אימפרוביזציה ותנועה בטבע המדברי\, עם שיעורי בוקר ואחר הצהריים\, ג׳אמים ליליים\, לינה במתחם וארוחות משותפות.\nhttps://mim21.github.io/merhav-bari/#event-ליפול-לאיזון-קונטקט-ותנועה-במדבר-20261119-1400
+LOCATION:מתחם טבע בערבה · הערבה
+URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D7%9C%D7%90%D7%99%D7%96%D7%95%D7%9F-%D7%A7%D7%95%D7%A0%D7%98%D7%A7%D7%98-%D7%95%D7%AA%D7%A0%D7%95%D7%A2%D7%94-%D7%91%D7%9E%D7%93%D7%91%D7%A8-20261119-1400
+END:VEVENT
+BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20261006T073935Z
+DTSTAMP:20261006T090300Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
