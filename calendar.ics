@@ -4,18 +4,8 @@ PRODID:-//merhav-bari//pipeline//HE
 X-WR-CALNAME:מרחב בריא – אירועים
 X-WR-TIMEZONE:Asia/Jerusalem
 BEGIN:VEVENT
-UID:995dceab849ebd613f940fa352e24373@merhav-bari
-DTSTAMP:20261007T053652Z
-DTSTART:20261006T200000
-DTEND:20261006T223000
-SUMMARY:אמנות האמון — סדנת מבוא DeepContact
-DESCRIPTION:בהנחיית DeepContact\nסדנת מבוא של DeepContact לחקירת אמון דרך תנועה\, מגע וריקוד: הישענות\, תמיכה\, הרפיה והקשבה לגוף. מתאימה למתחילים ולבעלי ניסיון.\nhttps://mim21.github.io/merhav-bari/#event-אמנות-האמון-סדנת-מבוא-DeepContact-20261006-2000
-LOCATION:סטודיו תנע\, עין שמר
-URL:https://mim21.github.io/merhav-bari/#event-%D7%90%D7%9E%D7%A0%D7%95%D7%AA-%D7%94%D7%90%D7%9E%D7%95%D7%9F-%D7%A1%D7%93%D7%A0%D7%AA-%D7%9E%D7%91%D7%95%D7%90-DeepContact-20261006-2000
-END:VEVENT
-BEGIN:VEVENT
 UID:b947d6412dd13757ddcccfd1b05880d6@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261007T200000
 DTEND:20261008T000000
 SUMMARY:יצחק — הכרבולייה — ערב מגע קשוב בהרי ירושלים
@@ -25,7 +15,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%94%D7%9B%D7%A8%D7%91%D7%95%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:e98a5954278c2513ad0d794890ec5444@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261008T200000
 DTEND:20261008T230000
 SUMMARY:גלי גאולה — מיינדפול-דאנס לזוגות
@@ -35,7 +25,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%99%D7%99%D7%A0%D7%93%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:234134f6583ad55e84a06e264a7bf743@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261009T150000
 DTEND:20261009T173000
 SUMMARY:ריטריטון DeepContact — סטודיו תנע
@@ -45,7 +35,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:2e92eebcdbadd0d57d764247ce4ebbf7@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261010T140000
 DTEND:20261010T220000
 SUMMARY:Sacred Space — מקדש טנטרי רך
@@ -55,7 +45,7 @@ URL:https://mim21.github.io/merhav-bari/#event-Sacred-Space-%D7%9E%D7%A7%D7%93%D
 END:VEVENT
 BEGIN:VEVENT
 UID:de80c4861cda0acc099edef7b5759032@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261013T200000
 DTEND:20261013T223000
 SUMMARY:קורס יסודות DeepContact — עין שמר
@@ -65,7 +55,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A7%D7%95%D7%A8%D7%A1-%D7%99%D
 END:VEVENT
 BEGIN:VEVENT
 UID:b0455dc7cc07b3eb6eb8933bd52d404f@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261015T193000
 DTEND:20261015T220000
 SUMMARY:רותם רם — מתנת המים — סדנת מגע אוהב לזוגות
@@ -75,7 +65,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9E%D7%AA%D7%A0%D7%AA-%D7%94%D
 END:VEVENT
 BEGIN:VEVENT
 UID:3470ca98fdac4f67ad3c3c472d00e773@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261021T190000
 DTEND:20261021T233000
 SUMMARY:מאיה לב-קורן — איך לענג אישה — ערב זוגי
@@ -85,7 +75,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%90%D7%99%D7%9A-%D7%9C%D7%A2%D
 END:VEVENT
 BEGIN:VEVENT
 UID:33d99c28695b2cbfc0489a3a81cdae1d@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261022T143000
 DTEND:20261022T170000
 SUMMARY:אביגיל רות לב — ריטריט מיניות נשית
@@ -95,7 +85,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%A8%D7%99%D7%98%D7%A8%D7%99%D7
 END:VEVENT
 BEGIN:VEVENT
 UID:ee6ed09ecd318d0a75546b7d3dcfb27a@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261119T140000
 DTEND:20261119T160000
 SUMMARY:נדב שרון ורותם רם — ליפול לאיזון — קונטקט ותנועה במדבר
@@ -105,7 +95,7 @@ URL:https://mim21.github.io/merhav-bari/#event-%D7%9C%D7%99%D7%A4%D7%95%D7%9C-%D
 END:VEVENT
 BEGIN:VEVENT
 UID:6196ef193f27d4690fe120912ca52c75@merhav-bari
-DTSTAMP:20261007T053652Z
+DTSTAMP:20261008T053602Z
 DTSTART:20261130T180000
 DTEND:20261130T213000
 SUMMARY:יניב גולד (אוקאס) — ARTS OF LOVE — מחזור נובמבר
